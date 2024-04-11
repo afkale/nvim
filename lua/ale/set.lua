@@ -3,6 +3,8 @@ vim.g.mail42 = 'arubio-o@student.42madrid.com'
 
 vim.g.python3_host_prog = '/usr/bin/python'
 
+vim.g.c_syntax_for_h = 1
+
 vim.g.vimtex_view_method = 'zathura'
 vim.g.vimtex_view_general_viewer = 'zathura'
 vim.g.vimtex_view_general_options = '--synctex-forward "%s:source:%s#%d" | zathura --fork %s'
@@ -53,3 +55,7 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = '80'
 vim.opt.showtabline = 2
+
+vim.filetype.add({
+	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
