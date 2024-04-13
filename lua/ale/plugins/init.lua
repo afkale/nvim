@@ -22,6 +22,7 @@ return {
 	{ "lervag/vimtex" },
 	{ "vimwiki/vimwiki" },
 	{ "junegunn/fzf" },
+	{ "fladson/vim-kitty" },
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },

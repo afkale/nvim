@@ -12,22 +12,13 @@ vim.g.vimtex_compiler_method = 'latexrun'
 
 vim.g.maplocalleader = ','
 
-vim.g.lazygit_floating_window_winblend = 0
-vim.g.lazygit_floating_window_scaling_factor = 0.9
-vim.g.lazygit_floating_window_border_chars = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
-vim.g.lazygit_floating_window_use_plenary = 0
-vim.g.lazygit_use_neovim_remote = 0
-
-vim.g.lazygit_use_custom_config_file_path = 1
-vim.g.lazygit_config_file_path = os.getenv('HOME') .. '/.config/lazygit/config.yml'
-
 vim.opt.filetype = 'plugin'
 vim.opt.syntax = 'enable'
 
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.breakindent = true
 
 vim.opt.tabstop = 4
