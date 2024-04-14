@@ -4,6 +4,7 @@ return {
 		config = function()
 			local actions = require "fzf-lua.actions"
 			require("fzf-lua").setup({
+				'fzf-tmux',
 				winopts              = {
 					height     = 0.85, -- window height
 					width      = 0.80, -- window width
