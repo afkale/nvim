@@ -19,7 +19,6 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "lukas-reineke/lsp-format.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "lervag/vimtex" },
 	{ "vimwiki/vimwiki" },
 	{ "junegunn/fzf" },
 	{ "fladson/vim-kitty" },

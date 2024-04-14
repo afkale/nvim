@@ -5,11 +5,6 @@ vim.g.python3_host_prog = '/usr/bin/python'
 
 vim.g.c_syntax_for_h = 1
 
-vim.g.vimtex_view_method = 'zathura'
-vim.g.vimtex_view_general_viewer = 'zathura'
-vim.g.vimtex_view_general_options = '--synctex-forward "%s:source:%s#%d" | zathura --fork %s'
-vim.g.vimtex_compiler_method = 'latexrun'
-
 vim.g.maplocalleader = ','
 
 vim.opt.filetype = 'plugin'
