@@ -4,4 +4,7 @@ return {
 	build = "make install_jsregexp",
 	dependencies = { "rafamadriz/friendly-snippets", lazy = true },
 	priority = 1000,
+	config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+	end
 }
