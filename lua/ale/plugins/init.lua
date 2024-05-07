@@ -1,5 +1,4 @@
 return {
-	{ "rcarriga/nvim-notify" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
@@ -14,7 +13,6 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "kdheepak/cmp-latex-symbols",               lazy = true },
 	{ "saadparwaiz1/cmp_luasnip" },
-	{ "christoomey/vim-tmux-navigator" },
 	{ "folke/neodev.nvim" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "lukas-reineke/lsp-format.nvim" },
