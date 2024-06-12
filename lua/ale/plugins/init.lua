@@ -1,15 +1,5 @@
 return {
 	{ "onsails/lspkind-nvim" },
-
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-	{ "hrsh7th/cmp-nvim-lua", ft = { "lua" } },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "saadparwaiz1/cmp_luasnip" },
-
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {},
@@ -19,6 +9,7 @@ return {
 	},
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	{ "kyazdani42/nvim-web-devicons" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "folke/neodev.nvim" },
 	{ "junegunn/fzf" },
 	{

@@ -6,7 +6,7 @@ return {
 			vim.g.loaded_netrw = 1
 			vim.g.loaded_netrwPlugin = 1
 			vim.opt.termguicolors = true
-			vim.keymap.set('n', '<leader>e', vim.cmd.NvimTreeToggle)
+			vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle)
 			require("nvim-tree").setup({
 				sort = {
 					sorter = "case_sensitive",

@@ -8,11 +8,12 @@ return {
 				formatters_by_ft = {
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
-					python = { "isort", "black" },
+					python = { "autopep8", "black" },
 					-- Use a sub-list to run only the first available formatter
 					javascript = { { "prettierd", "prettier" } },
 				},
 			})
+
 			vim.api.nvim_create_user_command("Format", function(args)
 				local range = nil
 				if args.count ~= -1 then
@@ -24,6 +25,8 @@ return {
 				end
 				require("conform").format({ async = true, lsp_fallback = true, range = range })
 			end, { range = true })
+
+			vim.keymap.set("n", "<leader>ff", ":Format<cr>", { noremap = true, silent = true })
 		end,
 	},
 }
