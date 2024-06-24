@@ -7,9 +7,9 @@ return {
 			require("colorizer").setup()
 		end,
 	},
-	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	{ "windwp/nvim-autopairs",               event = "InsertEnter", config = true },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",          opts = {} },
 	{ "folke/neodev.nvim" },
 	{ "junegunn/fzf" },
 	{

@@ -52,6 +52,7 @@ return {
 					Lua = {},
 				},
 			})
+
 			lspconfig.pyright.setup({})
 			lspconfig.tsserver.setup({
 				init_options = {
