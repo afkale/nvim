@@ -1,28 +1,20 @@
 return {
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
-	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-	{ "neovim/nvim-lspconfig" },
 	{ "onsails/lspkind-nvim" },
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-	{ "hrsh7th/cmp-nvim-lua",                     ft = { "lua" } },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "kdheepak/cmp-latex-symbols",               lazy = true },
-	{ "saadparwaiz1/cmp_luasnip" },
-	{ "folke/neodev.nvim" },
-	{ "nvim-lua/plenary.nvim" },
-	{ "lukas-reineke/lsp-format.nvim" },
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {},
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "vimwiki/vimwiki" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{ "folke/neodev.nvim" },
 	{ "junegunn/fzf" },
-	{ "fladson/vim-kitty" },
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {}
+		opts = {},
 	},
 }

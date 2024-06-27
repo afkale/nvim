@@ -27,5 +27,5 @@ return {
 			end
 		end
 		return res
-	end
+	end,
 }
