@@ -2,6 +2,7 @@ return {
 	"hrsh7th/vim-vsnip",
 	dependencies = {
 		{ "neovim/nvim-lspconfig" },
+		{ "onsails/lspkind-nvim" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
@@ -12,15 +13,12 @@ return {
 	},
 	config = function()
 		local cmp = require("cmp")
+		local lspkind = require("lspkind")
 
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-					-- require("snippy").expand_snippet(args.body) -- For `snippy` users.
-					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-					-- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			window = {
@@ -34,7 +32,7 @@ return {
 				["<C-k>"] = cmp.mapping.select_prev_item(),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			}),
 			sources = cmp.config.sources({
 				{ name = "luasnip", option = { use_show_condition = false } },
@@ -45,6 +43,26 @@ return {
 			}, {
 				{ name = "buffer" },
 			}),
+			formatting = {
+				format = lspkind.cmp_format({
+					mode = "symbol_text", -- show only symbol annotations
+					maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+					ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part will show ellipsis_char instead
+					before = function(entry, vim_item)
+						-- Source display logic
+						vim_item.menu = ({
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snippet]",
+							buffer = "[Buffer]",
+							path = "[Path]",
+						})[entry.source.name]
+						return vim_item
+					end,
+				}),
+			},
+			experimental = {
+				ghost_text = true,
+			},
 		})
 
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won"t work anymore).
