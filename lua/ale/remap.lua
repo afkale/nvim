@@ -52,10 +52,12 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 function SurroundSelectionWithPair(char)
+	-- TODO: Handle V mode
 	if vim.fn.visualmode() ~= "v" then
 		return
 	end
 
+	-- FIX: When selection goes to the end it takes a super big e_row
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
 	local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
 
