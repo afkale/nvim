@@ -101,7 +101,7 @@ return {
 						args = "-n",
 					},
 					bat = {
-						cmd = "bat",
+						cmd = "bat --theme 'Catppuccin Macchiato'",
 						args = "--color=always --style=numbers,changes",
 					},
 					head = {
