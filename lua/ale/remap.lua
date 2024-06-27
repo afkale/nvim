@@ -71,7 +71,8 @@ function SurroundSelectionWithPair(char)
 end
 
 for key, _ in pairs(utils.couples) do
-	local command = string.format(':lua SurroundSelectionWithPair("%s")<CR>', key)
+	local escaped_key = vim.fn.escape(key, "'")
+	local command = string.format(":lua SurroundSelectionWithPair('%s')<CR>", escaped_key)
 	vim.keymap.set("v", key, command, { noremap = true, silent = true })
 end
 
