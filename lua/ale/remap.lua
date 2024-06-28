@@ -57,14 +57,14 @@ function SurroundSelectionWithPair(char)
 		return
 	end
 
-	-- FIX: When selection goes to the end it takes a super big e_row
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
+
 	local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
 
 	local s_char, e_char = utils.get_couple(char)
 
-	text[1] = s_char .. text[1]
-	text[#text] = text[#text] .. e_char
+	text[1] = s_char:rep(vim.v.count1) .. text[1]
+	text[#text] = text[#text] .. e_char:rep(vim.v.count1)
 
 	vim.api.nvim_buf_set_text(c_buf, s_row, s_col, e_row, e_col + 1, text)
 	return text

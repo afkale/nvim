@@ -47,6 +47,9 @@ return {
 		e_row = e_row - 1
 		e_col = e_col - 1
 
+		local line_length = vim.api.nvim_buf_get_lines(c_buf, e_row, e_row + 1, false)[1]:len()
+		e_col = math.min(e_col, line_length - 1)
+
 		return c_buf, s_row, s_col, e_row, e_col
 	end,
 	get_couple = function(key)
