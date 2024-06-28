@@ -47,6 +47,7 @@ return {
 		e_row = e_row - 1
 		e_col = e_col - 1
 
+		-- Adjust the end column to be the last character of the line
 		local line_length = vim.api.nvim_buf_get_lines(c_buf, e_row, e_row + 1, false)[1]:len()
 		e_col = math.min(e_col, line_length - 1)
 

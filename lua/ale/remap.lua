@@ -53,10 +53,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 function SurroundSelectionWithPair(char)
 	-- TODO: Handle V mode
-	if vim.fn.visualmode() ~= "v" then
-		return
-	end
-
+	-- TODO: Handle S-V mode to remove surrounded selection
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
 
 	local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
@@ -67,7 +64,6 @@ function SurroundSelectionWithPair(char)
 	text[#text] = text[#text] .. e_char:rep(vim.v.count1)
 
 	vim.api.nvim_buf_set_text(c_buf, s_row, s_col, e_row, e_col + 1, text)
-	return text
 end
 
 for key, _ in pairs(utils.couples) do
