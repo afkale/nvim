@@ -16,8 +16,6 @@ vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", { noremap = true, silent
 vim.keymap.set("n", "<A-j>", ":resize +2<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-k>", ":resize -2<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader><leader>", ":source<cr>")
-
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-l>", ">gv", { noremap = true, silent = true })
@@ -48,13 +46,14 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 
-vim.keymap.set("n", "zz", "<cmd>write<cr>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>t", [[:s/.*/\'.*\'/<Left><Left><Left><CR>]])
+vim.keymap.set("n", "zz", "<cmd>write<cr>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>", ":source<CR>")
+
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 function SurroundSelectionWithPair(key)
 	-- TODO: Handle V mode
@@ -76,25 +75,3 @@ for key, _ in pairs(utils.couples) do
 	local command = string.format(":lua SurroundSelectionWithPair('%s')<CR>", escaped_key)
 	vim.keymap.set("v", key, command, { noremap = true, silent = true })
 end
-vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
-end)
-
--- LSP CMDS
-local opts = { noremap = true, silent = true }
-
-vim.keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-vim.keymap.set("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-vim.keymap.set("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-vim.keymap.set("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-vim.keymap.set("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-vim.keymap.set("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-vim.keymap.set("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-vim.keymap.set("n", "<leader>ff", "<cmd>Format<CR>", opts)
--- vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
--- vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
