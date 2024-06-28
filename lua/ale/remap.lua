@@ -51,17 +51,17 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-function SurroundSelectionWithPair(char)
+function SurroundSelectionWithPair(key)
 	-- TODO: Handle V mode
 	-- TODO: Handle S-V mode to remove surrounded selection
+	local left, right = utils.get_couple(key)
+
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
 
 	local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
 
-	local s_char, e_char = utils.get_couple(char)
-
-	text[1] = s_char:rep(vim.v.count1) .. text[1]
-	text[#text] = text[#text] .. e_char:rep(vim.v.count1)
+	text[1] = left:rep(vim.v.count1) .. text[1]
+	text[#text] = text[#text] .. right:rep(vim.v.count1)
 
 	vim.api.nvim_buf_set_text(c_buf, s_row, s_col, e_row, e_col + 1, text)
 end
@@ -92,7 +92,7 @@ vim.keymap.set("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", o
 vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 vim.keymap.set("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 vim.keymap.set("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 vim.keymap.set("n", "<leader>ff", "<cmd>Format<CR>", opts)
+-- vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+-- vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)

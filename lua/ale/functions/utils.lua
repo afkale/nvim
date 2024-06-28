@@ -7,13 +7,13 @@ local get_os = function()
 end
 
 local couples = {
-	["'"] = "'",
-	['"'] = '"',
-	["`"] = "`",
-	["{"] = "}",
-	["["] = "]",
-	["("] = ")",
-	["<"] = ">",
+	["'"] = { "'", "'" },
+	['"'] = { '"', '"' },
+	["`"] = { "`", "`" },
+	["{"] = { "{", "}" },
+	["["] = { "[", "]" },
+	["("] = { "(", ")" },
+	["<"] = { "<", ">" },
 }
 
 return {
@@ -54,7 +54,12 @@ return {
 		return c_buf, s_row, s_col, e_row, e_col
 	end,
 	get_couple = function(key)
-		return key, couples[key]
+		local pair = couples[key]
+		if pair then
+			return pair[1], pair[2]
+		else
+			return nil, nil
+		end
 	end,
 	couples = couples,
 }
