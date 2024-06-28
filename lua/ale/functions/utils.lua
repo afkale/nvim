@@ -55,11 +55,7 @@ return {
 	end,
 	get_couple = function(key)
 		local pair = couples[key]
-		if pair then
-			return pair[1], pair[2]
-		else
-			return nil, nil
-		end
+		return pair[1], pair[2]
 	end,
 	couples = couples,
 }

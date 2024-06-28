@@ -20,6 +20,11 @@ vim.keymap.set("n", "<leader><leader>", ":source<cr>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "<S-l>", ">gv", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-l>", ">>", { noremap = true, silent = true })
+vim.keymap.set("v", "<S-h>", "<gv", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-h>", "<<", { noremap = true, silent = true })
+
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
@@ -37,11 +42,10 @@ vim.keymap.set("n", "sc", vim.cmd.close)
 vim.keymap.set("n", "mp", vim.cmd.bp)
 vim.keymap.set("n", "mn", vim.cmd.bn)
 vim.keymap.set("n", "mc", vim.cmd.bd)
-vim.keymap.set("n", "mf", vim.lsp.buf.format)
 
-vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 
 vim.keymap.set("n", "zz", "<cmd>write<cr>")
@@ -49,11 +53,12 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>t", [[:s/.*/\'.*\'/<Left><Left><Left><CR>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 function SurroundSelectionWithPair(key)
 	-- TODO: Handle V mode
-	-- TODO: Handle S-V mode to remove surrounded selection
+	-- TODO: Handle S-V mode to remove surrounded selection?
 	local left, right = utils.get_couple(key)
 
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
@@ -71,16 +76,13 @@ for key, _ in pairs(utils.couples) do
 	local command = string.format(":lua SurroundSelectionWithPair('%s')<CR>", escaped_key)
 	vim.keymap.set("v", key, command, { noremap = true, silent = true })
 end
-
-vim.keymap.set({ "v", "n" }, "<Tab>", ">>", { noremap = true, silent = true })
-vim.keymap.set({ "v", "n" }, "<S-Tab>", "<<", { noremap = true, silent = true })
-
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 end)
 
 -- LSP CMDS
 local opts = { noremap = true, silent = true }
+
 vim.keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 vim.keymap.set("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
