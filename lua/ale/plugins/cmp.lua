@@ -35,8 +35,8 @@ return {
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
-				{ name = "luasnip", option = { use_show_condition = false } },
 				{ name = "nvim_lsp" },
+				{ name = "luasnip", option = { use_show_condition = false } },
 				{ name = "path" },
 				{ name = "vsnip" },
 				{ name = "copilot" },
@@ -83,5 +83,9 @@ return {
 			}),
 			matching = { disallow_symbol_nonprefix_matching = false },
 		})
+		vim.keymap.set("i", "<Tab>", [[<cmd>lua require'luasnip'.jump(1)<CR>]], { noremap = true, silent = true })
+		vim.keymap.set("s", "<Tab>", [[<cmd>lua require'luasnip'.jump(1)<CR>]], { noremap = true, silent = true })
+		vim.keymap.set("i", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<CR>]], { noremap = true, silent = true })
+		vim.keymap.set("s", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<CR>]], { noremap = true, silent = true })
 	end,
 }

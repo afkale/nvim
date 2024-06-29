@@ -56,18 +56,25 @@ vim.keymap.set("n", "<leader><leader>", ":source<CR>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 function SurroundSelectionWithPair(key)
-	-- TODO: Handle V mode
-	-- TODO: Handle S-V mode to remove surrounded selection?
 	local left, right = utils.get_couple(key)
-
 	local c_buf, s_row, s_col, e_row, e_col = utils.get_visual_selection_indices()
 
-	local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
+	if vim.fn.visualmode() == "v" then
+		local text = vim.api.nvim_buf_get_text(c_buf, s_row, s_col, e_row, e_col + 1, {})
 
-	text[1] = left:rep(vim.v.count1) .. text[1]
-	text[#text] = text[#text] .. right:rep(vim.v.count1)
+		text[1] = left:rep(vim.v.count1) .. text[1]
+		text[#text] = text[#text] .. right:rep(vim.v.count1)
 
-	vim.api.nvim_buf_set_text(c_buf, s_row, s_col, e_row, e_col + 1, text)
+		vim.api.nvim_buf_set_text(c_buf, s_row, s_col, e_row, e_col + 1, text)
+	else
+		for row = s_row, e_row do
+			local text = vim.api.nvim_buf_get_text(c_buf, row, s_col, row, e_col + 1, {})
+
+			text[1] = left .. text[1] .. right
+
+			vim.api.nvim_buf_set_text(c_buf, row, s_col, row, e_col + 1, text)
+		end
+	end
 end
 
 for key, _ in pairs(utils.couples) do
