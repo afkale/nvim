@@ -32,7 +32,7 @@ return {
 				["<C-k>"] = cmp.mapping.select_prev_item(),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<Tab>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
@@ -49,7 +49,6 @@ return {
 					maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 					ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part will show ellipsis_char instead
 					before = function(entry, vim_item)
-						-- Source display logic
 						vim_item.menu = ({
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snippet]",
