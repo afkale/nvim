@@ -682,6 +682,7 @@ return {
 			local fzf = require("fzf-lua")
 
 			vim.keymap.set("n", "fg", fzf.live_grep, {})
+			vim.keymap.set("v", "fg", fzf.grep_cword, {})
 			vim.keymap.set("n", "fd", fzf.grep_curbuf, {})
 			vim.keymap.set("n", "ff", fzf.files, {})
 			vim.keymap.set("n", "fs", fzf.lsp_document_symbols, {})
