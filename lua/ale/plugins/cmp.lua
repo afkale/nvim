@@ -10,6 +10,18 @@ return {
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-copilot", dependencies = "github/copilot.vim" },
 		{ "saadparwaiz1/cmp_luasnip" },
+		{
+			"L3MON4D3/LuaSnip",
+			version = "v2.*",
+			build = "make install_jsregexp",
+			dependencies = {
+				{ "rafamadriz/friendly-snippets", lazy = true },
+			},
+			priority = 1000,
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		},
 	},
 	config = function()
 		local cmp = require("cmp")
