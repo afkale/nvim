@@ -1,7 +1,4 @@
-vim.g.user42 = "arubio-o"
-vim.g.mail42 = "arubio-o@student.42madrid.com"
-
-vim.g.python3_host_prog = "/usr/bin/python"
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 vim.g.c_syntax_for_h = 1
 
@@ -39,9 +36,14 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 vim.opt.showtabline = 2
 
-vim.filetype.add({
-	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "html", "javascript", "json", "typescript", "yaml" },
+	command = "setlocal shiftwidth=2 tabstop=2",
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "python", "lua" },
+	command = "setlocal shiftwidth=4 tabstop=4",
 })

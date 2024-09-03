@@ -46,7 +46,9 @@ return {
 			})
 
 			lspconfig.pyright.setup({})
+			lspconfig.djlsp.setup({})
 			lspconfig.bashls.setup({ filetypes = { "sh", "zsh" } })
+			lspconfig.angularls.setup({})
 			lspconfig.tsserver.setup({
 				init_options = {
 					plugins = {

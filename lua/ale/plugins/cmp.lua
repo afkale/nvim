@@ -94,8 +94,19 @@ return {
 			}),
 			matching = { disallow_symbol_nonprefix_matching = false },
 		})
-		vim.keymap.set("i", "<Tab>", [[<cmd>lua require'luasnip'.jump(1)<CR>]], { noremap = true, silent = true })
-		vim.keymap.set("s", "<Tab>", [[<cmd>lua require'luasnip'.jump(1)<CR>]], { noremap = true, silent = true })
+
+		local function tab_complete()
+			local luasnip = require("luasnip")
+			if luasnip.expand_or_jumpable() then
+				return "<cmd>lua require'luasnip'.jump(1)<CR>"
+			else
+				return "<Tab>"
+			end
+		end
+
+		-- Map the Tab key in insert and select mode
+		vim.keymap.set("i", "<Tab>", tab_complete, { expr = true, noremap = true, silent = true })
+		vim.keymap.set("s", "<Tab>", tab_complete, { expr = true, noremap = true, silent = true })
 		vim.keymap.set("i", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<CR>]], { noremap = true, silent = true })
 		vim.keymap.set("s", "<S-Tab>", [[<cmd>lua require'luasnip'.jump(-1)<CR>]], { noremap = true, silent = true })
 	end,

@@ -7,11 +7,15 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					-- Conform will run multiple formatters sequentially
-					python = { "isort", "black" },
-					-- Use a sub-list to run only the first available formatter
+					python = { { "isort", "autoflake", "autopep8" } },
+
+					typescript = { { "prettierd", "prettier" } },
 					javascript = { { "prettierd", "prettier" } },
-					zsh = { "shfmt" },
+					html = { { "prettierd", "prettier" } },
+					css = { { "prettierd", "prettier" } },
+					scss = { { "prettierd", "prettier" } },
+					json = { { "prettierd", "prettier" } },
+					yaml = { { "prettierd", "prettier" } },
 				},
 			})
 
@@ -24,7 +28,7 @@ return {
 						["end"] = { args.line2, end_line:len() },
 					}
 				end
-				require("conform").format({ async = true, lsp_fallback = true, range = range })
+				conform.format({ async = true, lsp_fallback = true, range = range })
 			end, { range = true })
 
 			vim.keymap.set("n", "<leader>ff", ":Format<cr>", { noremap = true, silent = true })
