@@ -7,13 +7,12 @@ return {
 		{ "fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 		{ "fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
 		{ "fc", "<cmd>Telescope commands<cr>", desc = "Commands" },
-		{ "fr", "<cmd>Telescope resume<cr>", desc = "Resume Last" },
-		{ "fl", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
 		{ "fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP Document Symbols" },
-		{ "fS", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "LSP Workspace Symbols" },
-		{ "fR", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
+		{ "fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "LSP Dynamic Workspace Symbols" },
+		{ "fr", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
 		{ "fG", "<cmd>Telescope git_files<cr>", desc = "Git Files" },
 		{ "fu", "<cmd>Telescope undo<cr>", desc = "Undo Tree" },
+		{ "fR", "<cmd>Telescope resume<cr>", desc = "Resume Last" },
 		{ "fi", "<cmd>Telescope import<cr>", desc = "Import" },
 	},
 	dependencies = {
@@ -28,7 +27,7 @@ return {
 
 		require("telescope").setup({
 			defaults = {
-				prompt_prefix = "   ",
+				prompt_prefix = "  ",
 				selection_caret = "▎ ",
 				multi_icon = " │ ",
 				layout_strategy = "flex",
