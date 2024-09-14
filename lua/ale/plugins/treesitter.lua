@@ -1,9 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		"HiPhish/nvim-ts-rainbow2",
 		"nvim-treesitter/playground",
-		"windwp/nvim-ts-autotag",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"andymass/vim-matchup",
 	},

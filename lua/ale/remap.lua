@@ -49,7 +49,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "zz", "<cmd>write<cr>")
+vim.keymap.set("n", "zz", ":update<CR>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader><leader>", ":source<CR>")
 

@@ -47,7 +47,7 @@ return {
 			lspconfig.djlsp.setup({})
 			lspconfig.bashls.setup({ filetypes = { "sh", "zsh" } })
 			lspconfig.angularls.setup({})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				init_options = {
 					plugins = {
 						{
@@ -59,9 +59,12 @@ return {
 				},
 				filetypes = {
 					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
 					"typescript",
-					"vue",
-				},
+					"typescriptreact",
+					"typescript.tsx"
+				}
 			})
 
 			-- LSP CMDS
