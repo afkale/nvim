@@ -7,14 +7,14 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					python = { { "isort", "autoflake", "autopep8" } },
-					typescript = { { "prettierd", "prettier" } },
-					javascript = { { "prettierd", "prettier" } },
-					html = { { "prettierd", "prettier" } },
-					css = { { "prettierd", "prettier" } },
-					scss = { { "prettierd", "prettier" } },
-					json = { { "prettierd", "prettier" } },
-					yaml = { { "prettierd", "prettier" } },
+					python = { "isort", "autoflake", "autopep8" },
+					typescript = { "prettierd", "prettier" },
+					javascript = { "prettierd", "prettier" },
+					html = { "prettierd", "prettier" },
+					css = { "prettierd", "prettier" },
+					scss = { "prettierd", "prettier" },
+					json = { "prettierd", "prettier" },
+					yaml = { "prettierd", "prettier" },
 				},
 			})
 
@@ -29,7 +29,7 @@ return {
 				end
 				conform.format({ async = true, lsp_fallback = true, range = range })
 			end, { range = true })
-			vim.keymap.set("n", "<leader>ff", ":Format<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>FF", ":Format<cr>", { noremap = true, silent = true })
 		end,
 	},
 }
