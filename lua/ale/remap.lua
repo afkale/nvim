@@ -23,11 +23,6 @@ vim.keymap.set("n", "<S-l>", ">>", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-h>", "<gv", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-h>", "<<", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-
 vim.keymap.set("n", "tw", vim.cmd.tabnew)
 vim.keymap.set("n", "tn", vim.cmd.tabnext)
 vim.keymap.set("n", "tp", vim.cmd.tabprev)
