@@ -16,6 +16,11 @@ vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", { noremap = true, silent
 vim.keymap.set("n", "<A-j>", ":resize +2<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-k>", ":resize -2<CR>", { noremap = true, silent = true })
 
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-l>", ">gv", { noremap = true, silent = true })
@@ -36,19 +41,18 @@ vim.keymap.set("n", "mp", vim.cmd.bp)
 vim.keymap.set("n", "mn", vim.cmd.bn)
 vim.keymap.set("n", "mc", vim.cmd.bd)
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "zz", ":update<CR>")
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set("n", "<leader><leader>", ":source<CR>")
+vim.keymap.set("n", "zz", ":update | silent! !ctags %<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>e", ":Explore<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 function SurroundSelectionWithPair(key)
 	local left, right = utils.get_couple(key)

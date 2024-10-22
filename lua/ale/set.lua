@@ -48,6 +48,12 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
 vim.opt.showtabline = 2
 
+-- awesome file search
+vim.opt.wildmenu = true
+vim.opt.path:append("**")
+vim.opt.wildignore:append("ignored")
+vim.opt.wildmode = "list:longest,list:full"
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "html", "javascript", "json", "typescript", "yaml" },
 	command = "setlocal shiftwidth=2 tabstop=2",
