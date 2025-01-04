@@ -2,9 +2,9 @@ vim.api.nvim_create_autocmd("TermClose", {
 	pattern = "*",
 	callback = function()
 		local buf_type = vim.bo.buftype
-		local term_title = vim.b.term_title or ""
-		if buf_type == "terminal" and term_title:match("lazygit") then
-			vim.cmd("tabclose")
+		local buf_name = vim.api.nvim_buf_get_name(0)
+		if buf_type == "terminal" and buf_name:match("lazygit") then
+			vim.cmd("bdelete")
 		end
 	end,
 })

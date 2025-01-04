@@ -43,7 +43,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("t", "<A-Esc>", "<C-\\><C-n>")
 
-vim.keymap.set("n", "<A-g>", ":tabnew lazygit | terminal lazygit<CR>i")
+vim.keymap.set("n", "<A-g>", ":tabnew | terminal lazygit<CR>:file lazygit<CR>i")
 vim.keymap.set("n", "<leader>e", ":Explore<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>s", function()
