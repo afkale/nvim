@@ -7,7 +7,6 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					python = { "isort", "autoflake", "autopep8" },
 					typescript = { "prettierd", "prettier" },
 					javascript = { "prettierd", "prettier" },
 					html = { "prettierd", "prettier" },
@@ -15,6 +14,9 @@ return {
 					scss = { "prettierd", "prettier" },
 					json = { "prettierd", "prettier" },
 					yaml = { "prettierd", "prettier" },
+					tsx = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
 				},
 			})
 

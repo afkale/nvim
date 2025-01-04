@@ -16,6 +16,9 @@ vim.g.maplocalleader = ","
 vim.opt.filetype = "plugin"
 vim.opt.syntax = "enable"
 
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -45,17 +48,32 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "88"
 vim.opt.showtabline = 2
 
--- awesome file search
 vim.opt.wildmenu = true
+vim.opt.compatible = false
 vim.opt.path:append("**")
-vim.opt.wildignore:append("ignored")
+
 vim.opt.wildmode = "list:longest,list:full"
+vim.opt.wildignore = {
+	"**/__pycache__/**",
+	"**/.venv/**",
+	"**/node_modules/** ",
+	"*.pyc",
+	"**/ignored/**",
+	"tags",
+}
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "*",
+	callback = function()
+		vim.fn.system("ctags -a " .. vim.fn.expand("%"))
+	end,
+})
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "javascript", "json", "typescript", "yaml" },
+	pattern = { "html", "javascript", "json", "typescript", "yaml", "typescriptreact" },
 	command = "setlocal shiftwidth=2 tabstop=2",
 })
 vim.api.nvim_create_autocmd("FileType", {

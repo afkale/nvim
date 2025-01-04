@@ -28,13 +28,8 @@ vim.keymap.set("n", "<S-l>", ">>", { noremap = true, silent = true })
 vim.keymap.set("v", "<S-h>", "<gv", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-h>", "<<", { noremap = true, silent = true })
 
-vim.keymap.set("n", "tw", vim.cmd.tabnew)
-vim.keymap.set("n", "tn", vim.cmd.tabnext)
-vim.keymap.set("n", "tp", vim.cmd.tabprev)
-vim.keymap.set("n", "tc", vim.cmd.tabclose)
-
-vim.keymap.set("n", "sv", vim.cmd.vsplit)
-vim.keymap.set("n", "sh", vim.cmd.split)
+vim.keymap.set("n", "sv", ":vs<CR><C-w>l")
+vim.keymap.set("n", "sh", ":sp<CR><C-w>j")
 vim.keymap.set("n", "sc", vim.cmd.close)
 
 vim.keymap.set("n", "mp", vim.cmd.bp)
@@ -46,13 +41,27 @@ vim.keymap.set("n", "n", "nzzzv")
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("t", "<A-Esc>", "<C-\\><C-n>")
 
-vim.keymap.set("n", "zz", ":update | silent! !ctags %<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<A-g>", ":tabnew lazygit | terminal lazygit<CR>i")
 vim.keymap.set("n", "<leader>e", ":Explore<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<leader>s", function()
+	local word = vim.fn.expand("<cword>")
+	local replacement = vim.fn.input("Replace: ")
+
+	vim.cmd("%s/\\<" .. word .. "\\>/" .. replacement .. "/gI")
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>S", function()
+	local word = vim.fn.expand("<cword>")
+	local replacement = vim.fn.input("Replace: ", word)
+
+	vim.cmd("vimgrep /\\<" .. word .. "\\>/j **/*")
+	vim.cmd(
+		"cdo if search('\\<" .. word .. "\\>', 'n') | %s/\\<" .. word .. "\\>/" .. replacement .. "/gc | update | endif"
+	)
+end, { noremap = true, silent = true })
 
 function SurroundSelectionWithPair(key)
 	local left, right = utils.get_couple(key)

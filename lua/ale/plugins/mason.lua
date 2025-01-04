@@ -17,10 +17,8 @@ return {
 			})
 
 			local lspconfig = require("lspconfig")
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			lspconfig.lua_ls.setup({
-				--  capabilities = capabilities,
 				on_init = function(client)
 					local path = client.workspace_folders[1].name
 					if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -28,24 +26,22 @@ return {
 					end
 
 					client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-						runtime = {
-							version = "LuaJIT",
-						},
+						runtime = { version = "LuaJIT" },
 						workspace = {
 							checkThirdParty = false,
-							library = {
-								vim.env.VIMRUNTIME,
-							},
+							library = { vim.env.VIMRUNTIME },
 						},
 					})
 				end,
 				settings = { Lua = {} },
 			})
 
+			lspconfig.rust_analyzer.setup({})
+			lspconfig.ruff.setup({})
 			lspconfig.pyright.setup({})
-			lspconfig.djlsp.setup({})
 			lspconfig.bashls.setup({ filetypes = { "sh", "zsh" } })
-			lspconfig.angularls.setup({})
+			lspconfig.nushell.setup({})
+
 			lspconfig.ts_ls.setup({
 				init_options = {
 					plugins = {
@@ -62,8 +58,8 @@ return {
 					"javascript.jsx",
 					"typescript",
 					"typescriptreact",
-					"typescript.tsx"
-				}
+					"typescript.tsx",
+				},
 			})
 
 			-- LSP CMDS
