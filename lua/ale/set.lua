@@ -64,19 +64,3 @@ vim.opt.wildignore = {
 	"**/ignored/**",
 	"tags",
 }
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "*",
-	callback = function()
-		vim.fn.system("ctags -a " .. vim.fn.expand("%"))
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "javascript", "json", "typescript", "yaml", "typescriptreact" },
-	command = "setlocal shiftwidth=2 tabstop=2",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "lua" },
-	command = "setlocal shiftwidth=4 tabstop=4",
-})
