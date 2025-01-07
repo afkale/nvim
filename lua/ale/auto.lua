@@ -25,10 +25,3 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "python", "lua" },
 	command = "setlocal shiftwidth=4 tabstop=4",
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		vim.bo.equalprg = "ruff format --quiet -"
-	end,
-})

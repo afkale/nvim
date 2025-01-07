@@ -48,7 +48,7 @@ vim.keymap.set("n", "<leader>e", ":Explore<CR>", { noremap = true, silent = true
 
 vim.keymap.set("n", "<leader>s", function()
 	local word = vim.fn.expand("<cword>")
-	local replacement = vim.fn.input("Replace: ")
+	local replacement = vim.fn.input("Replace: ", word)
 
 	vim.cmd("%s/\\<" .. word .. "\\>/" .. replacement .. "/gI")
 end, { noremap = true, silent = true })
