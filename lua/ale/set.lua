@@ -16,6 +16,9 @@ vim.g.maplocalleader = ","
 vim.opt.filetype = "plugin"
 vim.opt.syntax = "enable"
 
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 
@@ -52,15 +55,20 @@ vim.opt.colorcolumn = "88"
 vim.opt.showtabline = 2
 
 vim.opt.wildmenu = true
-vim.opt.compatible = false
 vim.opt.path:append("**")
-
-vim.opt.wildmode = "list:longest,list:full"
+vim.opt.compatible = false
 vim.opt.wildignore = {
 	"**/__pycache__/**",
 	"**/.venv/**",
-	"**/node_modules/** ",
+	"**/node_modules/**",
+	"**/.git/**",
+	"**/.svn/**",
+	"**/.hg/**",
+	"*.bak",
 	"*.pyc",
-	"**/ignored/**",
+	"*.class",
 	"tags",
 }
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wildoptions = "pum,tagfile"
+vim.opt.wildcharm = vim.fn.char2nr("\t")
