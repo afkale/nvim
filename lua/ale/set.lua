@@ -54,9 +54,7 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "88"
 vim.opt.showtabline = 2
 
-vim.opt.wildmenu = true
 vim.opt.path:append("**")
-vim.opt.compatible = false
 vim.opt.wildignore = {
 	"**/__pycache__/**",
 	"**/.venv/**",
@@ -69,6 +67,9 @@ vim.opt.wildignore = {
 	"*.class",
 	"tags",
 }
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildoptions = "pum,tagfile"
-vim.opt.wildcharm = vim.fn.char2nr("\t")
+
+-- vim.opt.wildmenu = false
+-- vim.opt.compatible = false
+-- vim.opt.wildmode = "longest:full,full"
+-- vim.opt.wildoptions = "pum,tagfile"
+-- vim.opt.wildcharm = vim.fn.char2nr("\t")

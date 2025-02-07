@@ -1,14 +1,3 @@
-vim.api.nvim_create_autocmd("TermClose", {
-	pattern = "*",
-	callback = function()
-		local buf_type = vim.bo.buftype
-		local buf_name = vim.api.nvim_buf_get_name(0)
-		if buf_type == "terminal" and buf_name:match("lazygit") then
-			vim.cmd("bdelete")
-		end
-	end,
-})
-
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*",
 	callback = function()
@@ -41,4 +30,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 	desc = "LSP: Disable hover capability from Ruff",
+})
+
+-- Auto formatting files
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client then
+			return
+		end
+
+		if client.supports_method("textDocument/formatting") then
+			-- Format the current buffer on save
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+				end,
+			})
+		end
+	end,
 })

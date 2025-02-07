@@ -34,9 +34,8 @@ vim.keymap.set("v", "<S-h>", "<gv", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-h>", "<<", { noremap = true, silent = true })
 
 -- Splits --
-vim.keymap.set("n", "sv", ":vs<CR><C-w>l")
-vim.keymap.set("n", "sh", ":sp<CR><C-w>j")
-vim.keymap.set("n", "sc", vim.cmd.close)
+vim.keymap.set("n", "<leader>s", ":vs<CR><C-w>l")
+vim.keymap.set("n", "<leader>h", ":sp<CR><C-w>j")
 
 -- Buffers --
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true })
@@ -59,24 +58,7 @@ vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>")
 -- Sort lines command
 vim.keymap.set("v", "<C-s>", ":sort<CR>", { noremap = true, silent = true })
 -- Open explorer
-vim.keymap.set("n", "<leader>e", ":Explore<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>s", function()
-	local word = vim.fn.expand("<cword>")
-	local replacement = vim.fn.input("Replace: ", word)
-
-	vim.cmd("%s/\\<" .. word .. "\\>/" .. replacement .. "/gI")
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>S", function()
-	local word = vim.fn.expand("<cword>")
-	local replacement = vim.fn.input("Replace: ", word)
-
-	vim.cmd("vimgrep /\\<" .. word .. "\\>/j **/*")
-	vim.cmd(
-		"cdo if search('\\<" .. word .. "\\>', 'n') | %s/\\<" .. word .. "\\>/" .. replacement .. "/gc | update | endif"
-	)
-end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", { noremap = true, silent = true })
 
 function SurroundSelectionWithPair(key)
 	local left, right = utils.get_couple(key)
