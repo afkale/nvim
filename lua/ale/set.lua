@@ -67,9 +67,3 @@ vim.opt.wildignore = {
 	"*.class",
 	"tags",
 }
-
--- vim.opt.wildmenu = false
--- vim.opt.compatible = false
--- vim.opt.wildmode = "longest:full,full"
--- vim.opt.wildoptions = "pum,tagfile"
--- vim.opt.wildcharm = vim.fn.char2nr("\t")

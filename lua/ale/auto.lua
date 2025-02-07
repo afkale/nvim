@@ -1,3 +1,4 @@
+-- Update ctags
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*",
 	callback = function()
@@ -5,6 +6,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
+-- File formatting spaces
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "html", "javascript", "json", "typescript", "yaml", "typescriptreact" },
 	command = "setlocal shiftwidth=2 tabstop=2",
@@ -13,6 +15,16 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "python", "lua" },
 	command = "setlocal shiftwidth=4 tabstop=4",
+})
+
+
+-- Terminal format
+vim.api.nvim_create_autocmd('TermOpen', {
+	group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+	callback = function()
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+	end
 })
 
 -- This is because i'm using ruff and pyright at the same time but I only want ruff
