@@ -33,10 +33,11 @@ vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", { noremap = true, silent = true })
 
 -- Terminals --
-vim.keymap.set("n", "<leader>tt", ":Floaterminal<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>tb", ":Boterminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tf", ":Floaterminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tt", ":Boterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
 vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- Tabs --
 vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
