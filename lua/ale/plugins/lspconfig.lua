@@ -1,77 +1,48 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "saghen/blink.cmp", "williamboman/mason.nvim" },
+		dependencies = {
+			{ "saghen/blink.cmp" },
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+
+						-- Only load the lazyvim library when the `LazyVim` global is found
+						{ path = "LazyVim",            words = { "LazyVim" } },
+					},
+				}
+			},
+		},
 
 		opts = {
 			servers = {
 				ruff = {},
 				nushell = {},
 				rust_analyzer = {},
-				bashls = { filetypes = { "sh", "zsh" } },
-				lua_ls = {
-					on_init = function(client)
-						if client.workspace_folders then
-							local path = client.workspace_folders[1].name
-							if
-								path ~= vim.fn.stdpath("config")
-								and (
-									vim.loop.fs_stat(path .. "/.luarc.json")
-									or vim.loop.fs_stat(path .. "/.luarc.jsonc")
-								)
-							then
-								return
-							end
-						end
-
-						client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-							runtime = {
-								version = "LuaJIT",
-							},
-							workspace = {
-								checkThirdParty = false,
-								library = {
-									vim.env.VIMRUNTIME,
+				jsonls = {},
+				marksman = {},
+				lua_ls = {},
+				dockerls = {
+					settings = {
+						docker = {
+							languageserver = {
+								formatter = {
+									ignoreMultilineInstructions = true,
 								},
 							},
-						})
-					end,
-					settings = {
-						Lua = {},
-					},
+						}
+					}
 				},
+				bashls = { filetypes = { "sh", "zsh" } },
 				pyright = {
 					settings = {
-						pyright = {
-							-- Using Ruff's import organizer
-							disableOrganizeImports = true,
-						},
-						python = {
-							analysis = {
-								-- Ignore all files for analysis to exclusively use Ruff for linting
-								ignore = { "*" },
-							},
-						},
-					},
-				},
-				ts_ls = {
-					init_options = {
-						plugins = {
-							{
-								name = "@vue/typescript-plugin",
-								location =
-								"/usr/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin",
-								languages = { "javascript", "typescript", "vue" },
-							},
-						},
-					},
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"javascript.jsx",
-						"typescript",
-						"typescriptreact",
-						"typescript.tsx",
+						pyright = { disableOrganizeImports = true },
+						python = { analysis = { ignore = { "*" } } },
 					},
 				},
 			},
@@ -79,8 +50,6 @@ return {
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
 			for server, config in pairs(opts.servers) do
-				-- passing config.capabilities to blink.cmp merges with the capabilities in your
-				-- `opts[server].capabilities, if you've defined it
 				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 				lspconfig[server].setup(config)
 			end

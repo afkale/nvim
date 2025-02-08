@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=4 tabstop=4",
 })
 
-
 -- Terminal format
 vim.api.nvim_create_autocmd('TermOpen', {
 	group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),

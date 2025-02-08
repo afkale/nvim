@@ -6,5 +6,5 @@ return {
 			require('mini.files').setup()
 		end
 
-	}
+	},
 }
