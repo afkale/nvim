@@ -12,7 +12,7 @@ local function rg_search()
 
 		if input then
 			-- Construct and run the `rg` command
-			local cmd = vim.g.searchcmd .. " " .. vim.fn.shellescape(input) .. ignore_files
+			local cmd = vim.opt.grepprg:get() .. " " .. vim.fn.shellescape(input) .. ignore_files
 			local results = vim.fn.systemlist(cmd)
 
 			if #results > 0 then
