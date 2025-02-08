@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return
 		end
 
-		if client.supports_method("textDocument/formatting") then
+		if client.supports_method("textDocument/formatting", args.buf) then
 			-- Format the current buffer on save
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				buffer = args.buf,

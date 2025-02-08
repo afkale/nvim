@@ -3,6 +3,7 @@ vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 vim.g.c_syntax_for_h = 1
 
 vim.g.maplocalleader = ","
+vim.g.searchcmd = "rg --vimgrep --smart-case"
 
 vim.opt.filetype = "plugin"
 vim.opt.syntax = "enable"
