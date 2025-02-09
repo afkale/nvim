@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", { noremap = true, silent = tr
 
 -- Terminal shortcuts
 vim.keymap.set("n", "<leader>ft", ":Floaterminal<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>tt", "<CMD>Boterminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tt", ":Boterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
 vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true, silent = true })
 
