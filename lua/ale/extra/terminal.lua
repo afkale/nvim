@@ -1,11 +1,13 @@
 local state = {
-	floating = {
+	float = {
 		win = -1,
 		buf = -1,
+		cmd = "Floaterminal"
 	},
-	bottom = {
+	bot = {
 		win = -1,
 		buf = -1,
+		cmd = "Boterminal"
 	}
 }
 
@@ -38,7 +40,7 @@ local function create_floating_window(opts)
 	}
 	local buf = create_buffer(opts)
 	local win = vim.api.nvim_open_win(buf, true, win_config)
-	return { buf = buf, win = win }
+	return { buf = buf, win = win, cmd = opts.cmd }
 end
 
 local function create_bottom_panel(opts)
@@ -59,7 +61,7 @@ local function create_bottom_panel(opts)
 	-- Set the height of the bottom panel
 	vim.api.nvim_win_set_height(win, height)
 
-	return { buf = buf, win = win }
+	return { buf = buf, win = win, cmd = opts.cmd }
 end
 
 -- Helper function to create a terminal tab with a given command
@@ -94,53 +96,48 @@ local function create_command_tab(opts)
 	})
 end
 
--- Function to toggle the floating terminal
-local function toggle_floaterminal()
-	if not vim.api.nvim_win_is_valid(state.floating.win) then
-		-- Create the terminal window based on the mode
-		state.floating = create_floating_window(state.floating)
+-- Helper function to toggle a terminal window
+local function toggle_terminal(mode)
+	local terminal = state[mode]
 
-		-- Open a terminal if necessary
-		if vim.bo[state.floating.buf].buftype ~= "terminal" then
+	-- If the terminal window is invalid, create it
+	if not vim.api.nvim_win_is_valid(terminal.win) then
+		-- Create window based on mode
+		if mode == "float" then
+			state.float = create_floating_window(state.float)
+		elseif mode == "bot" then
+			state.bot = create_bottom_panel(state.bot)
+		end
+
+		terminal = state[mode] -- Reassign after creation
+		-- Open terminal if necessary
+		if vim.bo[terminal.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
 		end
 
-		-- Start insert when enter current floaterminal
-		vim.cmd("startinsert")
-	else
-		-- Hide the terminal window if it's already valid
-		vim.api.nvim_win_hide(state.floating.win)
-	end
-end
-
--- Function to toggle the bottom terminal
-local function toggle_boterminal()
-	if not vim.api.nvim_win_is_valid(state.bottom.win) then
-		-- Create the terminal window based on the mode
-		state.bottom = create_bottom_panel(state.bottom)
-
-		-- Open a terminal if necessary
-		if vim.bo[state.bottom.buf].buftype ~= "terminal" then
-			vim.cmd.terminal()
-		end
+		-- Set keymap for exiting terminal mode
 		vim.api.nvim_buf_set_keymap(
-			state.bottom.buf, "t", "<leader>tt", "<CMD>Boterminal<CR>",
+			terminal.buf, "t", "<C-\\><C-\\>", "<C-\\><C-n><CMD>" .. terminal.cmd .. "<CR>",
 			{ noremap = true, silent = true }
 		)
 
-		-- Start insert when enter current boterminal
+		-- Start insert mode when entering terminal
 		vim.cmd("startinsert")
 	else
-		-- Hide the terminal window if it's already valid
-		vim.api.nvim_win_hide(state.bottom.win)
+		-- Hide the terminal if it's already open
+		vim.api.nvim_win_hide(terminal.win)
 	end
 end
 
 -- Create the user command for Floaterminal
-vim.api.nvim_create_user_command("Floaterminal", toggle_floaterminal, { desc = "Run floating terminal." })
+vim.api.nvim_create_user_command(
+	"Floaterminal", function() toggle_terminal("float") end, { desc = "Run floating terminal." }
+)
 
 -- Create the user command for Boterminal
-vim.api.nvim_create_user_command("Boterminal", toggle_boterminal, { desc = "Run bottom terminal." })
+vim.api.nvim_create_user_command(
+	"Boterminal", function() toggle_terminal("bot") end, { desc = "Run bottom terminal." }
+)
 
 -- Create the Precommit command
 vim.api.nvim_create_user_command("Precommit", function()

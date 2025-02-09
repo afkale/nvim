@@ -42,6 +42,7 @@ vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>ft", ":Floaterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>tt", "<CMD>Boterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- Tab management
 vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
@@ -52,7 +53,6 @@ vim.keymap.set("n", "<C-.>", ":cnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-,>", ":cprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true })
-
 
 -- File finding and searching
 vim.keymap.set("n", "<leader>ff", ":find ")
