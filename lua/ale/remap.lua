@@ -53,6 +53,7 @@ vim.keymap.set("n", "<C-.>", ":cnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-,>", ":cprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>cc", ":cclose<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>crn", ":cdo s///c<LEFT><LEFT><LEFT>")
 
 -- File finding and searching
 vim.keymap.set("n", "<leader>ff", ":find ")
