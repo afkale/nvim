@@ -1,49 +1,66 @@
+-- Set the Python 3 host program for Neovim
 vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
+-- Use C syntax highlighting for .h (header) files
 vim.g.c_syntax_for_h = 1
 
-vim.opt.filetype = "plugin"
-vim.opt.syntax = "enable"
+-- Enable filetype detection and syntax highlighting
+vim.opt.filetype = "plugin" -- Enable filetype-based settings
+vim.opt.syntax = "enable"   -- Enable syntax highlighting
 
+-- Configure grep program to use ripgrep (rg) for searching
 vim.opt.grepprg = "rg --vimgrep --smart-case"
-vim.opt.grepformat = "%f:%l:%c:%m"
+vim.opt.grepformat = "%f:%l:%c:%m" -- Format for displaying grep results
 
-vim.opt.foldmethod = "indent"
-vim.opt.foldlevelstart = 99
+-- Configure folding settings
+vim.opt.foldmethod = "indent" -- Use indentation levels for folding
+vim.opt.foldlevelstart = 99   -- Keep folds open by default
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+-- Enable line numbers
+vim.opt.number = true         -- Show absolute line numbers
+vim.opt.relativenumber = true -- Show relative line numbers
 
-vim.opt.wrap = false
-vim.opt.breakindent = true
+-- Configure text wrapping behavior
+vim.opt.wrap = false       -- Disable line wrapping
+vim.opt.breakindent = true -- Maintain indentation when wrapping
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = false
+-- Configure default tab and indentation settings
+vim.opt.tabstop = 4       -- Number of spaces per tab
+vim.opt.shiftwidth = 4    -- Indentation width
+vim.opt.expandtab = false -- Use actual tab characters instead of spaces
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
-vim.opt.undofile = true
+-- Disable swap and backup files, enable persistent undo
+vim.opt.swapfile = false                                -- Disable swap file creation
+vim.opt.backup = false                                  -- Disable backup files
+vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir" -- Set undo directory
+vim.opt.undofile = true                                 -- Enable persistent undo
 
-vim.opt.hlsearch = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
+-- Configure search behavior
+vim.opt.hlsearch = false  -- Disable highlight search
+vim.opt.ignorecase = true -- Ignore case in searches
+vim.opt.smartcase = true  -- Enable case-sensitive search if uppercase is used
+vim.opt.incsearch = true  -- Show search matches while typing
 
-vim.opt.termguicolors = true
-vim.opt.cursorline = true
+-- Enable terminal colors and cursor highlighting
+vim.opt.termguicolors = true -- Enable 24-bit colors
+vim.opt.cursorline = true    -- Highlight the current cursor line
 
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+-- Scrolling and UI enhancements
+vim.opt.scrolloff = 8         -- Keep 8 lines of context above/below cursor
+vim.opt.signcolumn = "yes"    -- Always show the sign column
+vim.opt.isfname:append("@-@") -- Allow @ in file names
 
-vim.opt.updatetime = 50
+-- Performance tuning
+vim.opt.updatetime = 50 -- Reduce time before triggering CursorHold event
 
-vim.opt.colorcolumn = "88"
-vim.opt.showtabline = 2
+-- Visual guidelines
+vim.opt.colorcolumn = "100" -- Highlight column 88 for better readability
+vim.opt.showtabline = 2     -- Always show tab bar
 
-vim.opt.path:append("**")
+-- Path settings for better file navigation
+vim.opt.path:append("**") -- Allow recursive searching of files
+
+-- Ignore unnecessary files in searches
 vim.opt.wildignore = {
 	"**/__pycache__/**",
 	"**/.venv/**",

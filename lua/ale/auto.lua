@@ -6,16 +6,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
--- File formatting spaces
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "javascript", "json", "typescript", "yaml", "typescriptreact" },
-	command = "setlocal shiftwidth=2 tabstop=2",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "lua" },
-	command = "setlocal shiftwidth=4 tabstop=4",
-})
-
 -- Terminal format
 vim.api.nvim_create_autocmd('TermOpen', {
 	group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),

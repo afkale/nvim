@@ -123,6 +123,10 @@ local function toggle_boterminal()
 		if vim.bo[state.bottom.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
 		end
+		vim.api.nvim_buf_set_keymap(
+			state.bottom.buf, "t", "<leader>tt", "<CMD>Boterminal<CR>",
+			{ noremap = true, silent = true }
+		)
 
 		-- Start insert when enter current boterminal
 		vim.cmd("startinsert")
