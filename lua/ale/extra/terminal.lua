@@ -96,15 +96,17 @@ end
 local function create_command_tab(opts)
 	opts = opts or {}
 
+	-- Check if command exists
 	if not opts.command or opts.command == "" then
 		vim.notify("Error: Missing or empty 'command' argument.", vim.log.levels.ERROR)
 		return
 	end
 
-	vim.cmd("tabnew") -- Create a new tab
+	vim.cmd("tabnew")                       -- Create a new tab
 
-	local buf = vim.api.nvim_get_current_buf()
+	local buf = vim.api.nvim_get_current_buf() -- Get the buffer of the new tab
 
+	-- Start command job and create a command to leave when it finish
 	vim.fn.jobstart(opts.command, {
 		term = true,
 		on_exit = function()
@@ -116,7 +118,7 @@ local function create_command_tab(opts)
 	})
 end
 
---- Create user commands
+--- User commands
 vim.api.nvim_create_user_command(TerminalCMD.FLOATERMINAL, function()
 	toggle_terminal(Terminal.FLOAT)
 end, { desc = "Run floating terminal." })
