@@ -17,6 +17,10 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w><C-l>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w><C-k>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w><C-j>", { noremap = true, silent = true })
 
 -- Lines --
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
@@ -33,7 +37,7 @@ vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", { noremap = true, silent = true })
 
 -- Terminals --
-vim.keymap.set("n", "<leader>tf", ":Floaterminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ft", ":Floaterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>tt", ":Boterminal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
 vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>", { noremap = true, silent = true })
@@ -41,6 +45,7 @@ vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true, silent = tr
 
 -- Tabs --
 vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { noremap = true, silent = true })
 
 -- Quifix --
 vim.keymap.set("n", "<C-,>", ":cnext<CR>", { noremap = true, silent = true })
@@ -62,6 +67,7 @@ vim.keymap.set("n", "<leader>fg", ":RgSearch<CR>")
 vim.keymap.set("v", "<C-s>", ":sort<CR>", { noremap = true, silent = true })
 -- Open explorer
 vim.keymap.set("n", "<leader>e", ":lua MiniFiles.open()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>E", ":lua MiniFiles.open(vim.fn.expand('%:p'))<CR>", { noremap = true, silent = true })
 -- Source file
 vim.keymap.set("n", "<leader><leader>", ":source<CR>", { noremap = true, silent = true })
 -- Open diagnostic

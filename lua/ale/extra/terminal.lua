@@ -55,6 +55,7 @@ local function create_bottom_panel(opts)
 
 	-- Set the buffer to window
 	vim.api.nvim_win_set_buf(win, buf)
+
 	-- Set the height of the bottom panel
 	vim.api.nvim_win_set_height(win, height)
 
@@ -103,6 +104,9 @@ local function toggle_floaterminal()
 		if vim.bo[state.floating.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
 		end
+
+		-- Start insert when enter current floaterminal
+		vim.cmd("startinsert")
 	else
 		-- Hide the terminal window if it's already valid
 		vim.api.nvim_win_hide(state.floating.win)
@@ -119,6 +123,9 @@ local function toggle_boterminal()
 		if vim.bo[state.bottom.buf].buftype ~= "terminal" then
 			vim.cmd.terminal()
 		end
+
+		-- Start insert when enter current boterminal
+		vim.cmd("startinsert")
 	else
 		-- Hide the terminal window if it's already valid
 		vim.api.nvim_win_hide(state.bottom.win)
