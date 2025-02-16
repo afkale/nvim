@@ -62,7 +62,7 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		config = function()
 			-- Eviline config for lualine
 			-- Author: shadmansaleh

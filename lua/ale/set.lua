@@ -1,6 +1,8 @@
 -- Set the Python 3 host program for Neovim
 vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
+vim.g.autoformat = true
+
 -- Use C syntax highlighting for .h (header) files
 vim.g.c_syntax_for_h = 1
 
@@ -49,14 +51,6 @@ vim.opt.cursorline = true    -- Highlight the current cursor line
 vim.opt.scrolloff = 8         -- Keep 8 lines of context above/below cursor
 vim.opt.signcolumn = "yes"    -- Always show the sign column
 vim.opt.isfname:append("@-@") -- Allow @ in file names
-
--- Performance tuning
-vim.opt.updatetime = 50   -- Reduce the time before the CursorHold event is triggered (default is 4000ms)
-vim.opt.timeoutlen = 500  -- Time in milliseconds to wait for a mapped sequence to complete (default is 1000ms)
-vim.opt.ttimeoutlen = 10  -- Time in milliseconds to wait for a keycode sequence to complete (useful for escape key responsiveness)
-vim.opt.lazyredraw = true -- Improves performance by not redrawing the screen while running macros, registers, etc.
-vim.opt.updatetime = 100  -- Adjust update time again (potential duplicate, but 100 is still a reasonable setting)
-vim.opt.synmaxcol = 200   -- Limit syntax highlighting to the first 200 columns for performance in very long lines
 
 -- Visual guidelines
 vim.opt.colorcolumn = "100" -- Highlight column 88 for better readability

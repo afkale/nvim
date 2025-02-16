@@ -36,12 +36,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if not client then
-			return
-		end
 
-		if client.supports_method("textDocument/formatting", args.buf) then
-			-- Format the current buffer on save
+		if not client then return end
+		if client.supports_method("textDocument/formatting") then
+			if not vim.g.autoformat then return end
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				buffer = args.buf,
 				callback = function()

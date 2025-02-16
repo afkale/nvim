@@ -2,7 +2,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "saghen/blink.cmp" },
+			{ "hrsh7th/nvim-cmp" },
 			{
 				"folke/lazydev.nvim",
 				ft = "lua",
@@ -22,7 +22,7 @@ return {
 				rust_analyzer = {},
 				jsonls = {},
 				marksman = {},
-				lua_ls = {},
+				bashls = { filetypes = { "sh", "zsh" } },
 				dockerls = {
 					settings = {
 						docker = {
@@ -34,21 +34,72 @@ return {
 						}
 					}
 				},
-				bashls = { filetypes = { "sh", "zsh" } },
+				lua_ls = {
+					Lua = {
+						diagnostics = {
+							enable = true,
+							diagnosticMode = "workspace",
+						},
+						workspace = {
+							checkThirdParty = false,
+						},
+					},
+				},
 				pyright = {
 					settings = {
 						pyright = { disableOrganizeImports = true },
-						python = { analysis = { ignore = { "*" } } },
+						python = {
+							analysis = {
+								typeCheckingMode = "strict",
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "workspace",
+							}
+						},
 					},
 				},
 			},
 		},
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
+
+			-- LSP servers setup configuration
 			for server, config in pairs(opts.servers) do
-				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 				lspconfig[server].setup(config)
 			end
+
+			-- Diagnostic configuration
+			vim.diagnostic.config({
+				float = { source = true },
+				virtual_text = {
+					enable = true,
+					spacing = 4,
+					prefix = "●",
+				},
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
+			})
+
+			-- Keymap for LSP actions
+			local keymap_opts = { noremap = true, silent = true }
+			vim.keymap.set("n", "gri", vim.lsp.buf.references, keymap_opts)
+			vim.keymap.set("n", "grn", vim.lsp.buf.rename, keymap_opts)
+			vim.keymap.set("n", "gra", vim.lsp.buf.code_action, keymap_opts)
+
+			vim.keymap.set("n", "gfd", "<CMD>lua vim.g.autoformat = not vim.g.autoformat<CR>")
+			vim.keymap.set("n", "gff", vim.lsp.buf.format, keymap_opts)
+
+			vim.keymap.set("n", "gel", vim.diagnostic.setqflist, keymap_opts)
+			vim.keymap.set("n", "gee", vim.diagnostic.open_float, keymap_opts)
+
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_opts)
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, keymap_opts)
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, keymap_opts)
+
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_opts)
 		end,
 	},
 }

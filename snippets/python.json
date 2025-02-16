@@ -1,0 +1,7 @@
+{
+	"def": {
+		"prefix": "def",
+		"body": "def ${1:function_name}(${2:args}):\n\t${0}",
+		"description": "Function definition"
+	}
+}

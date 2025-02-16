@@ -1,72 +1,71 @@
--- Set the leader key to space
+-- Set the leader key to spac
 vim.g.mapleader = " "
 
+local opts = { noremap = true, silent = true }
+
 -- Copy mappings using system clipboard
-vim.keymap.set({ "v", "x" }, "<leader>y", '"+y', { noremap = true, silent = true })   -- Copy selection to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true }) -- Copy current line or selection
-vim.keymap.set("n", "<leader>Y", [["+Y]], { noremap = true, silent = true })          -- Copy entire line
+vim.keymap.set({ "v", "x" }, "<leader>y", '"+y', opts)   -- Copy selection to system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], opts) -- Copy current line or selection
+vim.keymap.set("n", "<leader>Y", [["+Y]], opts)          -- Copy entire line
 
 -- Window resizing shortcuts
-vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", { noremap = true, silent = true }) -- Decrease window width
-vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", { noremap = true, silent = true }) -- Increase window width
-vim.keymap.set("n", "<A-j>", ":resize +2<CR>", { noremap = true, silent = true })          -- Increase window height
-vim.keymap.set("n", "<A-k>", ":resize -2<CR>", { noremap = true, silent = true })          -- Decrease window height
+vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", opts) -- Decrease window width
+
+vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", opts) -- Increase window width
+vim.keymap.set("n", "<A-j>", ":resize +2<CR>", opts)          -- Increase window height
+vim.keymap.set("n", "<A-k>", ":resize -2<CR>", opts)          -- Decrease window height
 
 -- Window navigation mappings
-vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true }) -- Move left
-vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true }) -- Move right
-vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true }) -- Move down
-vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true }) -- Move up
+vim.keymap.set("n", "<C-h>", "<C-w>h", opts) -- Move left
+vim.keymap.set("n", "<C-l>", "<C-w>l", opts) -- Move right
+vim.keymap.set("n", "<C-j>", "<C-w>j", opts) -- Move down
+vim.keymap.set("n", "<C-k>", "<C-w>k", opts) -- Move up
 
 -- Terminal window navigation
-vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", { noremap = true, silent = true })
-vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w><C-l>", { noremap = true, silent = true })
-vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w><C-k>", { noremap = true, silent = true })
-vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w><C-j>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", opts)
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w><C-l>", opts)
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w><C-k>", opts)
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w><C-j>", opts)
 
 -- Move lines up and down in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 -- Indentation mappings
-vim.keymap.set("v", "<S-l>", ">gv", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-l>", ">>", { noremap = true, silent = true })
-vim.keymap.set("v", "<S-h>", "<gv", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-h>", "<<", { noremap = true, silent = true })
+vim.keymap.set("v", "<S-l>", ">gv", opts)
+vim.keymap.set("n", "<S-l>", ">>", opts)
+vim.keymap.set("v", "<S-h>", "<gv", opts)
+vim.keymap.set("n", "<S-h>", "<<", opts)
 
 -- Split window shortcuts
-vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", { noremap = true, silent = true }) -- Vertical split
-vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", { noremap = true, silent = true }) -- Horizontal split
+vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", opts) -- Vertical split
+vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", opts) -- Horizontal split
 
 -- Terminal shortcuts
-vim.keymap.set("n", "<leader>ft", ":Floaterminal<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>tt", ":Boterminal<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
-vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set({ "t", "n" }, "<C-1>", "<CMD>Boterminal<CR>", opts)
+vim.keymap.set({ "t", "n" }, "<C-2>", "<CMD>Floaterminal<CR>", opts)
+vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", opts)
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", opts)
 
 -- Tab management
-vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", opts)
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", opts)
 
--- Quickfix navigation
-vim.keymap.set("n", "<C-.>", ":cnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-,>", ":cprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>cc", ":cclose<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>crn", ":cdo s///c<LEFT><LEFT><LEFT>")
+-- Quickfix
+vim.keymap.set("n", "<C-.>", ":cnext<CR>", opts)
+vim.keymap.set("n", "<C-,>", ":cprevious<CR>", opts)
+vim.keymap.set("n", "<leader>cc", ":cclose<CR>", opts)
+vim.keymap.set("n", "<leader>co", ":botright cwindow<CR>", opts)
+vim.keymap.set("n", "<leader>crn",
+	":cdo s///c | update<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>")
 
--- File finding and searching
-vim.keymap.set("n", "<leader>ff", ":find ")
+-- Finding things
+-- vim.keymap.set("n", "<leader>ff", ":find ")
 vim.keymap.set("n", "<leader>fh", ":help ")
 vim.keymap.set("n", "<leader>fg", ":RgSearch<CR>")
 
 -- File explorer
-vim.keymap.set("n", "<leader>e", ":Files<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>E", ":FilesHere<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", ":lua require'oil'.toggle_float()<CR>", opts)
 
 -- Miscellaneous shortcuts
-vim.keymap.set("v", "<C-s>", ":sort<CR>", { noremap = true, silent = true })                         -- Sort lines visual
-vim.keymap.set("n", "<leader><leader>", ":source<CR>", { noremap = true, silent = true })            -- Source File
-vim.keymap.set("n", "gl", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true }) -- Open diagnostic float
-vim.keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true })                             -- Exit insert mode
-vim.keymap.set("n", "Q", "<nop>", { noremap = true, silent = true })                                 -- Disable Ex mode
+vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual

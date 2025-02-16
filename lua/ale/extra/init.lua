@@ -1,3 +1,3 @@
 require("ale.extra.search")
 require("ale.extra.terminal")
-require("ale.extra.files")
+require("ale.extra.utils")
