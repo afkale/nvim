@@ -1,4 +1,5 @@
 require("ale.extra.utils")
+
 local Terminal = {
 	BOT = "bot",
 	FLOAT = "float"
@@ -113,35 +114,3 @@ end, { desc = "Run pre-commit hooks in a new tab" })
 vim.api.nvim_create_user_command(
 	"Lazygit", floating_lazygit, { desc = "Run floating lazygit command." }
 )
-
-local fzf_command = "fzf --preview 'bat --color=always --style=plain --theme=Catppuccin\\ Mocha {}'"
-local function select_file()
-	local old_buf = vim.api.nvim_get_current_buf()
-	local window = create_floating_window({})
-
-	vim.cmd("startinsert")
-
-	local tmp = vim.fn.tempname()
-	vim.fn.termopen(fzf_command .. " > " .. tmp, {
-		on_exit = function()
-			local fname = vim.fn.readfile(tmp)[1]
-
-			-- Close this term buffer and window
-			vim.api.nvim_win_close(window.win, true)
-			vim.api.nvim_buf_delete(window.buf, {})
-
-			-- Get the old buffer
-			vim.api.nvim_set_current_buf(old_buf)
-
-			if vim.fn.filereadable(fname) == 1 then
-				vim.cmd('edit ' .. vim.fn.fnameescape(fname))
-			end
-
-			vim.fn.delete(tmp)
-		end
-	})
-end
-
--- Create a command for easy execution
-vim.api.nvim_create_user_command('Fzf', select_file, {})
-vim.keymap.set("n", "<leader>ff", ":Fzf<CR>")

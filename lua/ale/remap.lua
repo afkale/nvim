@@ -60,7 +60,6 @@ vim.keymap.set("n", "<leader>crn",
 	":cdo s///c | update<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>")
 
 -- Finding things
--- vim.keymap.set("n", "<leader>ff", ":find ")
 vim.keymap.set("n", "<leader>fh", ":help ")
 vim.keymap.set("n", "<leader>fg", ":RgSearch<CR>")
 
