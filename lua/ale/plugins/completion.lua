@@ -15,15 +15,8 @@ return {
 
 			vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
 
-			local performance = {
-				debounce = 60,
-				throttle = 30,
-				fetching_timeout = 500,
-				filtering_context_budget = 100,
-				confirm_resolve_timeout = 80,
-				async_budget = 1,
-				max_view_entries = 30
-			}
+			local performance = { max_view_entries = 30 }
+
 			local sorting = {
 				comparators = {
 					cmp.config.compare.offset,
@@ -38,18 +31,18 @@ return {
 				}
 			}
 
-			cmp.setup({
+			local mappings = cmp.mapping.preset.insert({
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping.abort(),
+				["<C-y>"] = cmp.mapping.confirm({ select = true })
+			})
 
+			cmp.setup({
 				performance = performance,
 				experimental = { ghost_text = true },
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
-					["<C-y>"] = cmp.mapping.confirm({ select = true })
-				}),
+				mapping = mappings,
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "vsnip" },
@@ -59,20 +52,20 @@ return {
 				}),
 				sorting = sorting
 			})
+
 			cmp.setup.cmdline({ "/", "?" }, {
 				performance = performance,
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = { { name = "buffer" } },
 				sorting = sorting
 			})
+
 			cmp.setup.cmdline(":", {
 				performance = performance,
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" }
-				}),
+				sources = cmp.config.sources(
+					{ { name = "path" }, }, { { name = "cmdline" } }
+				),
 				sorting = sorting
 			})
 		end

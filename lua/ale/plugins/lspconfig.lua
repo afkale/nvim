@@ -35,13 +35,26 @@ return {
 					}
 				},
 				lua_ls = {
-					Lua = {
-						diagnostics = {
-							enable = true,
-							diagnosticMode = "workspace",
-						},
-						workspace = {
-							checkThirdParty = false,
+					settings = {
+						Lua = {
+							diagnostics = {
+								enable = true,
+								globals = { "vim" }, -- Avoid "undefined global 'vim'" error
+								disable = { "missing-fields" }, -- Optional: Prevent some annoying warnings
+								diagnosticMode = "workspace",
+							},
+							workspace = {
+								checkThirdParty = false, -- Disable "Do you want to configure your workspace?" prompt
+								library = {
+									vim.env.VIMRUNTIME, -- Include Neovim runtime files
+									"${3rd}/luv/library", -- Add additional libraries from LazyDev
+									"LazyVim", -- Add LazyVim as a recognized library
+								},
+							},
+							telemetry = { enable = false }, -- Disable telemetry
+							completion = {
+								callSnippet = "Replace", -- Better function snippet behavior
+							},
 						},
 					},
 				},
@@ -50,7 +63,7 @@ return {
 						pyright = { disableOrganizeImports = true },
 						python = {
 							analysis = {
-								typeCheckingMode = "strict",
+								-- typeCheckingMode = "strict",
 								autoSearchPaths = true,
 								useLibraryCodeForTypes = true,
 								diagnosticMode = "workspace",
@@ -75,7 +88,7 @@ return {
 				virtual_text = {
 					enable = true,
 					spacing = 4,
-					prefix = "●",
+					prefix = "■",
 				},
 				signs = true,
 				underline = true,

@@ -1,10 +1,8 @@
----
---- Validates the given buffer or creates a new one if invalid.
----
----@param buf integer|nil Buffer ID to validate (optional).
----@return integer buf Validated or newly created buffer ID.
----
-function create_buffer(buf)
+local M = {}
+--- This function should validate the buffer or return a valid one.
+--- @param buf any
+--- @return any
+M.create_buffer = function(buf)
 	local buf = buf or -1
 
 	if buf and vim.api.nvim_buf_is_valid(buf) then
@@ -22,7 +20,7 @@ end
 ---@return table size Table containing width, height, col, and row.
 ---@nodiscard
 ---
-function calculate_centered_window_size(opts)
+M.calculate_centered_window_size = function(opts)
 	opts = opts or {}
 
 	local width = opts.width or math.floor(vim.o.columns * opts.sizep)
@@ -49,13 +47,13 @@ end
 ---  - `buf` (integer) : Buffer ID used in the window.
 ---  - `win` (integer) : Window ID created by the floating window.
 ---
-function create_floating_window(opts)
+M.create_floating_window = function(opts)
 	opts = opts or {}
 
 	-- Set the window centered by default
 	opts.centered = (opts.centered == nil or opts.centered == true)
 	if opts.centered then
-		local csize = calculate_centered_window_size({
+		local csize = M.calculate_centered_window_size({
 			width = opts.width, height = opts.height, sizep = opts.sizep or 0.8
 		})
 		opts.width = csize.width
@@ -76,7 +74,7 @@ function create_floating_window(opts)
 	}
 
 	-- Create buffer (if not provided)
-	local buf = create_buffer(opts.buf)
+	local buf = M.create_buffer(opts.buf)
 
 	-- Create and open the floating window
 	local win = vim.api.nvim_open_win(buf, true, win_config)
@@ -99,7 +97,7 @@ local valid_options = { split = true, vsplit = true, new = true, vnew = true }
 ---  - `buf` (integer) : Buffer ID used in the window.
 ---  - `win` (integer) : Window ID created by the split window.
 ---
-function create_split(opts)
+M.create_split = function(opts)
 	local place = opts.place
 	local option = opts.option
 
@@ -117,10 +115,12 @@ function create_split(opts)
 
 	-- Get the newly created window ID
 	local win = vim.api.nvim_get_current_win()
-	local buf = create_buffer(opts.buf)
+	local buf = M.create_buffer(opts.buf)
 
 	vim.api.nvim_set_current_buf(buf)
 	vim.api.nvim_win_set_height(win, opts.height or 10)
 
 	return { buf = buf, win = win }
 end
+
+return M

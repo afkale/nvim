@@ -1,4 +1,4 @@
-require("ale.extra.utils")
+local utils = require("ale.extra.utils")
 
 local Terminal = {
 	BOT = "bot",
@@ -22,9 +22,9 @@ local function toggle_terminal(mode)
 	if not vim.api.nvim_win_is_valid(terminal.win) then
 		-- Create the terminal window
 		if mode == Terminal.FLOAT then
-			state.float = create_floating_window({ buf = state.float.buf })
+			state.float = utils.create_floating_window({ buf = state.float.buf })
 		elseif mode == Terminal.BOT then
-			state.bot = create_split({
+			state.bot = utils.create_split({
 				place = "botright",
 				option = "new",
 				buf = state.bot.buf
@@ -37,21 +37,10 @@ local function toggle_terminal(mode)
 			vim.cmd.terminal()
 		end
 
-		vim.cmd("startinsert")        -- Start insert mode
+		vim.cmd("startinsert")            -- Start insert mode
 	else
 		vim.api.nvim_win_hide(terminal.win) -- Hide the terminal if it's already open
 	end
-end
-
-local function floating_lazygit()
-	local window = create_floating_window({})
-	vim.fn.termopen("lazygit", {
-		on_exit = function()
-			vim.api.nvim_win_close(window.win, true)
-			vim.api.nvim_buf_delete(window.buf, {})
-		end,
-	})
-	vim.cmd("startinsert")
 end
 
 local function create_disposable_command_tab(opts)
@@ -110,7 +99,3 @@ end, { desc = "Run bottom terminal." })
 vim.api.nvim_create_user_command("Precommit", function()
 	create_disposable_command_tab({ command = "pre-commit run --all-files", close_key = "q" })
 end, { desc = "Run pre-commit hooks in a new tab" })
-
-vim.api.nvim_create_user_command(
-	"Lazygit", floating_lazygit, { desc = "Run floating lazygit command." }
-)

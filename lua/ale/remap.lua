@@ -38,8 +38,8 @@ vim.keymap.set("v", "<S-h>", "<gv", opts)
 vim.keymap.set("n", "<S-h>", "<<", opts)
 
 -- Split window shortcuts
-vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", opts) -- Vertical split
-vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", opts) -- Horizontal split
+-- vim.keymap.set("n", "<leader>ss", ":vs<CR><C-w>l", opts) -- Vertical split
+-- vim.keymap.set("n", "<leader>sh", ":sp<CR><C-w>j", opts) -- Horizontal split
 
 -- Terminal shortcuts
 vim.keymap.set({ "t", "n" }, "<C-1>", "<CMD>Boterminal<CR>", opts)
@@ -61,10 +61,10 @@ vim.keymap.set("n", "<leader>crn",
 
 -- Finding things
 vim.keymap.set("n", "<leader>fh", ":help ")
-vim.keymap.set("n", "<leader>fg", ":RgSearch<CR>")
 
 -- File explorer
 vim.keymap.set("n", "<leader>e", ":lua require'oil'.toggle_float()<CR>", opts)
+vim.keymap.set("n", "<leader>ff", ":find ")
 
 -- Miscellaneous shortcuts
 vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual

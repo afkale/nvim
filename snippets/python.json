@@ -3,5 +3,15 @@
 		"prefix": "def",
 		"body": "def ${1:function_name}(${2:args}):\n\t${0}",
 		"description": "Function definition"
+	},
+	"pdb": {
+		"prefix": "pdb",
+		"body": "import pdb; pdb.set_trace()",
+		"description": "Python debugger"
+	},
+	"try": {
+		"prefix": "try",
+		"body": "try:\n\t${1:pass}\nexcept ${2:Exception} as ${3:e}:\n\t${0}",
+		"description": "Try-Except block"
 	}
 }

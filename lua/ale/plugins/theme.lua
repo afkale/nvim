@@ -1,11 +1,10 @@
 return {
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
+		"rose-pine/neovim",
+		name = "rose-pine",
 		config = function()
-			vim.cmd("colorscheme catppuccin-macchiato")
-		end,
+			vim.cmd("colorscheme rose-pine-moon")
+		end
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -71,18 +70,20 @@ return {
 
 			-- Color table for highlights
 			local colors = {
-				bg = "#1C1F2E",
-				fg = "#CAD3F5",
-				yellow = "#EED49F",
-				cyan = "#91D7E3",
-				darkblue = "#1E2030",
-				green = "#A6DA95",
-				orange = "#F5A97F",
-				violet = "#C6A0F6",
-				magenta = "#F5BDE6",
-				blue = "#8AADF4",
-				red = "#ED8796",
+				bg = "#2A273F",
+				fg = "#E0DEF4",
+				yellow = "#F6C177",
+				cyan = "#9CCFD8",
+				darkblue = "#393552",
+				green = "#A3BE8C",
+				orange = "#EBBCBA",
+				violet = "#C4A7E7",
+				magenta = "#EB6F92",
+				blue = "#9CCFD8",
+				red = "#EB6F92",
 			}
+
+
 			local conditions = {
 				buffer_not_empty = function()
 					return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -147,7 +148,7 @@ return {
 				function()
 					return "▊"
 				end,
-				color = { fg = colors.blue }, -- Sets highlighting of component
+				color = { fg = colors.blue },  -- Sets highlighting of component
 				padding = { left = 0, right = 1 }, -- We don't need space before this
 			})
 
@@ -243,7 +244,7 @@ return {
 
 			-- Add components to right sections
 			ins_right({
-				"o:encoding", -- option component same as &encoding in viml
+				"o:encoding",   -- option component same as &encoding in viml
 				fmt = string.upper, -- I'm not sure why it's upper case either ;)
 				cond = conditions.hide_in_width,
 				color = { fg = colors.green, gui = "bold" },

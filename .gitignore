@@ -1,2 +1,3 @@
 lazy-lock.json
 tags
+lua/ale/plugins/dev.lua
