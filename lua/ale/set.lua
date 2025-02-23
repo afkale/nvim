@@ -3,7 +3,7 @@ vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 vim.g.autoformat = true
 
-opt = vim.opt
+local opt = vim.opt
 
 -- Enable filetype detection and syntax highlighting
 opt.filetype = "plugin" -- Enable filetype-based settings
@@ -26,8 +26,8 @@ opt.wrap = false       -- Disable line wrapping
 opt.breakindent = true -- Maintain indentation when wrapping
 
 -- Configure default tab and indentation settings
-opt.tabstop = 4       -- Number of spaces per tab
-opt.shiftwidth = 4    -- Indentation width
+opt.tabstop = 2       -- Number of spaces per tab
+opt.shiftwidth = 2    -- Indentation width
 opt.expandtab = false -- Use actual tab characters instead of spaces
 
 -- Disable swap and backup files, enable persistent undo
