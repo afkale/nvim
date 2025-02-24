@@ -53,7 +53,6 @@ opt.isfname:append("@-@") -- Allow @ in file names
 
 -- Visual guidelines
 opt.colorcolumn = "100" -- Highlight column 88 for better readability
-opt.showtabline = 2     -- Always show tab bar
 
 -- Path settings for better file navigation
 opt.path:append("**") -- Allow recursive searching of files

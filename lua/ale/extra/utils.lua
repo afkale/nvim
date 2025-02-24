@@ -54,7 +54,7 @@ M.create_floating_window = function(opts)
 	opts.centered = (opts.centered == nil or opts.centered == true)
 	if opts.centered then
 		local csize = M.calculate_centered_window_size({
-			width = opts.width, height = opts.height, sizep = opts.sizep or 0.8
+			width = opts.width, height = opts.height, sizep = opts.sizep or 0.7
 		})
 		opts.width = csize.width
 		opts.height = csize.height
@@ -123,4 +123,5 @@ M.create_split = function(opts)
 	return { buf = buf, win = win }
 end
 
+M.kmset = vim.keymap.set
 return M

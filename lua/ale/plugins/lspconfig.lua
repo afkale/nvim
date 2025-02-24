@@ -14,7 +14,6 @@ return {
 				}
 			},
 		},
-
 		opts = {
 			servers = {
 				ruff = {},
@@ -39,21 +38,25 @@ return {
 						Lua = {
 							diagnostics = {
 								enable = true,
-								globals = { "vim" }, -- Avoid "undefined global 'vim'" error
-								disable = { "missing-fields" }, -- Optional: Prevent some annoying warnings
+								globals = { "vim" },
 								diagnosticMode = "workspace",
 							},
 							workspace = {
-								checkThirdParty = false, -- Disable "Do you want to configure your workspace?" prompt
+								checkThirdParty = false,
 								library = {
-									vim.env.VIMRUNTIME, -- Include Neovim runtime files
-									"${3rd}/luv/library", -- Add additional libraries from LazyDev
-									"LazyVim", -- Add LazyVim as a recognized library
+									vim.env.VIMRUNTIME, "${3rd}/luv/library", "LazyVim",
 								},
 							},
-							telemetry = { enable = false }, -- Disable telemetry
+							telemetry = { enable = false },
 							completion = {
 								callSnippet = "Replace", -- Better function snippet behavior
+							},
+							format = {
+								enable = true, -- Ensure formatting is enabled
+								defaultConfig = {
+									indent_style = "space",
+									indent_size = 2,
+								},
 							},
 						},
 					},
@@ -63,7 +66,6 @@ return {
 						pyright = { disableOrganizeImports = true },
 						python = {
 							analysis = {
-								-- typeCheckingMode = "strict",
 								autoSearchPaths = true,
 								useLibraryCodeForTypes = true,
 								diagnosticMode = "workspace",
@@ -75,10 +77,16 @@ return {
 		},
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities()
+			)
 
 			-- LSP servers setup configuration
 			for server, config in pairs(opts.servers) do
-				config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+				config.capabilities = capabilities
 				lspconfig[server].setup(config)
 			end
 
@@ -97,22 +105,24 @@ return {
 			})
 
 			-- Keymap for LSP actions
-			local keymap_opts = { noremap = true, silent = true }
-			vim.keymap.set("n", "gri", vim.lsp.buf.references, keymap_opts)
-			vim.keymap.set("n", "grn", vim.lsp.buf.rename, keymap_opts)
-			vim.keymap.set("n", "gra", vim.lsp.buf.code_action, keymap_opts)
+			local set = vim.keymap.set
+			local kmopts = { noremap = true, silent = true }
 
-			vim.keymap.set("n", "gfd", "<CMD>lua vim.g.autoformat = not vim.g.autoformat<CR>")
-			vim.keymap.set("n", "gff", vim.lsp.buf.format, keymap_opts)
+			set("n", "gri", vim.lsp.buf.references, kmopts)
+			set("n", "grn", vim.lsp.buf.rename, kmopts)
+			set("n", "gra", vim.lsp.buf.code_action, kmopts)
 
-			vim.keymap.set("n", "gel", vim.diagnostic.setqflist, keymap_opts)
-			vim.keymap.set("n", "gee", vim.diagnostic.open_float, keymap_opts)
+			set("n", "gfd", "<CMD>lua vim.g.autoformat = not vim.g.autoformat<CR>", kmopts)
+			set("n", "gff", vim.lsp.buf.format, kmopts)
 
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymap_opts)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, keymap_opts)
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, keymap_opts)
+			set("n", "<leader>cd", vim.diagnostic.setqflist, kmopts)
+			set("n", "E", vim.diagnostic.open_float, kmopts)
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, keymap_opts)
+			set("n", "gd", vim.lsp.buf.definition, kmopts)
+			set("n", "gD", vim.lsp.buf.declaration, kmopts)
+			set("n", "gi", vim.lsp.buf.implementation, kmopts)
+
+			set("n", "K", vim.lsp.buf.hover, kmopts)
 		end,
 	},
 }

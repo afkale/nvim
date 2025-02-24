@@ -71,35 +71,30 @@ vim.api.nvim_create_user_command("RgSearch", rg_search, {
 vim.keymap.set("n", "<leader>fs", ":RgSearch<CR>")
 
 
-
 local fzf = function(command, delimiter)
 	delimiter = delimiter or -1
 
 	local opts = {
 		command = command,
 		capture_output = true,
-		on_enter = function()
-			vim.cmd("startinsert")
-		end,
+		on_enter = function() vim.cmd("startinsert") end,
 		on_result = function(result)
 			local filename = result[1]
+			local line = "0"
 
 			if delimiter then
-				filename = vim.fn.split(filename, delimiter)[1]
+				local split_result = vim.fn.split(filename, delimiter)
+				filename = split_result[1]
+				line = split_result[2]
 			end
 
 			if vim.fn.filereadable(filename) == 1 then
-				vim.cmd('edit ' .. vim.fn.fnameescape(filename))
+				vim.cmd('edit ' .. "+" .. line .. " " .. vim.fn.fnameescape(filename))
 			end
 		end
 	}
 
 	floating_window_command(opts)
-end
-
-local fzf_git_files = function()
-	local command = "git ls-files | fzf --preview 'bat --color=always --style=numbers --theme=Catppuccin\\ Mocha {}'"
-	fzf(command)
 end
 
 local fzf_grep = function()
@@ -108,7 +103,6 @@ local fzf_grep = function()
 	fzf(command, ":")
 end
 
-vim.api.nvim_create_user_command('FzfGitFiles', fzf_git_files, {})
 vim.api.nvim_create_user_command('FzfGrep', fzf_grep, {})
 
-vim.keymap.set("n", "<leader>fg", ":FzfGrep<CR>")
+vim.keymap.set("n", "<leader>fg", ":FzfGrep<CR>", { noremap = true, silent = true })

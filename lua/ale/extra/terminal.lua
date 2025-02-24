@@ -2,16 +2,13 @@ local utils = require("ale.extra.utils")
 
 local Terminal = {
 	BOT = "bot",
-	FLOAT = "float"
 }
 
 local TerminalUserCMD = {
-	FLOATERMINAL = "Floaterminal",
 	BOTERMINAL = "Boterminal"
 }
 
 local state = {
-	float = { win = -1, buf = -1, ucmd = TerminalUserCMD.FLOATERMINAL },
 	bot = { win = -1, buf = -1, ucmd = TerminalUserCMD.BOTERMINAL }
 }
 
@@ -21,13 +18,9 @@ local function toggle_terminal(mode)
 
 	if not vim.api.nvim_win_is_valid(terminal.win) then
 		-- Create the terminal window
-		if mode == Terminal.FLOAT then
-			state.float = utils.create_floating_window({ buf = state.float.buf })
-		elseif mode == Terminal.BOT then
+		if mode == Terminal.BOT then
 			state.bot = utils.create_split({
-				place = "botright",
-				option = "new",
-				buf = state.bot.buf
+				place = "botright", option = "new", buf = state.bot.buf
 			})
 		end
 		terminal = state[mode]
@@ -50,8 +43,6 @@ local function create_disposable_command_tab(opts)
 	if not opts.command or opts.command == "" then
 		error("Error: Missing or empty 'command' argument.", vim.log.levels.ERROR)
 	end
-
-	-- Create a new tab and get its buffer
 
 	-- Function to execute the command
 	local function execute_command()
@@ -87,15 +78,14 @@ local function create_disposable_command_tab(opts)
 	execute_command()
 end
 
---- User commands
-vim.api.nvim_create_user_command(TerminalUserCMD.FLOATERMINAL, function()
-	toggle_terminal(Terminal.FLOAT)
-end, { desc = "Run floating terminal." })
-
+-- user commands
 vim.api.nvim_create_user_command(TerminalUserCMD.BOTERMINAL, function()
 	toggle_terminal(Terminal.BOT)
 end, { desc = "Run bottom terminal." })
-
 vim.api.nvim_create_user_command("Precommit", function()
 	create_disposable_command_tab({ command = "pre-commit run --all-files", close_key = "q" })
 end, { desc = "Run pre-commit hooks in a new tab" })
+
+-- keymaps
+vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "t", "n" }, "<A-2>", "<CMD>Boterminal<CR>", { noremap = true, silent = true })
