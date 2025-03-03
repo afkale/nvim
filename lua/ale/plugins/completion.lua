@@ -39,8 +39,23 @@ return {
 				["<C-y>"] = cmp.mapping.confirm({ select = true })
 			})
 
+			local win_config = {
+				border = nil,
+				winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+				zindex = 1001,
+				scrolloff = 0,
+				col_offset = 0,
+				side_padding = 1,
+				scrollbar = false,
+			}
+
 			cmp.setup({
 				performance = performance,
+				window = {
+					completion = win_config,
+					documentation = win_config,
+				},
+
 				experimental = { ghost_text = true },
 				mapping = mappings,
 				sources = cmp.config.sources({
@@ -57,7 +72,7 @@ return {
 				performance = performance,
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = { { name = "buffer" } },
-				sorting = sorting
+				sorting = sorting,
 			})
 
 			cmp.setup.cmdline(":", {
@@ -66,7 +81,15 @@ return {
 				sources = cmp.config.sources(
 					{ { name = "path" }, }, { { name = "cmdline" } }
 				),
-				sorting = sorting
+				sorting = sorting,
+				matching = {
+					disallow_symbol_nonprefix_matching = true,
+					disallow_fullfuzzy_matching = false,
+					disallow_partial_matching = false,
+					disallow_prefix_unmatching = false,
+					disallow_fuzzy_matching = false,
+					disallow_partial_fuzzy_matching = false,
+				}
 			})
 		end
 	},

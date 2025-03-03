@@ -12,14 +12,14 @@ return {
 		set('n', '<leader>mn', ':lua require("harpoon.ui").nav_next()<CR>', opts)
 
 		-- Move between marks
-		set('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
-		set('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
-		set('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
-		set('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
-		set('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', opts)
-		set('n', '<leader>6', ':lua require("harpoon.ui").nav_file(6)<CR>', opts)
-		set('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', opts)
-		set('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', opts)
-		set('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', opts)
+		set('n', '<leader>m1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
+		set('n', '<leader>m2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
+		set('n', '<leader>m3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
+		set('n', '<leader>m4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
+		set('n', '<leader>m5', ':lua require("harpoon.ui").nav_file(5)<CR>', opts)
+		set('n', '<leader>m6', ':lua require("harpoon.ui").nav_file(6)<CR>', opts)
+		set('n', '<leader>m7', ':lua require("harpoon.ui").nav_file(7)<CR>', opts)
+		set('n', '<leader>m8', ':lua require("harpoon.ui").nav_file(8)<CR>', opts)
+		set('n', '<leader>m9', ':lua require("harpoon.ui").nav_file(9)<CR>', opts)
 	end
 }
