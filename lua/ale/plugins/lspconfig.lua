@@ -2,7 +2,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp", },
 			{
 				"folke/lazydev.nvim",
 				ft = "lua",
@@ -112,7 +112,11 @@ return {
 			set("n", "grn", vim.lsp.buf.rename, kmopts)
 			set("n", "gra", vim.lsp.buf.code_action, kmopts)
 
-			set("n", "gfd", "<CMD>lua vim.g.autoformat = not vim.g.autoformat<CR>", kmopts)
+			set("n", "gft", function()
+				vim.g.autoformat = not vim.g.autoformat
+				vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
+				vim.cmd("LspRestart")
+			end)
 			set("n", "gff", vim.lsp.buf.format, kmopts)
 
 			set("n", "<leader>cd", vim.diagnostic.setqflist, kmopts)

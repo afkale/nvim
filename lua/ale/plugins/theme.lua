@@ -6,7 +6,7 @@ return {
 			vim.cmd("colorscheme rose-pine-moon")
 
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 			vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
 		end
@@ -160,7 +160,7 @@ return {
 			ins_left({
 				-- mode component
 				function()
-					return ""
+					return " "
 				end,
 				color = function()
 					-- auto change color according to neovims mode
@@ -198,7 +198,10 @@ return {
 			})
 
 			ins_left({
-				"filename",
+				function()
+					local filename = vim.fn.expand("%:t")
+					return MiniIcons.get("file", filename) .. "  " .. filename
+				end,
 				cond = conditions.buffer_not_empty,
 				color = { fg = colors.magenta, gui = "bold" },
 			})
@@ -229,7 +232,7 @@ return {
 			ins_left({
 				-- Lsp server name .
 				function()
-					local msg = "No Active Lsp"
+					local msg = "None"
 					local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 					local clients = vim.lsp.get_clients()
 					if next(clients) == nil then
@@ -243,7 +246,7 @@ return {
 					end
 					return msg
 				end,
-				icon = " LSP:",
+				icon = " ",
 				color = { fg = "#ffffff", gui = "bold" },
 			})
 

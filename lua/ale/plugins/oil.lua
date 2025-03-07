@@ -6,10 +6,21 @@ return {
 		lazy = false,
 		config = function()
 			local oil = require("oil")
-			oil.setup({})
+			oil.setup()
 
-			vim.keymap.set("n", "<leader>e", ":Oil --preview<CR>",
-				{ desc = "Open parent directory", noremap = true, silent = true })
+			local toggle_float = function()
+				if vim.bo.filetype ~= "oil" then
+					oil.open_float(nil,
+						{ preview = { horizontal = true, vertical = false, split = "topleft" } }
+					)
+				else
+					oil.close()
+				end
+			end
+
+			vim.keymap.set("n", "<leader>e", toggle_float,
+				{ desc = "Open directory", noremap = true, silent = true }
+			)
 		end
 	}
 }

@@ -39,13 +39,8 @@ set("n", "<leader>tc", ":tabclose<CR>", opts)
 set("n", "<C-.>", ":cnext<CR>", opts)
 set("n", "<C-,>", ":cprevious<CR>", opts)
 set("n", "<leader>cc", ":cclose<CR>", opts)
-set("n", "<leader>co", ":botright cwindow<CR>", opts)
-set("n", "<leader>crn",
-	":cdo s///c | update<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>")
-
--- Explorer
-set("n", "<leader>ff", ":find ")
-set("n", "<leader>fh", ":help ")
+set("n", "<leader>co", ":copen<CR>", opts)
+set("n", "<leader>crn", ":execute 'cdo s/' . input('Find: ') . '/' . input('Replace: ') . '/gc | update'<CR>")
 
 -- Miscellaneous shortcuts
 set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual

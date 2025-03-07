@@ -59,16 +59,48 @@ opt.path:append("**") -- Allow recursive searching of files
 
 -- Ignore unnecessary files in searches
 opt.wildignore = {
-	"**/__pycache__/**",
-	"**/.venv/**",
-	"**/node_modules/**",
+	-- General version control and cache directories
 	"**/.git/**",
 	"**/.svn/**",
 	"**/.hg/**",
+	"**/__pycache__/**",
+	"**/.DS_Store",
+	"**/Thumbs.db",
+
+	-- Dependency folders
+	"**/node_modules/**",
+	"**/.venv/**",
+	"**/env/**",
+	"**/vendor/**",
 	"**/build/**",
+	"**/dist/**",
 	"**/target/**",
+	"**/.next/**",
+	"**/.yarn/**",
+
+	-- Temporary and backup files
+	"*.swp",
+	"*.swo",
 	"*.bak",
-	"*.pyc",
+	"*.tmp",
+	"*.lock",
+	"*.log",
+
+	-- Compiled and bytecode files
 	"*.class",
+	"*.pyc",
+	"*.pyo",
+	"*.exe",
+	"*.dll",
+	"*.o",
+	"*.obj",
+
+	-- IDE and Editor-specific files
+	"**/.idea/**",
+	"**/.vscode/**",
+
+	-- Tags and ctags files
 	"tags",
+	"*.tags",
+	"*.ctags",
 }
