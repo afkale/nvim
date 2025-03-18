@@ -101,7 +101,6 @@ return {
 					disallow_fuzzy_matching = false,
 					disallow_partial_fuzzy_matching = false,
 				},
-				formatting = {}
 			})
 		end
 	},

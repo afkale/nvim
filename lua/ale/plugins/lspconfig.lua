@@ -125,6 +125,7 @@ return {
 			set("n", "gd", vim.lsp.buf.definition, kmopts)
 			set("n", "gD", vim.lsp.buf.declaration, kmopts)
 			set("n", "gi", vim.lsp.buf.implementation, kmopts)
+			set("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
 
 			set("n", "K", vim.lsp.buf.hover, kmopts)
 		end,
