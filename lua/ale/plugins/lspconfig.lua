@@ -115,7 +115,7 @@ return {
 			set("n", "gft", function()
 				vim.g.autoformat = not vim.g.autoformat
 				vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
-				vim.cmd("LspRestart")
+				vim.cmd("e")
 			end)
 			set("n", "gff", vim.lsp.buf.format, kmopts)
 
