@@ -1,0 +1,35 @@
+shell: fish
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - "#c4a7e7"  # Rose Pine Moon accent color (light lavender)
+      - bold
+    inactiveBorderColor:
+      - "#6e6a86"  # Soft muted grayish purple
+    optionsTextColor:
+      - "#c4a7e7"  # Rose Pine Moon accent color (light lavender)
+    selectedLineBgColor:
+      - "#2a273f"  # Dark background color for selected lines
+    selectedRangeBgColor:
+      - "#2a273f"  # Dark background color for selected range
+    cherryPickedCommitBgColor:
+      - "#3e3b56"  # Slightly darker background for cherry-picked commits
+    cherryPickedCommitFgColor:
+      - "#c4a7e7"  # Rose Pine Moon accent color (light lavender)
+    unstagedChangesColor:
+      - "#f6c177"  # Soft yellow (for unstaged changes, more visible in Rose Pine Moon)
+    defaultFgColor:
+      - "#d9e0ee"  # Light purple color for general text
+    searchingActiveBorderColor:
+      - "#f9e2af"  # Soft yellow tone for search borders (same as Rose Pine)
+  showFileTree: true # for rendering changes files in a tree format
+
+os:
+  editPreset: "nvim-remote"
+
+promptToReturnFromSubprocess: false # to avoid confirmation on file editor close
+
+keybinding:
+  universal:
+    quit: "q"

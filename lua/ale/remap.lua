@@ -44,3 +44,7 @@ set("n", "<leader>crn", ":execute 'cdo s/' . input('Find: ') . '/' . input('Repl
 
 -- Miscellaneous shortcuts
 set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
+
+-- Command remaps
+set('c', '<C-p>', '<Up>', opts)
+set('c', '<C-n>', '<Down>', opts)

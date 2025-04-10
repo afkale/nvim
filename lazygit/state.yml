@@ -1,0 +1,40 @@
+lastupdatecheck: 0
+recentrepos:
+    - /Users/a.rubio/repos/omt-workspace/backend
+    - /Users/a.rubio/Repos/omt-workspace/backend
+    - /Users/a.rubio/.config/nvim
+    - /Users/a.rubio/Repos/omt-workspace
+    - /Users/a.rubio/repos/nvim/terminale.nvim
+    - /Users/a.rubio/Repos/omt-workspace/frontend
+    - /Users/a.rubio/Repos/sanifruit-workspace/frontend
+    - /Users/a.rubio/Repos/pmrs
+    - /Users/a.rubio/Repos/sanifruit-workspace/backend
+    - /Users/a.rubio/repos/sanifruit-workspace/frontend
+    - /Users/a.rubio/repos/sanifruit-workspace/backend
+    - /Users/a.rubio/.config/tmux
+    - /Users/a.rubio/Repos/nvim/homepage.nvim
+startuppopupversion: 5
+lastversion: 0.48.0
+customcommandshistory:
+    - q
+    - Lazygit2
+    - git push
+    - 'feat: new ingestor'
+    - wq
+    - 'feat: new swagger :_) openapi 3.0.3'
+    - git reset --soft HEAD~1
+    - git apply nombre-del-archivo-de-parche.patch
+    - git format-patch -1 HEAD
+    - git rebase master-ibe
+    - git rebase
+    - git pull --rebase
+    - git checkout pre-master-ibe_RPR-395
+    - '(fix): [RPR-405] - remove commented code '
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 87
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

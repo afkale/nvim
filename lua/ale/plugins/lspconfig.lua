@@ -63,16 +63,16 @@ return {
 				},
 				pyright = {
 					settings = {
-						pyright = { disableOrganizeImports = true },
 						python = {
 							analysis = {
 								autoSearchPaths = true,
-								useLibraryCodeForTypes = true,
-								diagnosticMode = "workspace",
+								typeCheckingMode = "off",
+								autoImportCompletions = true,
+								diagnosticMode = "workspace"
 							}
-						},
-					},
-				},
+						}
+					}
+				}
 			},
 		},
 		config = function(_, opts)
@@ -89,6 +89,9 @@ return {
 				config.capabilities = capabilities
 				lspconfig[server].setup(config)
 			end
+
+			local util = require("lspconfig.util")
+			lspconfig.root_dir = util.root_pattern("pyproject.toml", ".git")
 
 			-- Diagnostic configuration
 			vim.diagnostic.config({
@@ -115,7 +118,6 @@ return {
 			set("n", "gft", function()
 				vim.g.autoformat = not vim.g.autoformat
 				vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
-				vim.cmd("e")
 			end)
 			set("n", "gff", vim.lsp.buf.format, kmopts)
 

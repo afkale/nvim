@@ -6,15 +6,11 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-vsnip",
-			"hrsh7th/vim-vsnip",
-			"echasnovski/mini.icons" -- This is for kind formatting and cool icons
+			"echasnovski/mini.icons"
 		},
 		version = "*",
 		config = function()
 			local cmp = require("cmp")
-
-			vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
 
 			local performance = { max_view_entries = 30 }
 
@@ -61,7 +57,6 @@ return {
 				mapping = mappings,
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "vsnip" },
 				}, {
 					{ name = "buffer" },
 					{ name = "path" },
@@ -70,6 +65,7 @@ return {
 				formatting = {
 					fields = { "abbr", "kind", "menu" },
 					expandable_indicator = true,
+
 					format = function(entry, vim_item)
 						local kind = vim_item.kind
 						vim_item.kind = MiniIcons.get("lsp", kind) .. " "
