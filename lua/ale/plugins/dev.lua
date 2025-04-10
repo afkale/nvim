@@ -1,6 +1,6 @@
 return {
 	{
-		dir = "~/Repos/nvim/terminale.nvim",
+		"afkale/terminale.nvim",
 		config = function()
 			local terminale = require "terminale"
 			terminale.setup()
