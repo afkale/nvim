@@ -5,7 +5,6 @@ return {
 	},
 	{
 		'stevearc/overseer.nvim',
-		opts = {},
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require('overseer').setup()
