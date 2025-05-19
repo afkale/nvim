@@ -19,6 +19,7 @@ return {
 			-- Author: shadmansaleh
 			-- Credit: glepnir
 			local lualine = require("lualine")
+			local dap = require("dap")
 
 			-- Color table for highlights
 			local colors = {
@@ -166,6 +167,18 @@ return {
 					warn = { fg = colors.yellow },
 					info = { fg = colors.cyan },
 				},
+			})
+
+			ins_left({
+				function()
+					if dap.session() ~= nil then 
+						return " " 
+					end
+
+					return ""
+				end,
+				color = { fg = colors.green, gui = "bold" },
+				padding = { left = 1 },
 			})
 
 			-- Insert mid section. You can make any number of sections in neovim :)

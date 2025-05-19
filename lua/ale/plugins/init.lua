@@ -1,13 +1,13 @@
 return {
 	{
-		"OXY2DEV/helpview.nvim",
-		lazy = false
+		"OXY2DEV/helpview.nvim", lazy = false
 	},
 	{
-		'stevearc/overseer.nvim',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		"stevearc/quicker.nvim",
+		event = "FileType qf",
+		opts = {},
 		config = function()
-			require('overseer').setup()
+			require("quicker").setup()
 		end
 	}
 }
