@@ -1,41 +1,34 @@
 return {
 	{
-		"rose-pine/neovim",
-		name = "rose-pine",
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
 		config = function()
-			vim.cmd("colorscheme rose-pine-moon")
-
-			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-			vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
+			vim.cmd("colorscheme tokyonight")
 		end
 	},
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		config = function()
-			-- Eviline config for lualine
-			-- Author: shadmansaleh
-			-- Credit: glepnir
 			local lualine = require("lualine")
 			local dap = require("dap")
 
 			-- Color table for highlights
 			local colors = {
-				bg = "#2A273F",
-				fg = "#E0DEF4",
-				yellow = "#F6C177",
-				cyan = "#9CCFD8",
-				darkblue = "#393552",
-				green = "#A3BE8C",
-				orange = "#EBBCBA",
-				violet = "#C4A7E7",
-				magenta = "#EB6F92",
-				blue = "#9CCFD8",
-				red = "#EB6F92",
+				bg       = "#1a1b26",
+				fg       = "#c0caf5",
+				yellow   = "#e0af68",
+				cyan     = "#7dcfff",
+				darkblue = "#394b70",
+				green    = "#9ece6a",
+				orange   = "#ff9e64",
+				violet   = "#9d7cd8",
+				magenta  = "#bb9af7",
+				blue     = "#7aa2f7",
+				red      = "#f7768e",
 			}
-
 
 			local conditions = {
 				buffer_not_empty = function()
@@ -49,6 +42,9 @@ return {
 					local gitdir = vim.fn.finddir(".git", filepath .. ";")
 					return gitdir and #gitdir > 0 and #gitdir < #filepath
 				end,
+				dap_active = function()
+					return dap.session() ~= nil
+				end
 			}
 
 			-- Config
@@ -106,10 +102,7 @@ return {
 			})
 
 			ins_left({
-				-- mode component
-				function()
-					return " "
-				end,
+				function() return " " end,
 				color = function()
 					-- auto change color according to neovims mode
 					local mode_color = {
@@ -140,18 +133,12 @@ return {
 			})
 
 			ins_left({
-				-- filesize component
-				"filesize",
-				cond = conditions.buffer_not_empty,
-			})
-
-			ins_left({
 				function()
 					local filename = vim.fn.expand("%:t")
 					return MiniIcons.get("file", filename) .. "  " .. filename
 				end,
 				cond = conditions.buffer_not_empty,
-				color = { fg = colors.magenta, gui = "bold" },
+				color = { fg = colors.magenta },
 			})
 
 			ins_left({ "location" })
@@ -159,9 +146,31 @@ return {
 			ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 			ins_left({
+				'lsp_status',
+				icon = '', -- f013
+				symbols = {
+					-- Standard unicode symbols to cycle through for LSP progress:
+					spinner = { '', '', '', '', '', '' },
+					-- Standard unicode symbol for when LSP is done:
+					done = '',
+					-- Delimiter inserted between LSP names:
+					separator = ' ',
+				},
+				ignore_lsp = {},
+				color = { fg = colors.magenta },
+			})
+
+			ins_left({
+				function() return " " end,
+				color = { fg = colors.green, gui = "bold" },
+				cond = conditions.dap_active,
+				padding = { left = 1 },
+			})
+
+			ins_left({
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
-				symbols = { error = " ", warn = " ", info = " " },
+				symbols = { error = " ", warn = " ", info = " " },
 				diagnostics_color = {
 					error = { fg = colors.red },
 					warn = { fg = colors.yellow },
@@ -169,46 +178,9 @@ return {
 				},
 			})
 
-			ins_left({
-				function()
-					if dap.session() ~= nil then 
-						return " " 
-					end
-
-					return ""
-				end,
-				color = { fg = colors.green, gui = "bold" },
-				padding = { left = 1 },
-			})
-
 			-- Insert mid section. You can make any number of sections in neovim :)
 			-- for lualine it's any number greater then 2
-			ins_left({
-				function()
-					return "%="
-				end,
-			})
-
-			ins_left({
-				-- Lsp server name .
-				function()
-					local msg = "None"
-					local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-					local clients = vim.lsp.get_clients()
-					if next(clients) == nil then
-						return msg
-					end
-					for _, client in ipairs(clients) do
-						local filetypes = client.config.filetypes
-						if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-							return client.name
-						end
-					end
-					return msg
-				end,
-				icon = " ",
-				color = { fg = "#ffffff", gui = "bold" },
-			})
+			ins_left({ function() return "%=" end })
 
 			-- Add components to right sections
 			ins_right({

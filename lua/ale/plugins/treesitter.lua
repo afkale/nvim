@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	dependencies = { "nvim-treesitter/nvim-treesitter-context" },
 	config = function()
 		local configs = require("nvim-treesitter.configs")
 
@@ -32,24 +33,6 @@ return {
 			sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
-			refactor = {
-				navigation = {
-					enable = true,
-					keymaps = {
-						goto_definition = "gnd",
-						list_definitions = "gnD",
-						list_definitions_toc = "gO",
-						goto_next_usage = "<a-*>",
-						goto_previous_usage = "<a-#>",
-					},
-				},
-				smart_rename = {
-					enable = true,
-					keymaps = {
-						smart_rename = "grr",
-					},
-				},
-			},
 		})
 	end,
 }
