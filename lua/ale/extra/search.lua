@@ -1,8 +1,6 @@
 local utils = require("ale.extra.utils")
 
 
-local set = vim.keymap.set
-
 local function grep()
 	local find = vim.fn.input({ prompt = "Search: ", text = "<complete>" })
 	if not find then return end
@@ -30,8 +28,8 @@ local function grep_and_replace()
 	vim.cmd("cclose")
 end
 
-set("n", "<leader>ff", ":find ")
-set("n", "<leader>fh", ":help ")
-set("n", "<leader>hw", ":help <C-R>=expand('<cword>')<CR><CR>")
-set("n", "<leader>fg", grep)
-set("n", "<leader>crn", grep_and_replace)
+utils.kmset("n", "<leader>ff", ":find ")
+utils.kmset("n", "<leader>fh", ":help ")
+utils.kmset("n", "<leader>hw", ":help <C-R>=expand('<cword>')<CR><CR>")
+utils.kmset("n", "<leader>fg", grep)
+utils.kmset("n", "<leader>crn", grep_and_replace)
