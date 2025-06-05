@@ -7,6 +7,7 @@ return {
 		config = function()
 			u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>fj", ":Jumps<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fb", ":Lines<CR>", { noremap = true, silent = true })
@@ -34,14 +35,6 @@ return {
 			vim.keymap.set("n", "<leader>e", toggle_float,
 				{ desc = "Open directory", noremap = true, silent = true }
 			)
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "OilActionsPost",
-				callback = function(event)
-					if event.data.actions.type == "move" then
-						Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
-					end
-				end,
-			})
 		end
 	}
 }
