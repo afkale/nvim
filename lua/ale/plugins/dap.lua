@@ -56,24 +56,24 @@ return {
 			local opts = { noremap = true, silent = true }
 
 			-- Dap Keymaps
-			vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, opts)
-			vim.keymap.set("n", "<leader>dc", dap.continue, opts)
-			vim.keymap.set("n", "<leader>do", dap.step_over, opts)
-			vim.keymap.set("n", "<leader>di", dap.step_into, opts)
-			vim.keymap.set("n", "<leader>dO", dap.step_out, opts)
-			vim.keymap.set("n", "<leader>dq", dap.terminate, opts)
-			vim.keymap.set("n", "<leader>dd", view.toggle, opts)
-			vim.keymap.set('n', '<Leader>dr', dap.repl.open, opts)
-			vim.keymap.set('n', '<Leader>dl', dap.run_last, opts)
+			vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+			vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
+			vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
+			vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
+			vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step out" })
+			vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
+			vim.keymap.set("n", "<leader>dd", view.toggle, { desc = "Toggle dap view" })
+			vim.keymap.set('n', '<Leader>dr', dap.repl.open, { desc = "" })
+			vim.keymap.set('n', '<Leader>dl', dap.run_last, { desc = "Run last" })
 
-			vim.keymap.set({ 'n', 'v' }, '<Leader>dh', widgets.hover, opts)
-			vim.keymap.set({ 'n', 'v' }, '<Leader>dp', widgets.preview, opts)
+			vim.keymap.set({ 'n', 'v' }, '<Leader>dh', widgets.hover, {})
+			vim.keymap.set({ 'n', 'v' }, '<Leader>dp', widgets.preview, {})
 			vim.keymap.set('n', '<Leader>df', function()
 				widgets.centered_float(widgets.frames)
-			end, opts)
+			end, {})
 			vim.keymap.set('n', '<Leader>ds', function()
 				widgets.centered_float(widgets.scopes)
-			end, opts)
+			end, {})
 		end,
 	},
 }

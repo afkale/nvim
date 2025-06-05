@@ -1,4 +1,15 @@
+local u = require("ale.extra.utils")
+
 return {
+	{
+		"junegunn/fzf.vim",
+		dependencies = { "junegunn/fzf" },
+		config = function()
+			u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>fa", ":Rg<CR>", { noremap = true, silent = true })
+		end
+	},
 	{
 		"stevearc/oil.nvim",
 		opts = {},
