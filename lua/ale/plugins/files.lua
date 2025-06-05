@@ -7,7 +7,7 @@ return {
 		config = function()
 			u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
-			u.kmset("n", "<leader>fa", ":Rg<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
 		end
 	},
 	{
