@@ -136,7 +136,7 @@ M.switch = function()
 
 	if substitution ~= nil then
 		vim.api.nvim_feedkeys("ciw" .. substitution, "n", false)
-		vim.api.nvim_input("<ESC>b")
+		vim.api.nvim_input("<ESC>")
 	end
 end
 

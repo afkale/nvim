@@ -6,8 +6,10 @@ return {
 		dependencies = { "junegunn/fzf" },
 		config = function()
 			u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
 			u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
+			u.kmset("n", "<leader>fb", ":Lines<CR>", { noremap = true, silent = true })
 		end
 	},
 	{

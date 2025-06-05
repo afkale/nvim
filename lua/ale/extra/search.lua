@@ -28,8 +28,8 @@ local function grep_and_replace()
 	vim.cmd("cclose")
 end
 
-utils.kmset("n", "<leader>ff", ":find ")
-utils.kmset("n", "<leader>fh", ":help ")
-utils.kmset("n", "<leader>hw", ":help <C-R>=expand('<cword>')<CR><CR>")
-utils.kmset("n", "<leader>fg", grep)
+-- utils.kmset("n", "<leader>ff", ":find ")
+-- utils.kmset("n", "<leader>fh", ":help ")
+-- utils.kmset("n", "<leader>hw", ":help <C-R>=expand('<cword>')<CR><CR>")
+-- utils.kmset("n", "<leader>fg", grep)
 utils.kmset("n", "<leader>crn", grep_and_replace)
