@@ -16,7 +16,6 @@ return {
 		},
 		opts = {
 			servers = {
-				ruff = {},
 				nushell = {},
 				rust_analyzer = {},
 				jsonls = {},
@@ -61,18 +60,21 @@ return {
 						},
 					},
 				},
+				-- ruff = {},
 				pyright = {
 					settings = {
+						pyright = {
+							disableOrganizeImports = true,
+						},
 						python = {
 							analysis = {
-								autoSearchPaths = true,
-								typeCheckingMode = "off",
-								autoImportCompletions = true,
-								diagnosticMode = "workspace"
-							}
-						}
-					}
-				}
+								ignore = { '*' },
+							},
+						},
+					},
+				},
+				angularls = {},
+				eslint = {}
 			},
 		},
 		config = function(_, opts)

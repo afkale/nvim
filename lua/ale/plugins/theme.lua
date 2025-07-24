@@ -4,8 +4,14 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {},
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
 		config = function()
-			vim.cmd("colorscheme tokyonight")
+			require("catppuccin").setup({ transparent_background = true })
+			vim.cmd("colorscheme catppuccin-macchiato")
 		end
 	},
 	{
@@ -16,19 +22,34 @@ return {
 			local dap = require("dap")
 
 			-- Color table for highlights
+			-- local colors = {
+			-- 	bg       = "#1a1b26",
+			-- 	fg       = "#c0caf5",
+			-- 	yellow   = "#e0af68",
+			-- 	cyan     = "#7dcfff",
+			-- 	darkblue = "#394b70",
+			-- 	green    = "#9ece6a",
+			-- 	orange   = "#ff9e64",
+			-- 	violet   = "#9d7cd8",
+			-- 	magenta  = "#bb9af7",
+			-- 	blue     = "#7aa2f7",
+			-- 	red      = "#f7768e",
+			-- }
 			local colors = {
-				bg       = "#1a1b26",
-				fg       = "#c0caf5",
-				yellow   = "#e0af68",
-				cyan     = "#7dcfff",
-				darkblue = "#394b70",
-				green    = "#9ece6a",
-				orange   = "#ff9e64",
-				violet   = "#9d7cd8",
-				magenta  = "#bb9af7",
-				blue     = "#7aa2f7",
-				red      = "#f7768e",
+				bg       = "#24273a",
+				fg       = "#cad3f5",
+				yellow   = "#eed49f",
+				cyan     = "#91d7e3",
+				darkblue = "#363a4f",
+				green    = "#a6da95",
+				orange   = "#f5a97f",
+				violet   = "#c6a0f6",
+				magenta  = "#f5bde6",
+				blue     = "#8aadf4",
+				red      = "#ed8796",
 			}
+
+
 
 			local conditions = {
 				buffer_not_empty = function()
