@@ -2,7 +2,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require('gitsigns').setup {
+			local configs = {
 				signs                        = {
 					add          = { text = '┃' },
 					change       = { text = '┃' },
@@ -51,6 +51,8 @@ return {
 					col = 1
 				},
 			}
+
+			require('gitsigns').setup(configs)
 		end
 	}
 }

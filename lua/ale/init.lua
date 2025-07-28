@@ -1,5 +1,5 @@
 require("ale.set")
-require("ale.remap")
+require("ale.remaps")
 require("ale.auto")
 require("ale.lazy")
 require("ale.extra")

@@ -6,7 +6,8 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"echasnovski/mini.icons"
+			"echasnovski/mini.icons",
+			"onsails/lspkind.nvim"
 		},
 		version = "*",
 		config = function()
@@ -37,13 +38,10 @@ return {
 			})
 
 			local win_config = {
-				border = nil,
-				winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
-				zindex = 1001,
-				scrolloff = 0,
-				col_offset = 0,
-				side_padding = 1,
-				scrollbar = false,
+				winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
+				col_offset = -3,
+				side_padding = 0,
+				border = "single",
 			}
 
 			cmp.setup({
@@ -63,16 +61,17 @@ return {
 				}),
 				sorting = sorting,
 				formatting = {
-					fields = { "abbr", "kind", "menu" },
+					fields = { "kind", "abbr", "menu" },
 					expandable_indicator = true,
-
 					format = function(entry, vim_item)
-						local kind = vim_item.kind
-						vim_item.kind = MiniIcons.get("lsp", kind) .. " "
-						vim_item.menu = "[" .. kind .. "]"
-						return vim_item
-					end
-				}
+						local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+						return kind
+					end,
+				},
 			})
 
 			cmp.setup.cmdline({ "/", "?" }, {

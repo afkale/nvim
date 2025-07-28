@@ -12,9 +12,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup("ale.plugins", {
 	change_detection = {
 		enabled = true,
 		notify = false,
 	},
 })
+
+vim.schedule(function()
+	require("ale.premaps")
+end)

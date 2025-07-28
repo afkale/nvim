@@ -91,47 +91,19 @@ return {
 				config.capabilities = capabilities
 				lspconfig[server].setup(config)
 			end
-
-			local util = require("lspconfig.util")
-			lspconfig.root_dir = util.root_pattern("pyproject.toml", ".git")
-
 			-- Diagnostic configuration
-			vim.diagnostic.config({
-				float = { source = true },
-				virtual_text = {
-					enable = true,
-					spacing = 4,
-					prefix = "■",
-				},
-				signs = true,
-				underline = true,
-				update_in_insert = false,
-				severity_sort = true,
-			})
-
-			-- Keymap for LSP actions
-			local set = vim.keymap.set
-			local kmopts = { noremap = true, silent = true }
-
-			set("n", "gri", vim.lsp.buf.references, kmopts)
-			set("n", "grn", vim.lsp.buf.rename, kmopts)
-			set("n", "gra", vim.lsp.buf.code_action, kmopts)
-
-			set("n", "gft", function()
-				vim.g.autoformat = not vim.g.autoformat
-				vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
-			end)
-			set("n", "gff", vim.lsp.buf.format, kmopts)
-
-			set("n", "<leader>cd", vim.diagnostic.setqflist, kmopts)
-			set("n", "E", vim.diagnostic.open_float, kmopts)
-
-			set("n", "gd", vim.lsp.buf.definition, kmopts)
-			set("n", "gD", vim.lsp.buf.declaration, kmopts)
-			set("n", "gi", vim.lsp.buf.implementation, kmopts)
-			set("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
-
-			set("n", "K", vim.lsp.buf.hover, kmopts)
+			-- vim.diagnostic.config({
+			-- 	float = { source = true },
+			-- 	virtual_text = {
+			-- 		enable = true,
+			-- 		spacing = 4,
+			-- 		prefix = "■",
+			-- 	},
+			-- 	signs = true,
+			-- 	underline = true,
+			-- 	update_in_insert = false,
+			-- 	severity_sort = true,
+			-- })
 		end,
 	},
 }

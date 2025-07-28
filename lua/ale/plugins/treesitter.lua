@@ -33,8 +33,16 @@ return {
 			sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					node_incremental = "v",
+					node_decremental = "V",
+				},
+			}
 		}
 		configs.setup(settings)
+
 		require("treesitter-context").setup({ enable = true })
 	end,
 }

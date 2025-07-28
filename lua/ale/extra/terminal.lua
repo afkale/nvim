@@ -1,41 +1,3 @@
-local utils = require("ale.extra.utils")
-
-local Terminal = {
-	BOT = "bot",
-}
-
-local TerminalUserCMD = {
-	BOTERMINAL = "Boterminal"
-}
-
-local state = {
-	bot = { win = -1, buf = -1, ucmd = TerminalUserCMD.BOTERMINAL }
-}
-
---- Toggle a terminal window
-local function toggle_terminal(mode)
-	local terminal = state[mode]
-
-	if not vim.api.nvim_win_is_valid(terminal.win) then
-		-- Create the terminal window
-		if mode == Terminal.BOT then
-			state.bot = utils.create_split({
-				place = "botright", option = "new", buf = state.bot.buf
-			})
-		end
-		terminal = state[mode]
-
-		-- Open terminal if necessary
-		if vim.bo[terminal.buf].buftype ~= "terminal" then
-			vim.cmd.terminal()
-		end
-
-		vim.cmd("startinsert")            -- Start insert mode
-	else
-		vim.api.nvim_win_hide(terminal.win) -- Hide the terminal if it's already open
-	end
-end
-
 local function create_disposable_command_tab(opts)
 	opts = opts or {}
 
@@ -78,14 +40,9 @@ local function create_disposable_command_tab(opts)
 	execute_command()
 end
 
--- user commands
-vim.api.nvim_create_user_command(TerminalUserCMD.BOTERMINAL, function()
-	toggle_terminal(Terminal.BOT)
-end, { desc = "Run bottom terminal." })
 vim.api.nvim_create_user_command("Precommit", function()
 	create_disposable_command_tab({ command = "pre-commit run --all-files", close_key = "q" })
 end, { desc = "Run pre-commit hooks in a new tab" })
 
 -- keymaps
 vim.keymap.set("n", "<leader>pre", ":Precommit<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "t", "n" }, "<A-2>", "<CMD>Boterminal<CR>", { noremap = true, silent = true })

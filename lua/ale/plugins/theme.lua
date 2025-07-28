@@ -10,7 +10,30 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({ transparent_background = true })
+			require("catppuccin").setup({
+				transparent_background = true,
+				integrations = {
+					cmp = true,
+					native_lsp = {
+						enabled = true,
+					},
+				},
+			})
+
+			local colors = require("catppuccin.palettes").get_palette("macchiato")
+
+			vim.api.nvim_set_hl(0, "FloatBorder", { fg = colors.surface1, bg = "NONE" })
+			vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = colors.text })
+			vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = colors.blue, bold = true })
+			vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = colors.overlay2 })
+			vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = colors.mauve })
+			vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = colors.mauve })
+			vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = colors.flamingo })
+			vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = colors.flamingo })
+			vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = colors.peach })
+			vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = colors.teal })
+			vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = colors.red })
+
 			vim.cmd("colorscheme catppuccin-macchiato")
 		end
 	},
@@ -21,20 +44,6 @@ return {
 			local lualine = require("lualine")
 			local dap = require("dap")
 
-			-- Color table for highlights
-			-- local colors = {
-			-- 	bg       = "#1a1b26",
-			-- 	fg       = "#c0caf5",
-			-- 	yellow   = "#e0af68",
-			-- 	cyan     = "#7dcfff",
-			-- 	darkblue = "#394b70",
-			-- 	green    = "#9ece6a",
-			-- 	orange   = "#ff9e64",
-			-- 	violet   = "#9d7cd8",
-			-- 	magenta  = "#bb9af7",
-			-- 	blue     = "#7aa2f7",
-			-- 	red      = "#f7768e",
-			-- }
 			local colors = {
 				bg       = "#24273a",
 				fg       = "#cad3f5",
@@ -48,8 +57,6 @@ return {
 				blue     = "#8aadf4",
 				red      = "#ed8796",
 			}
-
-
 
 			local conditions = {
 				buffer_not_empty = function()
@@ -248,5 +255,4 @@ return {
 			lualine.setup(config)
 		end,
 	},
-
 }
