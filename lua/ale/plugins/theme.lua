@@ -1,3 +1,5 @@
+local theme = "mocha"
+
 return {
 	{
 		"catppuccin/nvim",
@@ -14,20 +16,20 @@ return {
 				},
 			})
 
-			local colors = require("catppuccin.palettes").get_palette("macchiato")
+			local palette = require("catppuccin.palettes").get_palette(theme)
 
-			vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = colors.text })
-			vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = colors.blue, bold = true })
-			vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = colors.overlay2 })
-			vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = colors.mauve })
-			vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = colors.mauve })
-			vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = colors.flamingo })
-			vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = colors.flamingo })
-			vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = colors.peach })
-			vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = colors.teal })
-			vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = colors.red })
+			vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = palette.text })
+			vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = palette.blue, bold = true })
+			vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = palette.overlay2 })
+			vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = palette.mauve })
+			vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = palette.mauve })
+			vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = palette.flamingo })
+			vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = palette.flamingo })
+			vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = palette.peach })
+			vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = palette.teal })
+			vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = palette.red })
 
-			vim.cmd("colorscheme catppuccin-macchiato")
+			vim.cmd("colorscheme catppuccin-" .. theme)
 		end
 	},
 	{
@@ -37,18 +39,19 @@ return {
 			local lualine = require("lualine")
 			local dap = require("dap")
 
+			local palette = require("catppuccin.palettes").get_palette(theme)
 			local colors = {
-				bg       = "#24273a",
-				fg       = "#cad3f5",
-				yellow   = "#eed49f",
-				cyan     = "#91d7e3",
-				darkblue = "#363a4f",
-				green    = "#a6da95",
-				orange   = "#f5a97f",
-				violet   = "#c6a0f6",
-				magenta  = "#f5bde6",
-				blue     = "#8aadf4",
-				red      = "#ed8796",
+				bg       = palette.base,
+				fg       = palette.text,
+				yellow   = palette.yellow,
+				cyan     = palette.teal,
+				darkblue = palette.surface0,
+				green    = palette.green,
+				orange   = palette.peach,
+				violet   = palette.mauve,
+				magenta  = palette.pink,
+				blue     = palette.blue,
+				red      = palette.red,
 			}
 
 			local conditions = {
@@ -70,7 +73,7 @@ return {
 
 			-- Config
 			local config = {
-				theme = "catppuccin-macchiato",
+				theme = "catppuccin-" .. theme,
 				options = {
 					-- Disable sections and component separators
 					component_separators = "",
