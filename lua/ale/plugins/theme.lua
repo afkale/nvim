@@ -6,15 +6,7 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				transparent_background = true,
-				integrations = {
-					cmp = true,
-					native_lsp = {
-						enabled = true,
-					},
-				},
-			})
+			require("catppuccin").setup({ transparent_background = true })
 
 			local palette = require("catppuccin.palettes").get_palette(theme)
 
