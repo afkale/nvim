@@ -16,7 +16,6 @@ return {
 
 			local colors = require("catppuccin.palettes").get_palette("macchiato")
 
-			vim.api.nvim_set_hl(0, "FloatBorder", { fg = colors.surface1, bg = "NONE" })
 			vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = colors.text })
 			vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = colors.blue, bold = true })
 			vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = colors.overlay2 })

@@ -64,7 +64,7 @@ return {
 					expandable_indicator = true,
 					format = function(entry, vim_item)
 						local kind = vim_item.kind
-						vim_item.kind = MiniIcons.get("lsp", kind) .. "  │"
+						vim_item.kind = " " .. MiniIcons.get("lsp", kind) .. "  │"
 						vim_item.menu = "│ " .. kind
 						return vim_item
 					end,
