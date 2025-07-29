@@ -9,7 +9,6 @@ return {
 		config = function()
 			local dap = require("dap")
 			local view = require("dap-view")
-			local widgets = require("dap.ui.widgets")
 			local dapPython = require("dap-python")
 
 			view.setup(

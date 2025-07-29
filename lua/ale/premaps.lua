@@ -19,58 +19,70 @@ u.kmset("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts
 u.kmset("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
 
 -- DAP Keymaps
-local dap = require("dap")
-local view = require("dap-view")
-local widgets = require("dap.ui.widgets")
+local isDapLoaded, dap = pcall(require, "dap")
+local isDapViewLoaded, dapView = pcall(require, "dap-view")
+local isDapUiLoaded, dapUiWidgets = pcall(require, "dap.ui.widgets")
 
-u.kmset("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-u.kmset("n", "<leader>dc", dap.continue, { desc = "Continue" })
-u.kmset("n", "<leader>do", dap.step_over, { desc = "Step over" })
-u.kmset("n", "<leader>di", dap.step_into, { desc = "Step into" })
-u.kmset("n", "<leader>dO", dap.step_out, { desc = "Step out" })
-u.kmset("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
-u.kmset("n", "<leader>dd", view.toggle, { desc = "Toggle dap view" })
-u.kmset('n', '<leader>dr', dap.repl.open, { desc = "" })
-u.kmset('n', '<leader>dl', dap.run_last, { desc = "Run last" })
-u.kmset({ 'n', 'v' }, '<leader>dh', widgets.hover, {})
-u.kmset({ 'n', 'v' }, '<leader>dp', widgets.preview, {})
-u.kmset('n', '<leader>df', function() widgets.centered_float(widgets.frames) end, {})
-u.kmset('n', '<leader>ds', function() widgets.centered_float(widgets.scopes) end, {})
+if isDapLoaded then
+	u.kmset("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+	u.kmset("n", "<leader>dc", dap.continue, { desc = "Continue" })
+	u.kmset("n", "<leader>do", dap.step_over, { desc = "Step over" })
+	u.kmset("n", "<leader>di", dap.step_into, { desc = "Step into" })
+	u.kmset("n", "<leader>dO", dap.step_out, { desc = "Step out" })
+	u.kmset("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
+	u.kmset('n', '<leader>dr', dap.repl.open, { desc = "" })
+	u.kmset('n', '<leader>dl', dap.run_last, { desc = "Run last" })
+end
+if isDapViewLoaded then
+	u.kmset("n", "<leader>dd", dapView.toggle, { desc = "Toggle dap view" })
+end
+if isDapUiLoaded then
+	u.kmset({ 'n', 'v' }, '<leader>dh', dapUiWidgets.hover, {})
+	u.kmset({ 'n', 'v' }, '<leader>dp', dapUiWidgets.preview, {})
+	u.kmset('n', '<leader>df', function() dapUiWidgets.centered_float(dapUiWidgets.frames) end, {})
+	u.kmset('n', '<leader>ds', function() dapUiWidgets.centered_float(dapUiWidgets.scopes) end, {})
+end
 
 -- FZF Keymaps
-u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
-u.kmset("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
-u.kmset("n", "<leader>fj", ":Jumps<CR>", { noremap = true, silent = true })
-u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
-u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
-u.kmset("n", "<leader>fb", ":Lines<CR>", { noremap = true, silent = true })
+if vim.g.loaded_fzf_vim then
+	u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader>fj", ":Jumps<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader>fb", ":Lines<CR>", { noremap = true, silent = true })
+end
 
 -- OIL Keymaps
-local oil = require("oil")
-oil.setup()
-u.kmset("n", "<leader>e", function()
-		if vim.bo.filetype ~= "oil" then
-			oil.open_float(nil,
-				{ preview = { horizontal = true, vertical = false, split = "topleft" } }
-			)
-		else
-			oil.close()
-		end
-	end,
-	{ desc = "Open directory", noremap = true, silent = true }
-)
+local isOilLoaded, oil = pcall(require, "oil")
+if isOilLoaded then
+	u.kmset("n", "<leader>e", function()
+			if vim.bo.filetype ~= "oil" then
+				oil.open_float(nil,
+					{ preview = { horizontal = true, vertical = false, split = "topleft" } }
+				)
+			else
+				oil.close()
+			end
+		end,
+		{ desc = "Open directory", noremap = true, silent = true }
+	)
+end
 
 -- HARPOON Keymaps
-u.kmset('n', '<leader>ma', ':lua require("harpoon.mark").add_file()<CR>', kmopts)
-u.kmset('n', '<leader>mm', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', kmopts)
-u.kmset('n', '<leader>mp', ':lua require("harpoon.ui").nav_prev()<CR>', kmopts)
-u.kmset('n', '<leader>mn', ':lua require("harpoon.ui").nav_next()<CR>', kmopts)
-u.kmset('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', kmopts)
-u.kmset('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', kmopts)
-u.kmset('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', kmopts)
-u.kmset('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', kmopts)
-u.kmset('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', kmopts)
-u.kmset('n', '<leader>6', ':lua require("harpoon.ui").nav_file(6)<CR>', kmopts)
-u.kmset('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', kmopts)
-u.kmset('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', kmopts)
-u.kmset('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', kmopts)
+local isHarpoonLoaded, _ = pcall(require, "harpoon")
+if isHarpoonLoaded then
+	u.kmset('n', '<leader>ma', ':lua require("harpoon.mark").add_file()<CR>', kmopts)
+	u.kmset('n', '<leader>mm', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', kmopts)
+	u.kmset('n', '<leader>mp', ':lua require("harpoon.ui").nav_prev()<CR>', kmopts)
+	u.kmset('n', '<leader>mn', ':lua require("harpoon.ui").nav_next()<CR>', kmopts)
+	u.kmset('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', kmopts)
+	u.kmset('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', kmopts)
+	u.kmset('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', kmopts)
+	u.kmset('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', kmopts)
+	u.kmset('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', kmopts)
+	u.kmset('n', '<leader>6', ':lua require("harpoon.ui").nav_file(6)<CR>', kmopts)
+	u.kmset('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', kmopts)
+	u.kmset('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', kmopts)
+	u.kmset('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', kmopts)
+end
