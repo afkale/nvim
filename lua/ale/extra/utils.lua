@@ -16,6 +16,8 @@ M.switch = function()
 	if substitution ~= nil then
 		vim.api.nvim_feedkeys("ciw" .. substitution, "n", false)
 		vim.api.nvim_input("<ESC>")
+	else
+		vim.notify("No substitution found for '" .. word .. "'", vim.log.levels.WARN)
 	end
 end
 
