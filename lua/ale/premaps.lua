@@ -56,17 +56,18 @@ end
 -- OIL Keymaps
 local isOilLoaded, oil = pcall(require, "oil")
 if isOilLoaded then
-	u.kmset("n", "<leader>e", function()
-			if vim.bo.filetype ~= "oil" then
-				oil.open_float(nil,
-					{ preview = { horizontal = true, vertical = false, split = "topleft" } }
-				)
-			else
-				oil.close()
-			end
-		end,
-		{ desc = "Open directory", noremap = true, silent = true }
-	)
+	local oilToggle = function()
+		if vim.bo.filetype ~= "oil" then
+			oil.open_float(nil,
+				{ preview = { horizontal = true, vertical = false, split = "topleft" } }
+			)
+		else
+			oil.close()
+		end
+	end
+
+	vim.api.nvim_create_user_command("OilToggle", oilToggle, { desc = "Toggle Oil" })
+	u.kmset("n", "<leader>e", oilToggle, { desc = "Toggle Oil", noremap = true, silent = true })
 end
 
 -- HARPOON Keymaps
@@ -85,4 +86,11 @@ if isHarpoonLoaded then
 	u.kmset('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', kmopts)
 	u.kmset('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', kmopts)
 	u.kmset('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', kmopts)
+end
+
+
+-- QUICKER Keymaps
+local isQuickerLoaded, quicker = pcall(require, "quicker")
+if isQuickerLoaded then
+	vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
 end
