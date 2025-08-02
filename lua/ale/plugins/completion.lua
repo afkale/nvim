@@ -37,7 +37,6 @@ return {
 			})
 
 			local win_config = {
-				winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
 				col_offset = -3,
 				side_padding = 0,
 				border = "single",

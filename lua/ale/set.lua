@@ -1,8 +1,7 @@
 -- Set the Python 3 host program for Neovim
-vim.g.python3_host_prog = "/usr/sbin/python"
+vim.g.python3_host_prog = "/usr/bin/python"
 
 vim.g.autoformat = true
-vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
 
 local opt = vim.opt
 

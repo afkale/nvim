@@ -5,7 +5,7 @@ return {
 	config = function()
 		local configs = require("nvim-treesitter.configs")
 
-		local settings = {
+		local opts = {
 			ensure_installed = {
 				"bash",
 				"c",
@@ -41,7 +41,7 @@ return {
 				},
 			}
 		}
-		configs.setup(settings)
+		configs.setup(opts)
 
 		require("treesitter-context").setup({ enable = true })
 	end,

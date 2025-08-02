@@ -12,7 +12,7 @@ local function create_disposable_command_tab(opts)
 		vim.cmd("tabnew")
 		local buf = vim.api.nvim_get_current_buf() -- Get the buffer of the new tab
 
-		vim.fn.termopen(opts.command, {
+		vim.fn.jobstart(opts.command, {
 			term = true,
 			on_exit = function()
 				-- Set a keymap to close the buffer when the job exits

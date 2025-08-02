@@ -18,39 +18,14 @@ u.kmset("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
 u.kmset("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts)
 u.kmset("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
 
--- DAP Keymaps
-local isDapLoaded, dap = pcall(require, "dap")
-local isDapViewLoaded, dapView = pcall(require, "dap-view")
-local isDapUiLoaded, dapUiWidgets = pcall(require, "dap.ui.widgets")
-
-if isDapLoaded then
-	u.kmset("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-	u.kmset("n", "<leader>dc", dap.continue, { desc = "Continue" })
-	u.kmset("n", "<leader>do", dap.step_over, { desc = "Step over" })
-	u.kmset("n", "<leader>di", dap.step_into, { desc = "Step into" })
-	u.kmset("n", "<leader>dO", dap.step_out, { desc = "Step out" })
-	u.kmset("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
-	u.kmset('n', '<leader>dr', dap.repl.open, { desc = "" })
-	u.kmset('n', '<leader>dl', dap.run_last, { desc = "Run last" })
-end
-if isDapViewLoaded then
-	u.kmset("n", "<leader>dd", dapView.toggle, { desc = "Toggle dap view" })
-end
-if isDapUiLoaded then
-	u.kmset({ 'n', 'v' }, '<leader>dh', dapUiWidgets.hover, {})
-	u.kmset({ 'n', 'v' }, '<leader>dp', dapUiWidgets.preview, {})
-	u.kmset('n', '<leader>df', function() dapUiWidgets.centered_float(dapUiWidgets.frames) end, {})
-	u.kmset('n', '<leader>ds', function() dapUiWidgets.centered_float(dapUiWidgets.scopes) end, {})
-end
-
 -- FZF Keymaps
 if vim.g.loaded_fzf_vim then
-	u.kmset("n", "<leader><space>", ":GFiles<CR>", { noremap = true, silent = true })
-	u.kmset("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
-	u.kmset("n", "<leader>fj", ":Jumps<CR>", { noremap = true, silent = true })
-	u.kmset("n", "<leader>fg", ":Rg<CR>", { noremap = true, silent = true })
-	u.kmset("n", "<leader>fc", ":Ag<CR>", { noremap = true, silent = true })
-	u.kmset("n", "<leader>fb", ":Lines<CR>", { noremap = true, silent = true })
+	u.kmset("n", "<leader><space>", ":GFiles<CR>", kmopts)
+	u.kmset("n", "<leader>ff", ":Files<CR>", kmopts)
+	u.kmset("n", "<leader>fj", ":Jumps<CR>", kmopts)
+	u.kmset("n", "<leader>fg", ":Rg<CR>", kmopts)
+	u.kmset("n", "<leader>fc", ":Ag<CR>", kmopts)
+	u.kmset("n", "<leader>fb", ":Lines<CR>", kmopts)
 end
 
 -- OIL Keymaps
@@ -94,3 +69,13 @@ local isQuickerLoaded, quicker = pcall(require, "quicker")
 if isQuickerLoaded then
 	vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
 end
+
+-- VIMSPECTOR keymaps
+vim.keymap.set("n", "<leader>dd", "<cmd>call vimspector#Launch()<CR>", kmopts)
+vim.keymap.set("n", "<leader>dq", ":call vimspector#Reset()<CR>", kmopts)
+vim.keymap.set("n", "<leader>dc", ":call vimspector#StepOut()<CR>", kmopts)
+vim.keymap.set("n", "<leader>dn", ":call vimspector#StepOver()<CR>", kmopts)
+vim.keymap.set("n", "<leader>di", ":call vimspector#StepInto()<CR>", kmopts)
+vim.keymap.set("n", "<leader>db", ":call vimspector#ToggleBreakpoint()<CR>", kmopts)
+vim.keymap.set("n", "<leader>dw", ":call vimspector#AddWatch()<CR>", kmopts)
+vim.keymap.set("n", "<leader>de", ":call vimspector#Evaluate()<CR>", kmopts)

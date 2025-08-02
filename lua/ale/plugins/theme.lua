@@ -6,21 +6,9 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({ transparent_background = true })
-
-			local palette = require("catppuccin.palettes").get_palette(theme)
-
-			vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = palette.text })
-			vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = palette.blue, bold = true })
-			vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = palette.overlay2 })
-			vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = palette.mauve })
-			vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = palette.mauve })
-			vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = palette.flamingo })
-			vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = palette.flamingo })
-			vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = palette.peach })
-			vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = palette.teal })
-			vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = palette.red })
-
+			require("catppuccin").setup({
+				transparent_background = true, float = { solid = true, transparent = true }
+			})
 			vim.cmd("colorscheme catppuccin-" .. theme)
 		end
 	},
@@ -29,7 +17,6 @@ return {
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		config = function()
 			local lualine = require("lualine")
-			local dap = require("dap")
 
 			local palette = require("catppuccin.palettes").get_palette(theme)
 			local colors = {
@@ -58,9 +45,6 @@ return {
 					local gitdir = vim.fn.finddir(".git", filepath .. ";")
 					return gitdir and #gitdir > 0 and #gitdir < #filepath
 				end,
-				dap_active = function()
-					return dap.session() ~= nil
-				end
 			}
 
 			-- Config
@@ -174,13 +158,6 @@ return {
 				},
 				ignore_lsp = {},
 				color = { fg = colors.magenta },
-			})
-
-			ins_left({
-				function() return " " end,
-				color = { fg = colors.green, gui = "bold" },
-				cond = conditions.dap_active,
-				padding = { left = 1 },
 			})
 
 			ins_left({

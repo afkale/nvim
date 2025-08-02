@@ -16,6 +16,7 @@ return {
 		},
 		opts = {
 			servers = {
+				zls = {},
 				nushell = {},
 				rust_analyzer = {},
 				jsonls = {},
@@ -32,35 +33,8 @@ return {
 						}
 					}
 				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							diagnostics = {
-								enable = true,
-								globals = { "vim" },
-								diagnosticMode = "workspace",
-							},
-							workspace = {
-								checkThirdParty = false,
-								library = {
-									vim.env.VIMRUNTIME, "${3rd}/luv/library", "LazyVim",
-								},
-							},
-							telemetry = { enable = false },
-							completion = {
-								callSnippet = "Replace", -- Better function snippet behavior
-							},
-							format = {
-								enable = true, -- Ensure formatting is enabled
-								defaultConfig = {
-									indent_style = "space",
-									indent_size = 2,
-								},
-							},
-						},
-					},
-				},
-				-- ruff = {},
+				lua_ls = {},
+				ruff = {},
 				pyright = {
 					settings = {
 						pyright = {
@@ -91,19 +65,6 @@ return {
 				config.capabilities = capabilities
 				lspconfig[server].setup(config)
 			end
-			-- Diagnostic configuration
-			-- vim.diagnostic.config({
-			-- 	float = { source = true },
-			-- 	virtual_text = {
-			-- 		enable = true,
-			-- 		spacing = 4,
-			-- 		prefix = "■",
-			-- 	},
-			-- 	signs = true,
-			-- 	underline = true,
-			-- 	update_in_insert = false,
-			-- 	severity_sort = true,
-			-- })
 		end,
 	},
 }
