@@ -6,8 +6,12 @@ M.switch = function()
 		False = "True",
 		["true"] = "false",
 		["false"] = "true",
+		["const"] = "let",
+		["let"] = "const",
 		["or"] = "and",
 		["and"] = "or",
+		["yes"] = "no",
+		["no"] = "yes",
 	}
 
 	local word = vim.fn.expand("<cword>")
