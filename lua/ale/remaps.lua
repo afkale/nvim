@@ -12,7 +12,6 @@ u.kmset("n", "<leader>Y", [["+Y]], opts)          -- Copy entire line
 
 -- Window resizing shortcuts
 u.kmset("n", "<A-h>", ":vertical resize -2<CR>", opts) -- Decrease window width
-
 u.kmset("n", "<A-l>", ":vertical resize +2<CR>", opts) -- Increase window width
 u.kmset("n", "<A-j>", ":resize +2<CR>", opts)          -- Increase window height
 u.kmset("n", "<A-k>", ":resize -2<CR>", opts)          -- Decrease window height
@@ -22,6 +21,19 @@ u.kmset("n", "<C-h>", "<C-w>h", opts) -- Move left
 u.kmset("n", "<C-l>", "<C-w>l", opts) -- Move right
 u.kmset("n", "<C-j>", "<C-w>j", opts) -- Move down
 u.kmset("n", "<C-k>", "<C-w>k", opts) -- Move up
+
+-- Better J behavior
+u.kmset("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+
+-- Move lines up/down
+u.kmset("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+u.kmset("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+u.kmset("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+u.kmset("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- Better indenting in visual mode
+u.kmset("v", "<", "<gv", { desc = "Indent left and reselect" })
+u.kmset("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Terminal window navigation
 u.kmset("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", opts)

@@ -3,104 +3,87 @@ vim.g.python3_host_prog = "/usr/bin/python"
 
 vim.g.autoformat = true
 
-local opt = vim.opt
+-- Basic settings
+vim.opt.number = true         -- Line numbers
+vim.opt.relativenumber = true -- Relative line numbers
+vim.opt.cursorline = true     -- Highlight current line
+vim.opt.wrap = false          -- Don't wrap lines
+vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
+vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 
 -- Enable filetype detection and syntax highlighting
-opt.filetype = "plugin" -- Enable filetype-based settings
-opt.syntax = "enable"   -- Enable syntax highlighting
+vim.opt.filetype = "plugin" -- Enable filetype-based settings
+vim.opt.syntax = "enable"   -- Enable syntax highlighting
 
 -- Configure grep program to use ripgrep (rg) for searching
-opt.grepprg = "rg --vimgrep"
-opt.grepformat = "%f:%l:%c:%m" -- Format for displaying grep results
-
--- Configure folding settings
-opt.foldmethod = "indent" -- Use indentation levels for folding
-opt.foldlevelstart = 99   -- Keep folds open by default
-
--- Enable line numbers
-opt.number = true         -- Show absolute line numbers
-opt.relativenumber = true -- Show relative line numbers
-
--- Configure text wrapping behavior
-opt.wrap = false       -- Disable line wrapping
-opt.breakindent = true -- Maintain indentation when wrapping
-
--- Configure default tab and indentation settings
-opt.tabstop = 2       -- Number of spaces per tab
-opt.shiftwidth = 2    -- Indentation width
-opt.expandtab = false -- Use actual tab characters instead of spaces
-
--- Disable swap and backup files, enable persistent undo
-opt.swapfile = false                                -- Disable swap file creation
-opt.backup = false                                  -- Disable backup files
-opt.undodir = os.getenv("HOME") .. "/.nvim/undodir" -- Set undo directory
-opt.undofile = true                                 -- Enable persistent undo
-
--- Configure search behavior
-opt.hlsearch = false  -- Disable highlight search
-opt.ignorecase = true -- Ignore case in searches
-opt.smartcase = true  -- Enable case-sensitive search if uppercase is used
-opt.incsearch = true  -- Show search matches while typing
-
--- Enable terminal colors and cursor highlighting
-opt.termguicolors = true -- Enable 24-bit colors
-opt.cursorline = true    -- Highlight the current cursor line
-
--- Scrolling and UI enhancements
-opt.scrolloff = 8         -- Keep 8 lines of context above/below cursor
-opt.signcolumn = "yes"    -- Always show the sign column
-opt.isfname:append("@-@") -- Allow @ in file names
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m" -- Format for displaying grep results
 
 -- Visual guidelines
-opt.colorcolumn = "100" -- Highlight column 88 for better readability
+vim.opt.colorcolumn = "100" -- Highlight column 88 for better readability
 
--- Path settings for better file navigation
-opt.path:append("**") -- Allow recursive searching of files
+-- Indentation
+vim.opt.tabstop = 2        -- Tab width
+vim.opt.shiftwidth = 2     -- Indent width
+vim.opt.softtabstop = 2    -- Soft tab stop
+vim.opt.expandtab = true   -- Use spaces instead of tabs
+vim.opt.smartindent = true -- Smart auto-indenting
+vim.opt.autoindent = true  -- Copy indent from current line
 
--- Ignore unnecessary files in searches
-opt.wildignore = {
-	-- General version control and cache directories
-	"**/.git/**",
-	"**/.svn/**",
-	"**/.hg/**",
-	"**/__pycache__/**",
-	"**/.DS_Store",
-	"**/Thumbs.db",
+-- Search settings
+vim.opt.ignorecase = true -- Case insensitive search
+vim.opt.smartcase = true  -- Case sensitive if uppercase in search
+vim.opt.hlsearch = false  -- Don't highlight search results
+vim.opt.incsearch = true  -- Show matches as you type
 
-	-- Dependency folders
-	"**/node_modules/**",
-	"**/.venv/**",
-	"**/env/**",
-	"**/vendor/**",
-	"**/build/**",
-	"**/dist/**",
-	"**/target/**",
-	"**/.next/**",
-	"**/.yarn/**",
+-- Visual settings
+vim.opt.termguicolors = true                      -- Enable 24-bit colors
+vim.opt.signcolumn = "yes"                        -- Always show sign column
+vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
+vim.opt.showmatch = true                          -- Highlight matching brackets
+vim.opt.matchtime = 2                             -- How long to show matching bracket
+vim.opt.cmdheight = 1                             -- Command line height
+vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
+vim.opt.showmode = false                          -- Don't show mode in command line
+vim.opt.pumheight = 10                            -- Popup menu height
+vim.opt.conceallevel = 0                          -- Don't hide markup
+vim.opt.concealcursor = ""                        -- Don't hide cursor line markup
+vim.opt.lazyredraw = true                         -- Don't redraw during macros
+vim.opt.synmaxcol = 300                           -- Syntax highlighting limit
 
-	-- Temporary and backup files
-	"*.swp",
-	"*.swo",
-	"*.bak",
-	"*.tmp",
-	"*.lock",
-	"*.log",
+-- File handling
+vim.opt.backup = false                            -- Don't create backup files
+vim.opt.writebackup = false                       -- Don't create backup before writing
+vim.opt.swapfile = false                          -- Don't create swap files
+vim.opt.undofile = true                           -- Persistent undo
+vim.opt.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
+vim.opt.updatetime = 300                          -- Faster completion
+vim.opt.timeoutlen = 500                          -- Key timeout duration
+vim.opt.ttimeoutlen = 0                           -- Key code timeout
+vim.opt.autoread = true                           -- Auto reload files changed outside vim
+vim.opt.autowrite = false                         -- Don't auto save
 
-	-- Compiled and bytecode files
-	"*.class",
-	"*.pyc",
-	"*.pyo",
-	"*.exe",
-	"*.dll",
-	"*.o",
-	"*.obj",
+-- Behavior settings
+vim.opt.hidden = true                   -- Allow hidden buffers
+vim.opt.errorbells = false              -- No error bells
+vim.opt.backspace = "indent,eol,start"  -- Better backspace behavior
+vim.opt.autochdir = false               -- Don't auto change directory
+vim.opt.iskeyword:append("-")           -- Treat dash as part of word
+vim.opt.path:append("**")               -- include subdirectories in search
+vim.opt.selection = "exclusive"         -- Selection behavior
+vim.opt.mouse = "a"                     -- Enable mouse support
+vim.opt.clipboard:append("unnamedplus") -- Use system clipboard
+vim.opt.modifiable = true               -- Allow buffer modifications
+vim.opt.encoding = "UTF-8"              -- Set encoding
 
-	-- IDE and Editor-specific files
-	"**/.idea/**",
-	"**/.vscode/**",
+-- Folding settings
+vim.opt.foldmethod = "expr" -- Use expression for folding
+vim.opt.foldlevel = 99      -- Start with all folds open
 
-	-- Tags and ctags files
-	"tags",
-	"*.tags",
-	"*.ctags",
-}
+-- Split behavior
+vim.opt.splitbelow = true -- Horizontal splits go below
+vim.opt.splitright = true -- Vertical splits go right
+
+-- Key mappings
+vim.g.mapleader = " " -- Set leader key to space
+vim.g.maplocalleader = " "
