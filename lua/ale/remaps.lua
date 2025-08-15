@@ -26,8 +26,6 @@ u.kmset("n", "<C-k>", "<C-w>k", opts) -- Move up
 u.kmset("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
 -- Move lines up/down
-u.kmset("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-u.kmset("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 u.kmset("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 u.kmset("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
