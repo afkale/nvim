@@ -6,8 +6,8 @@ u.kmset("n", "gri", vim.lsp.buf.references, kmopts)
 u.kmset("n", "grn", vim.lsp.buf.rename, kmopts)
 u.kmset("n", "gra", vim.lsp.buf.code_action, kmopts)
 u.kmset("n", "gft", function()
-	vim.g.autoformat = not vim.g.autoformat
-	vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
+  vim.g.autoformat = not vim.g.autoformat
+  vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
 end)
 u.kmset("n", "gff", vim.lsp.buf.format, kmopts)
 u.kmset("n", "ge", vim.diagnostic.setqflist, kmopts)
@@ -19,55 +19,43 @@ u.kmset("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts
 u.kmset("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
 
 -- FZF Keymaps
-if vim.g.loaded_fzf_vim then
-	u.kmset("n", "<leader><space>", ":GFiles<CR>", kmopts)
-	u.kmset("n", "<leader>ff", ":Files<CR>", kmopts)
-	u.kmset("n", "<leader>fj", ":Jumps<CR>", kmopts)
-	u.kmset("n", "<leader>fg", ":Rg<CR>", kmopts)
-	u.kmset("n", "<leader>fc", ":Ag<CR>", kmopts)
-	u.kmset("n", "<leader>fb", ":Lines<CR>", kmopts)
+local isPickLoaded, _ = pcall(require, "mini.pick")
+if isPickLoaded then
+  u.kmset("n", "<leader><space>", ":Pick files tool='git'<CR>", kmopts)
+  u.kmset("n", "<leader>ff", ":Pick files<CR>", kmopts)
+  u.kmset("n", "<leader>fg", ":Pick grep_live<CR>", kmopts)
+  u.kmset("n", "<leader>fh", ":Pick help<CR>", kmopts)
 end
 
 -- OIL Keymaps
-local isOilLoaded, oil = pcall(require, "oil")
-if isOilLoaded then
-	local oilToggle = function()
-		if vim.bo.filetype ~= "oil" then
-			oil.open_float(nil,
-				{ preview = { horizontal = true, vertical = false, split = "topleft" } }
-			)
-		else
-			oil.close()
-		end
-	end
-
-	vim.api.nvim_create_user_command("OilToggle", oilToggle, { desc = "Toggle Oil" })
-	u.kmset("n", "<leader>e", oilToggle, { desc = "Toggle Oil", noremap = true, silent = true })
+local isFilesLoaded, files = pcall(require, "mini.files")
+if isFilesLoaded then
+  u.kmset("n", "<leader>e", files.open, { desc = "Toggle Mini files", noremap = true, silent = true })
 end
 
 -- HARPOON Keymaps
 local isHarpoonLoaded, _ = pcall(require, "harpoon")
 if isHarpoonLoaded then
-	u.kmset('n', '<leader>ma', ':lua require("harpoon.mark").add_file()<CR>', kmopts)
-	u.kmset('n', '<leader>mm', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', kmopts)
-	u.kmset('n', '<leader>mp', ':lua require("harpoon.ui").nav_prev()<CR>', kmopts)
-	u.kmset('n', '<leader>mn', ':lua require("harpoon.ui").nav_next()<CR>', kmopts)
-	u.kmset('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', kmopts)
-	u.kmset('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', kmopts)
-	u.kmset('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', kmopts)
-	u.kmset('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', kmopts)
-	u.kmset('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', kmopts)
-	u.kmset('n', '<leader>6', ':lua require("harpoon.ui").nav_file(6)<CR>', kmopts)
-	u.kmset('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', kmopts)
-	u.kmset('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', kmopts)
-	u.kmset('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', kmopts)
+  u.kmset('n', '<leader>ma', ':lua require("harpoon.mark").add_file()<CR>', kmopts)
+  u.kmset('n', '<leader>mm', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', kmopts)
+  u.kmset('n', '<leader>mp', ':lua require("harpoon.ui").nav_prev()<CR>', kmopts)
+  u.kmset('n', '<leader>mn', ':lua require("harpoon.ui").nav_next()<CR>', kmopts)
+  u.kmset('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', kmopts)
+  u.kmset('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', kmopts)
+  u.kmset('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', kmopts)
+  u.kmset('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', kmopts)
+  u.kmset('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', kmopts)
+  u.kmset('n', '<leader>6', ':lua require("harpoon.ui").nav_file(6)<CR>', kmopts)
+  u.kmset('n', '<leader>7', ':lua require("harpoon.ui").nav_file(7)<CR>', kmopts)
+  u.kmset('n', '<leader>8', ':lua require("harpoon.ui").nav_file(8)<CR>', kmopts)
+  u.kmset('n', '<leader>9', ':lua require("harpoon.ui").nav_file(9)<CR>', kmopts)
 end
 
 
 -- QUICKER Keymaps
 local isQuickerLoaded, quicker = pcall(require, "quicker")
 if isQuickerLoaded then
-	vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
+  vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
 end
 
 -- VIMSPECTOR keymaps
