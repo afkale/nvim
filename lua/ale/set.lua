@@ -64,17 +64,16 @@ vim.opt.autoread = true                           -- Auto reload files changed o
 vim.opt.autowrite = false                         -- Don't auto save
 
 -- Behavior settings
-vim.opt.hidden = true                   -- Allow hidden buffers
-vim.opt.errorbells = false              -- No error bells
-vim.opt.backspace = "indent,eol,start"  -- Better backspace behavior
-vim.opt.autochdir = false               -- Don't auto change directory
-vim.opt.iskeyword:append("-")           -- Treat dash as part of word
-vim.opt.path:append("**")               -- include subdirectories in search
-vim.opt.selection = "exclusive"         -- Selection behavior
-vim.opt.mouse = "a"                     -- Enable mouse support
-vim.opt.clipboard:append("unnamedplus") -- Use system clipboard
-vim.opt.modifiable = true               -- Allow buffer modifications
-vim.opt.encoding = "UTF-8"              -- Set encoding
+vim.opt.hidden = true                  -- Allow hidden buffers
+vim.opt.errorbells = false             -- No error bells
+vim.opt.backspace = "indent,eol,start" -- Better backspace behavior
+vim.opt.autochdir = false              -- Don't auto change directory
+vim.opt.iskeyword:append("-")          -- Treat dash as part of word
+vim.opt.path:append("**")              -- include subdirectories in search
+vim.opt.selection = "exclusive"        -- Selection behavior
+vim.opt.mouse = "a"                    -- Enable mouse support
+vim.opt.modifiable = true              -- Allow buffer modifications
+vim.opt.encoding = "UTF-8"             -- Set encoding
 
 -- Folding settings
 vim.opt.foldmethod = "expr" -- Use expression for folding
