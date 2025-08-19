@@ -1,6 +1,6 @@
-local M = {}
+local utils = {}
 
-M.switch = function()
+utils.switch = function()
   local map = {
     True = "False",
     False = "True",
@@ -18,12 +18,12 @@ M.switch = function()
   local substitution = map[word]
 
   if substitution ~= nil then
-    vim.api.nvim_feedkeys("ciw" .. substitution, "n", false)
+    vim.api.nvim_feedkeys("*#cw" .. substitution, "n", false)
     vim.api.nvim_input("<ESC>")
-  else
+  elseif word ~= '' then
     vim.notify("No substitution found for '" .. word .. "'", vim.log.levels.WARN)
   end
 end
 
-vim.keymap.set("n", "<C-s>", M.switch, opts) -- Switch character pairs
-return M
+vim.keymap.set("n", "<C-s>", utils.switch, {}) -- Switch character pairs
+return utils
