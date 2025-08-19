@@ -1,18 +1,18 @@
 return {
   {
-    "ThePrimeagen/harpoon",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'ThePrimeagen/harpoon',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
-    "echasnovski/mini.files",
+    'echasnovski/mini.files',
     config = function()
-      require("mini.files").setup()
+      require('mini.files').setup({ mappings = { close = '<ESC>' } })
     end
   },
   {
-    "echasnovski/mini.pick",
+    'echasnovski/mini.pick',
     config = function()
-      require("mini.pick").setup()
+      require('mini.pick').setup()
     end
   },
 }
