@@ -1,62 +1,59 @@
-local u = require("ale.extra.utils")
-
 -- utils.kmset the leader key to spac
 vim.g.mapleader = " "
 
 local opts = { noremap = true, silent = true }
 
 -- Copy mappings using system clipboard
-u.kmset({ "v", "x" }, "<leader>y", '"+y', opts)   -- Copy selection to system clipboard
-u.kmset({ "n", "v" }, "<leader>y", [["+y]], opts) -- Copy current line or selection
-u.kmset("n", "<leader>Y", [["+Y]], opts)          -- Copy entire line
+vim.keymap.set({ "v", "x" }, "<leader>y", '"+y', opts)   -- Copy selection to system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], opts) -- Copy current line or selection
+vim.keymap.set("n", "<leader>Y", [["+Y]], opts)          -- Copy entire line
 
 -- Window resizing shortcuts
-u.kmset("n", "<A-h>", ":vertical resize -2<CR>", opts) -- Decrease window width
-u.kmset("n", "<A-l>", ":vertical resize +2<CR>", opts) -- Increase window width
-u.kmset("n", "<A-j>", ":resize +2<CR>", opts)          -- Increase window height
-u.kmset("n", "<A-k>", ":resize -2<CR>", opts)          -- Decrease window height
+vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", opts) -- Decrease window width
+vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", opts) -- Increase window width
+vim.keymap.set("n", "<A-j>", ":resize +2<CR>", opts)          -- Increase window height
+vim.keymap.set("n", "<A-k>", ":resize -2<CR>", opts)          -- Decrease window height
 
 -- Window navigation mappings
-u.kmset("n", "<C-h>", "<C-w>h", opts) -- Move left
-u.kmset("n", "<C-l>", "<C-w>l", opts) -- Move right
-u.kmset("n", "<C-j>", "<C-w>j", opts) -- Move down
-u.kmset("n", "<C-k>", "<C-w>k", opts) -- Move up
+vim.keymap.set("n", "<C-h>", "<C-w>h", opts) -- Move left
+vim.keymap.set("n", "<C-l>", "<C-w>l", opts) -- Move right
+vim.keymap.set("n", "<C-j>", "<C-w>j", opts) -- Move down
+vim.keymap.set("n", "<C-k>", "<C-w>k", opts) -- Move up
 
 -- Better J behavior
-u.kmset("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
 -- Move lines up/down
-u.kmset("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-u.kmset("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Better indenting in visual mode
-u.kmset("v", "<", "<gv", { desc = "Indent left and reselect" })
-u.kmset("v", ">", ">gv", { desc = "Indent right and reselect" })
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Terminal window navigation
-u.kmset("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", opts)
-u.kmset("t", "<C-l>", "<C-\\><C-n><C-w><C-l>", opts)
-u.kmset("t", "<C-k>", "<C-\\><C-n><C-w><C-k>", opts)
-u.kmset("t", "<C-j>", "<C-\\><C-n><C-w><C-j>", opts)
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w><C-h>", opts)
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w><C-l>", opts)
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w><C-k>", opts)
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w><C-j>", opts)
 
 -- Terminal shortcuts
-u.kmset("t", "<C-\\><C-\\>", "<C-\\><C-n>", opts)
+vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", opts)
 
 -- Tab management
-u.kmset("n", "<leader>tn", ":tabnew<CR>", opts)
-u.kmset("n", "<leader>tc", ":tabclose<CR>", opts)
+vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", opts)
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", opts)
 
 -- Quickfix
-u.kmset("n", "<C-.>", ":cnext<CR>", opts)
-u.kmset("n", "<C-,>", ":cprevious<CR>", opts)
-u.kmset("n", "<leader>cc", ":cclose<CR>", opts)
-u.kmset("n", "<leader>co", ":copen<CR>", opts)
-u.kmset("n", "<leader>crn", ":execute 'cdo s/' . input('Find: ') . '/' . input('Replace: ') . '/gc | update'<CR>")
+vim.keymap.set("n", "<C-.>", ":cnext<CR>", opts)
+vim.keymap.set("n", "<C-,>", ":cprevious<CR>", opts)
+vim.keymap.set("n", "<leader>cc", ":cclose<CR>", opts)
+vim.keymap.set("n", "<leader>co", ":copen<CR>", opts)
+vim.keymap.set("n", "<leader>crn", ":execute 'cdo s/' . input('Find: ') . '/' . input('Replace: ') . '/gc | update'<CR>")
 
 -- Miscellaneous shortcuts
-u.kmset("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
-u.kmset("n", "<C-s>", u.switch, opts)    -- Switch character pairs
+vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
 
 -- Command remaps
-u.kmset('c', '<C-p>', '<Up>', opts)
-u.kmset('c', '<C-n>', '<Down>', opts)
+vim.keymap.set('c', '<C-p>', '<Up>', opts)
+vim.keymap.set('c', '<C-n>', '<Down>', opts)

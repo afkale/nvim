@@ -3,8 +3,11 @@ local u = require("ale.extra.utils")
 
 local function grep_and_replace()
 	local find = vim.fn.input({ prompt = "Search: " })
+	if not find then return end
+
 	local replace = vim.fn.input({ prompt = "Replace: " })
-	if not find or not replace then return end
+
+	if not replace then return end
 
 	local safe_find = vim.fn.escape(find, '/\\')
 
@@ -16,4 +19,4 @@ local function grep_and_replace()
 	vim.cmd("cclose")
 end
 
-u.kmset("n", "<leader>crn", grep_and_replace)
+vim.keymap.set("n", "<leader>crn", grep_and_replace)
