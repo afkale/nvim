@@ -1,98 +1,53 @@
 return {
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"echasnovski/mini.icons",
-		},
-		version = "*",
-		config = function()
-			local cmp = require("cmp")
+  'saghen/blink.cmp',
+  -- optional: provides snippets for the snippet source
+  -- dependencies = { 'rafamadriz/friendly-snippets' },
 
-			local performance = { max_view_entries = 30 }
+  -- use a release tag to download pre-built binaries
+  version = '1.*',
+  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+  -- build = 'cargo build --release',
+  -- If you use nix, you can build from source using latest nightly rust with:
+  -- build = 'nix run .#build-plugin',
 
-			local sorting = {
-				comparators = {
-					cmp.config.compare.offset,
-					cmp.config.compare.exact,
-					cmp.config.compare.score,
-					cmp.config.compare.recently_used,
-					cmp.config.compare.locality,
-					cmp.config.compare.kind,
-					cmp.config.compare.sort_text,
-					cmp.config.compare.length,
-					cmp.config.compare.order,
-				}
-			}
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+    -- 'super-tab' for mappings similar to vscode (tab to accept)
+    -- 'enter' for enter to accept
+    -- 'none' for no mappings
+    --
+    -- All presets have the following mappings:
+    -- C-space: Open menu or open docs if already open
+    -- C-n/C-p or Up/Down: Select next/previous item
+    -- C-e: Hide menu
+    -- C-k: Toggle signature help (if signature.enabled = true)
+    --
+    -- See :h blink-cmp-config-keymap for defining your own keymap
+    keymap = { preset = 'default' },
 
-			local mappings = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.abort(),
-				["<C-y>"] = cmp.mapping.confirm({ select = true })
-			})
+    appearance = {
+      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- Adjusts spacing to ensure icons are aligned
+      nerd_font_variant = 'mono'
+    },
 
-			local win_config = {
-				col_offset = -3,
-				side_padding = 0,
-				border = "single",
-			}
+    -- (Default) Only show the documentation popup when manually triggered
+    completion = { documentation = { auto_show = true }, ghost_text = { enabled = true } },
 
-			cmp.setup({
-				performance = performance,
-				window = {
-					completion = win_config,
-					documentation = win_config,
-				},
+    -- Default list of enabled providers defined so that you can extend it
+    -- elsewhere in your config, without redefining it, due to `opts_extend`
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
 
-				experimental = { ghost_text = true },
-				mapping = mappings,
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-				}, {
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-				sorting = sorting,
-				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					expandable_indicator = true,
-					format = function(entry, vim_item)
-						local kind = vim_item.kind
-						vim_item.kind = " " .. MiniIcons.get("lsp", kind) .. "  │"
-						vim_item.menu = "│ " .. kind
-						return vim_item
-					end,
-				},
-			})
-
-			cmp.setup.cmdline({ "/", "?" }, {
-				performance = performance,
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = { { name = "buffer" } },
-				sorting = sorting,
-			})
-
-			cmp.setup.cmdline(":", {
-				performance = performance,
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources(
-					{ { name = "path" }, }, { { name = "cmdline" } }
-				),
-				sorting = sorting,
-				matching = {
-					disallow_symbol_nonprefix_matching = true,
-					disallow_fullfuzzy_matching = false,
-					disallow_partial_matching = false,
-					disallow_prefix_unmatching = false,
-					disallow_fuzzy_matching = false,
-					disallow_partial_fuzzy_matching = false,
-				},
-			})
-		end
-	},
+    -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+    --
+    -- See the fuzzy documentation for more information
+    fuzzy = { implementation = 'prefer_rust_with_warning' }
+  },
+  opts_extend = { 'sources.default' }
 }
