@@ -2,7 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp", },
+      -- { "hrsh7th/cmp-nvim-lsp", },
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -56,8 +56,7 @@ return {
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities()
+        vim.lsp.protocol.make_client_capabilities()
       )
 
       -- LSP servers setup configuration
