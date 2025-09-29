@@ -66,12 +66,32 @@ if isQuickerLoaded then
   vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
 end
 
--- VIMSPECTOR keymaps
-vim.keymap.set("n", "<leader>dd", "<cmd>call vimspector#Launch()<CR>", kmopts)
-vim.keymap.set("n", "<leader>dq", ":call vimspector#Reset()<CR>", kmopts)
-vim.keymap.set("n", "<leader>dc", ":call vimspector#StepOut()<CR>", kmopts)
-vim.keymap.set("n", "<leader>dn", ":call vimspector#StepOver()<CR>", kmopts)
-vim.keymap.set("n", "<leader>di", ":call vimspector#StepInto()<CR>", kmopts)
-vim.keymap.set("n", "<leader>db", ":call vimspector#ToggleBreakpoint()<CR>", kmopts)
-vim.keymap.set("n", "<leader>dw", ":call vimspector#AddWatch()<CR>", kmopts)
-vim.keymap.set("n", "<leader>de", ":call vimspector#Evaluate()<CR>", kmopts)
+local isDapLoaded, dap = pcall(require, "dap")
+if isDapLoaded then
+  vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, kmopts)
+  vim.keymap.set("n", "<leader>dc", dap.continue, kmopts)
+  vim.keymap.set("n", "<leader>do", dap.step_over, kmopts)
+  vim.keymap.set("n", "<leader>di", dap.step_into, kmopts)
+  vim.keymap.set("n", "<leader>dO", dap.step_out, kmopts)
+  vim.keymap.set("n", "<leader>dq", dap.terminate, kmopts)
+  vim.keymap.set('n', '<Leader>dr', dap.repl.open, kmopts)
+  vim.keymap.set('n', '<Leader>dl', dap.run_last, kmopts)
+end
+
+local isDapViewLoaded, dapView = pcall(require, "dap-view")
+
+if isDapViewLoaded then
+  vim.keymap.set("n", "<leader>dd", dapView.toggle, kmopts)
+end
+
+local isDapWidgetsLoaded, dapWidgets = pcall(require, "dap.ui.widgets")
+if isDapWidgetsLoaded then
+  vim.keymap.set({ 'n', 'v' }, '<Leader>dh', dapWidgets.hover, kmopts)
+  vim.keymap.set({ 'n', 'v' }, '<Leader>dp', dapWidgets.preview, kmopts)
+  vim.keymap.set('n', '<Leader>df', function()
+    dapWidgets.centered_float(dapWidgets.frames)
+  end, kmopts)
+  vim.keymap.set('n', '<Leader>ds', function()
+    dapWidgets.centered_float(dapWidgets.scopes)
+  end, kmopts)
+end
