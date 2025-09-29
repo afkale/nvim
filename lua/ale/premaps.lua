@@ -30,7 +30,15 @@ end
 -- OIL Keymaps
 local isFilesLoaded, files = pcall(require, "mini.files")
 if isFilesLoaded then
-  vim.keymap.set("n", "<leader>e", files.open, { desc = "Toggle Mini files", noremap = true, silent = true })
+  vim.keymap.set("n", "<leader>e",
+    function() files.open(vim.fn.expand('%:p:.')) end,
+    { desc = "Toggle Mini files in path.", noremap = true, silent = true }
+  )
+
+  vim.keymap.set("n", "<leader>E",
+    function() files.open() end,
+    { desc = "Toggle Mini files", noremap = true, silent = true }
+  )
 end
 
 -- HARPOON Keymaps
