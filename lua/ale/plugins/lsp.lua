@@ -17,7 +17,6 @@ return {
       servers = {
         "zls",
         "ruff",
-        "nushell",
         "rust_analyzer",
         "jsonls",
         "marksman",
