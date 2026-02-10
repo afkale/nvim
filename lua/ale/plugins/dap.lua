@@ -2,46 +2,40 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      "nvim-neotest/nvim-nio",
-      "igorlfs/nvim-dap-view",
       "mfussenegger/nvim-dap-python",
+      {
+        "igorlfs/nvim-dap-view",
+        opts = {
+          -- winbar: optional, show section labels
+          winbar = {
+            show = true,
+            sections = { "watches", "exceptions", "breakpoints", "threads", "repl" },
+            default_section = "watches",
+          },
+
+          windows = {
+            terminal = {
+              position = "left",
+              hide = {}, -- which adapters to hide terminal
+            },
+          },
+
+          auto_toggle = true, -- open / close dap-view automatically
+
+        }
+      },
     },
     config = function()
       local dap = require("dap")
       local view = require("dap-view")
-      local dapPython = require("dap-python")
-
-      view.setup(
-        {
-          winbar = {
-            show = true,
-            -- You can add a "console" section to merge the terminal with the other views
-            sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
-            -- Must be one of the sections declared above
-            default_section = "watches",
-          },
-          windows = {
-            height = 12,
-            terminal = {
-              -- 'left'|'right'|'above'|'below': Terminal position in layout
-              position = "left",
-              -- List of debug adapters for which the terminal should be ALWAYS hidden
-              hide = {},
-              -- Hide the terminal when starting a new session
-              start_hidden = true,
-            },
-          },
-          -- Controls how to jump when selecting a breakpoint or navigating the stack
-          switchbuf = "usetab",
-        }
-      )
-
-      dapPython.setup("python")
+      require("dap-python").setup("python3")
 
       -- Automatically open/close DAP UI
       dap.listeners.after.event_initialized["dapui_config"] = function()
         view.open()
       end
+
+      vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'red', linehl = '', numhl = '' })
     end,
   },
 }

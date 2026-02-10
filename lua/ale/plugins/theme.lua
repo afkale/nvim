@@ -18,6 +18,7 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
     config = function()
       local lualine = require("lualine")
+      local dap = require("dap")
 
       local palette = require("catppuccin.palettes").get_palette(theme)
       local colors = {
@@ -46,6 +47,9 @@ return {
           local gitdir = vim.fn.finddir(".git", filepath .. ";")
           return gitdir and #gitdir > 0 and #gitdir < #filepath
         end,
+        dap_active = function()
+          return dap.session() ~= nil
+        end
       }
 
       -- Config
@@ -159,6 +163,12 @@ return {
         },
         ignore_lsp = {},
         color = { fg = colors.magenta },
+      })
+      ins_left({
+        function() return " " end,
+        color = { fg = colors.green, gui = "bold" },
+        cond = conditions.dap_active,
+        padding = { left = 1 },
       })
 
       ins_left({

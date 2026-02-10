@@ -9,13 +9,14 @@ local function create_disposable_command_tab(opts)
 	-- Function to execute the command
 	local function execute_command()
 		-- Start command job and create a command to leave when it finishes
-		vim.cmd("tabnew")
+    
+    vim.cmd.tabnew()
 		local buf = vim.api.nvim_get_current_buf() -- Get the buffer of the new tab
 
 		vim.fn.jobstart(opts.command, {
 			term = true,
 			on_exit = function()
-				-- Set a keymap to close the buffer when the job exits
+				-- Set a keymap to close the buffer when the job finishes
 				vim.api.nvim_buf_set_keymap(
 					buf, "n", opts.close_key or "q", ":bdelete!<CR>",
 					{ noremap = true, silent = true }
@@ -36,12 +37,15 @@ local function create_disposable_command_tab(opts)
 		})
 	end
 
-	-- Execute the command initially
 	execute_command()
 end
 
 vim.api.nvim_create_user_command("Precommit", function()
-	create_disposable_command_tab({ command = "pre-commit run --all-files", close_key = "q" })
+  local path = vim.fn.findfile(".pre-commit-config.yaml")
+
+  if path ~= "" then
+    create_disposable_command_tab({ command = "pre-commit run --all-files", close_key = "q" })
+  end
 end, { desc = "Run pre-commit hooks in a new tab" })
 
 -- keymaps

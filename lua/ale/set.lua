@@ -1,5 +1,5 @@
 -- Set the Python 3 host program for Neovim
-vim.g.python3_host_prog = '/usr/bin/python'
+vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.g.autoformat = true
 
@@ -87,3 +87,16 @@ vim.opt.splitright = true -- Vertical splits go right
 -- Key mappings
 vim.g.mapleader = ' ' -- Set leader key to space
 vim.g.maplocalleader = ' '
+
+
+vim.g.fzf_layout = {
+  window = {
+    width = 0.9,
+    height = 0.9,
+    border = "none",
+  },
+}
+vim.g.fzf_vim = vim.g.fzf_vim or {}
+vim.g.fzf_vim.preview_window = { "down,60%,hidden", "ctrl-/" }
+
+vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --border --margin=1 --padding=1"

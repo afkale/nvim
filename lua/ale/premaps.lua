@@ -17,15 +17,10 @@ vim.keymap.set("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
 vim.keymap.set("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts)
 vim.keymap.set("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
 
--- FZF Keymaps
-local isPickLoaded, _ = pcall(require, "mini.pick")
-if isPickLoaded then
-  vim.keymap.set("n", "<leader><space>", ":Pick files tool='git'<CR>", kmopts)
-  vim.keymap.set("n", "<leader>ff", ":Pick files<CR>", kmopts)
-  vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>", kmopts)
-  vim.keymap.set("n", "<leader>fh", ":Pick help<CR>", kmopts)
-  vim.keymap.set("n", "<leader>fr", ":Pick resume<CR>", kmopts)
-end
+vim.keymap.set("n", "<leader><space>", ":GFiles<CR>", kmopts)
+vim.keymap.set("n", "<leader>ff", ":Files<CR>", kmopts)
+vim.keymap.set("n", "<leader>fg", ":RG<CR>", kmopts)
+vim.keymap.set("n", "<leader>fh", ":Helptags<CR>", kmopts)
 
 -- OIL Keymaps
 local isFilesLoaded, files = pcall(require, "mini.files")

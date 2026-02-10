@@ -10,9 +10,7 @@ return {
     end
   },
   {
-    'echasnovski/mini.pick',
-    config = function()
-      require('mini.pick').setup()
-    end
+    'junegunn/fzf.vim',
+    dependencies = { 'junegunn/fzf' }
   },
 }
