@@ -11,6 +11,11 @@ return {
     end
   },
   {
-    "tpope/vim-fugitive"
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Open git" })
+    end
+
+
   },
 }
