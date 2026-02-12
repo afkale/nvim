@@ -4,9 +4,15 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
-    'echasnovski/mini.files',
+    'nvim-mini/mini.files',
     config = function()
       require('mini.files').setup({ mappings = { close = '<ESC>' } })
+    end
+  },
+  {
+    'nvim-mini/mini.icons',
+    config = function()
+      require('mini.icons').setup()
     end
   },
   {
