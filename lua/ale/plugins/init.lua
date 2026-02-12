@@ -1,20 +1,16 @@
 return {
   {
-    "stevearc/quicker.nvim",
-    event = "FileType qf",
+    'stevearc/quicker.nvim',
+    ft = "qf",
     opts = {},
     config = function()
-      require("quicker").setup()
+      local quicker = require("quicker")
+      quicker.setup()
+
+      vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
     end
   },
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    },
-  }
+    "tpope/vim-fugitive"
+  },
 }
