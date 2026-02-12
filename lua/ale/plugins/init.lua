@@ -10,12 +10,4 @@ return {
       vim.keymap.set("n", "<leader>cc", quicker.toggle, { desc = "Toggle quickfix" })
     end
   },
-  {
-    "tpope/vim-fugitive",
-    config = function()
-      vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Open git" })
-    end
-
-
-  },
 }
