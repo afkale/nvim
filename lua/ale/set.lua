@@ -71,7 +71,6 @@ vim.opt.backspace = 'indent,eol,start' -- Better backspace behavior
 vim.opt.autochdir = false              -- Don't auto change directory
 vim.opt.iskeyword:append('-')          -- Treat dash as part of word
 vim.opt.path:append('**')              -- include subdirectories in search
-vim.opt.selection = 'exclusive'        -- Selection behavior
 vim.opt.mouse = 'a'                    -- Enable mouse support
 vim.opt.modifiable = true              -- Allow buffer modifications
 vim.opt.encoding = 'UTF-8'             -- Set encoding
@@ -89,14 +88,14 @@ vim.g.mapleader = ' ' -- Set leader key to space
 vim.g.maplocalleader = ' '
 
 
+-- Remove border configuration entirely
 vim.g.fzf_layout = {
   window = {
+    border = "sharp",
     width = 0.9,
     height = 0.9,
-    border = "none",
-  },
+  }
 }
+
 vim.g.fzf_vim = vim.g.fzf_vim or {}
 vim.g.fzf_vim.preview_window = { "down,60%,hidden", "ctrl-/" }
-
-vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --border --margin=1 --padding=1"
