@@ -1,5 +1,9 @@
 return {
   {
+    "mason-org/mason.nvim",
+    opts = {}
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
@@ -16,6 +20,7 @@ return {
     opts = {
       servers = {
         "zls",
+        "ty",
         "ruff",
         "rust_analyzer",
         "jsonls",
