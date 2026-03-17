@@ -34,6 +34,8 @@ return {
       },
     },
     config = function(_, opts)
+      vim.lsp.config("*", { capabilities = MiniCompletion.get_lsp_capabilities() })
+
       vim.lsp.enable(opts.servers)
       -- LSP Keymaps
       local kmopts = { noremap = true, silent = true }

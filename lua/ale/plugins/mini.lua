@@ -4,7 +4,7 @@ return {
     version = "*",
     config = function()
       require("mini.icons").tweak_lsp_kind()
-      require("mini.completion").setup()
+      require("mini.completion").setup({ lsp_completion = { source_func = 'omnifunc', auto_setup = false } })
     end
   },
   {

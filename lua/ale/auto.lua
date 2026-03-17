@@ -24,3 +24,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- Setup mini completion config
+local on_attach = function(args)
+  vim.bo[args.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
+end
+vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
