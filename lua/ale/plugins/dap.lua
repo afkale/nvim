@@ -47,8 +47,6 @@ return {
       vim.keymap.set("n", "<leader>dd", view.toggle, kmopts)
       vim.keymap.set({ 'n', 'v' }, '<Leader>dh', widgets.hover, kmopts)
       vim.keymap.set({ 'n', 'v' }, '<Leader>dp', widgets.preview, kmopts)
-      vim.keymap.set('n', '<Leader>df', function() widgets.centered_float(widgets.frames) end, kmopts)
-      vim.keymap.set('n', '<Leader>ds', function() widgets.centered_float(widgets.scopes) end, kmopts)
     end,
   },
 }

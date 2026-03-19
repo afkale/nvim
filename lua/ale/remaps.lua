@@ -40,3 +40,5 @@ vim.keymap.set("n", "<C-p>", ":cprev<CR>")
 
 -- Miscellaneous shortcuts
 vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
+
+vim.keymap.set("n", "<C-a>", ':silent grep! "\\b<C-R><C-W>\\b"<CR>')

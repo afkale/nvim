@@ -30,3 +30,9 @@ local on_attach = function(args)
   vim.bo[args.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
 end
 vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
+
+-- Open QuickfixList always after grep
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  pattern = "grep",
+  command = "copen"
+})

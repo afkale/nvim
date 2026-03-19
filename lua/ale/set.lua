@@ -1,6 +1,12 @@
 -- Set the Python 3 host program for Neovim
 vim.g.python3_host_prog = "/usr/bin/python3"
 
+if vim.fn.executable("ag") == 1 then
+  vim.opt.grepprg = "ag --vimgrep --smart-case"
+elseif vim.fn.executable("rg") == 1 then
+  vim.opt.grepprg = "rg --vimgrep --smart-case"
+end
+
 vim.g.autoformat = true
 
 -- Basic settings
@@ -14,10 +20,6 @@ vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 -- Enable filetype detection and syntax highlighting
 vim.opt.filetype = "plugin" -- Enable filetype-based settings
 vim.opt.syntax = "enable"   -- Enable syntax highlighting
-
--- Configure grep program to use ripgrep (rg) for searching
-vim.opt.grepprg = "rg --vimgrep"
-vim.opt.grepformat = "%f:%l:%c:%m" -- Format for displaying grep results
 
 -- Visual guidelines
 vim.opt.colorcolumn = "100"     -- Highlight column 88 for better readability
