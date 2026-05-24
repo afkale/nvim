@@ -39,6 +39,21 @@ vim.keymap.set("n", "<C-n>", ":cnext<CR>")
 vim.keymap.set("n", "<C-p>", ":cprev<CR>")
 
 -- Miscellaneous shortcuts
-vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
+vim.keymap.set("v", "<C-s>", ":sort", opts) -- Sort lines visual
 
-vim.keymap.set("n", "<C-a>", ':silent grep! "\\b<C-R><C-W>\\b"<CR>')
+function _G.grep_operator(type)
+  local saved_reg = vim.fn.getreg('"')
+  local saved_regtype = vim.fn.getregtype('"')
+  if type == 'char' or type == 'line' or type == 'block' then
+    vim.cmd('normal! `[v`]y')
+    local text = vim.fn.escape(vim.fn.getreg('"'), [[.,^$*[]\/~(){}|?+-":<>]])
+    vim.cmd('silent grep!  "' .. text .. '"')
+  end
+  vim.fn.setreg('"', saved_reg, saved_regtype)
+end
+
+-- Operator-pending mapping for F
+vim.keymap.set('n', '<leader>f', function()
+  vim.o.operatorfunc = 'v:lua.grep_operator'
+  return 'g@'
+end, { expr = true, silent = true, desc = "Grep operator" })
