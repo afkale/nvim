@@ -24,7 +24,10 @@ vim.keymap.set("n", "<leader>E",
   function() files.open() end,
   { desc = "Toggle Mini files", noremap = true, silent = true }
 )
-vim.keymap.set("n", "<leader>cc", ":lua require('quicker').toggle()<CR>", { desc = "Toggle quickfix" })
+vim.keymap.set(
+  "n", "<leader>cc", ":lua require('quicker').toggle()<CR>",
+  { desc = "Toggle quickfix", noremap = true, silent = true }
+)
 vim.keymap.set("n", "<leader>ff", pick.builtin.files, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fh", pick.builtin.help, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fg", pick.builtin.grep_live, { noremap = true, silent = true })
