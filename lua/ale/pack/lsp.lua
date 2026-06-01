@@ -7,10 +7,6 @@ capabilities = vim.tbl_deep_extend(
 vim.lsp.config("*", { capabilities = capabilities })
 vim.diagnostic.config({ virtual_text = true })
 
-vim.lsp.config(
-  "lua_ls",
-  { settings = { Lua = { diagnostics = { globals = { "vim" } }, } } }
-)
 vim.lsp.enable({ "lua_ls", "ruff", "pyright" })
 
 
