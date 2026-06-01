@@ -7,7 +7,18 @@ capabilities = vim.tbl_deep_extend(
 vim.lsp.config("*", { capabilities = capabilities })
 vim.diagnostic.config({ virtual_text = true })
 
-vim.lsp.enable({ "lua_ls", "ruff", "pyright" })
+vim.lsp.enable({
+  "ty",
+  "ruff",
+  "rust_analyzer",
+  "jsonls",
+  "marksman",
+  "bashls",
+  "dockerls",
+  "lua_ls",
+  "pyright",
+  "eslint"
+})
 
 
 -- KEYMAPS --
