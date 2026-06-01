@@ -17,7 +17,9 @@ vim.lsp.enable({
   "dockerls",
   "lua_ls",
   "pyright",
-  "eslint"
+  "eslint",
+  "gopls",
+  "html"
 })
 
 
