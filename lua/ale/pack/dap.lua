@@ -22,7 +22,12 @@ local widgets = require("dap.ui.widgets")
 view.setup(dap_view_configs)
 require("dap-python").setup("python3")
 
-vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'red', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpoint', { text = '●', texthl = 'DiagnosticError', linehl = '', numhl = 'DiagnosticError', })
+vim.fn.sign_define('DapBreakpointCondition',
+  { text = '◆', texthl = 'DiagnosticWarn', linehl = '', numhl = 'DiagnosticWarn', })
+vim.fn.sign_define('DapBreakpointRejected', { text = '●', texthl = 'DiagnosticHint', linehl = '', numhl = '', })
+vim.fn.sign_define('DapLogPoint', { text = '◉', texthl = 'DiagnosticInfo', linehl = '', numhl = 'DiagnosticInfo', })
+vim.fn.sign_define('DapStopped', { text = '▶', texthl = 'DiagnosticOk', linehl = 'CursorLine', numhl = 'DiagnosticOk', })
 
 local kmopts = { noremap = true, silent = true }
 
