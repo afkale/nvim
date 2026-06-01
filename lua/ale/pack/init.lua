@@ -16,6 +16,7 @@ vim.pack.add({
   { src = "https://github.com/igorlfs/nvim-dap-view",           name = "nvim-dap-view" },
   { src = "https://github.com/mason-org/mason.nvim",            name = "nvim-mason" },
 
+  { src = "https://github.com/tpope/vim-fugitive",              name = "vim-fungitive" },
 })
 
 require("ale.pack.theme")
