@@ -1,1 +1,0 @@
-require("ale.extra.terminal")
