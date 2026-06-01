@@ -1,5 +1,6 @@
 vim.pack.add({
   { src = "https://github.com/rose-pine/neovim",                name = "rose-pine" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim",       name = "lualine" },
 
   { src = "https://github.com/lewis6991/gitsigns.nvim",         name = "gitsigns" },
   { src = "https://github.com/afkale/wswitcher.nvim",           name = "wswitcher" },
