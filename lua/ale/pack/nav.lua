@@ -1,4 +1,5 @@
 require("mini.cmdline").setup()
+require("quicker").setup()
 
 local files = require("mini.files")
 local pick = require("mini.pick")
@@ -26,6 +27,7 @@ vim.keymap.set("n", "<leader>E",
 vim.keymap.set("n", "<leader>cc", ":lua require('quicker').toggle()<CR>", { desc = "Toggle quickfix" })
 vim.keymap.set("n", "<leader>ff", pick.builtin.files, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fh", pick.builtin.help, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fg", pick.builtin.grep_live, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>ma", ":lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>mm", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })

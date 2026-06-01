@@ -1,3 +1,4 @@
+require("mason").setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities = vim.tbl_deep_extend(
@@ -10,7 +11,7 @@ vim.lsp.config(
   "lua_ls",
   { settings = { Lua = { diagnostics = { globals = { "vim" } }, } } }
 )
-vim.lsp.enable({ "lua_ls", "ruff" })
+vim.lsp.enable({ "lua_ls", "ruff", "pyright" })
 
 
 -- KEYMAPS --
