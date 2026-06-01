@@ -21,7 +21,7 @@ local ensure_installed = {
   "typescript",
   "vim",
   "vimdoc",
-  "gopls",
+  "go",
 }
 
 treesitter.install(ensure_installed)
