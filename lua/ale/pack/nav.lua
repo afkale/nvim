@@ -31,3 +31,4 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>ff", pick.builtin.files, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fh", pick.builtin.help, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fg", pick.builtin.grep_live, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fr", pick.builtin.resume, { noremap = true, silent = true })

@@ -39,4 +39,6 @@ vim.keymap.set("n", "<C-n>", ":cnext<CR>")
 vim.keymap.set("n", "<C-p>", ":cprev<CR>")
 
 -- Miscellaneous shortcuts
-vim.keymap.set("v", "<C-s>", ":sort", opts) -- Sort lines visual
+vim.keymap.set("v", "<C-s>", ":sort<CR>", opts)                -- Sort lines visual
+vim.keymap.set("n", "<leader>tt", ":vsplit | term<CR>i", opts) -- Open terminal in split
+vim.keymap.set("n", "<leader>zz", "<C-W>|", opts)              -- Zoom current buffer
