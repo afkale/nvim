@@ -9,7 +9,7 @@ function _G.grep_operator(type)
   vim.fn.setreg('"', saved_reg, saved_regtype)
 end
 
--- Operator-pending mapping for F
+-- Operator-pending mapping for Grep (e.g., <leader>fiw to grep word under cursor motion)
 vim.keymap.set('n', '<leader>f', function()
   vim.o.operatorfunc = 'v:lua.grep_operator'
   return 'g@'

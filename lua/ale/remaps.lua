@@ -1,6 +1,3 @@
--- utils.kmset the leader key to spac
-vim.g.mapleader = " "
-
 local opts = { noremap = true, silent = true }
 
 -- Copy mappings using system clipboard
@@ -34,7 +31,6 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", opts) -- Move up
 vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", opts)
 
 -- Quickfix
-vim.keymap.set("n", "<leader>cc", ":copen<CR>")
 vim.keymap.set("n", "<C-n>", ":cnext<CR>")
 vim.keymap.set("n", "<C-p>", ":cprev<CR>")
 

@@ -3,3 +3,4 @@ tags
 lua/ale/plugins/dev.lua
 lazygit/state.yml
 /nvim-pack-lock.json
+/.serena
