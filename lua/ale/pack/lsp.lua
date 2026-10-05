@@ -23,7 +23,6 @@ vim.lsp.enable({
 })
 
 
--- KEYMAPS --
 local kmopts = { noremap = true, silent = true }
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, kmopts)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, kmopts)
@@ -40,4 +39,3 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation, kmopts)
 vim.keymap.set("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
 vim.keymap.set("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts)
 vim.keymap.set("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
--- KEYMAPS --

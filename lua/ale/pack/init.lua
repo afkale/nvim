@@ -6,6 +6,7 @@ vim.pack.add({
   { src = "https://github.com/afkale/wswitcher.nvim",                   name = "wswitcher" },
 
   { src = "https://github.com/nvim-mini/mini.nvim",                     name = "mini-nvim" },
+  { src = "https://github.com/rafamadriz/friendly-snippets",            name = "friendly-snippets" },
 
   { src = "https://github.com/stevearc/quicker.nvim",                   name = "quicker" },
   { src = "https://github.com/neovim/nvim-lspconfig",                   name = "nvim-lspconfig" },
