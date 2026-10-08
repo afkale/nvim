@@ -1,10 +1,12 @@
 require("mini.cmdline").setup()
-require("quicker").setup()
 
+local miniclue = require('mini.clue')
 local files = require("mini.files")
+local quicker = require("quicker")
 local pick = require("mini.pick")
-pick.setup()
 
+pick.setup()
+quicker.setup()
 files.setup({
   mappings = {
     close = "<ESC>",
@@ -14,17 +16,6 @@ files.setup({
     go_out_plus = "H"
   }
 })
-
-local map = require("ale.keys").map
-map("n", "<leader>e", function() files.open(vim.fn.expand('%:p:.')) end, "Toggle Mini files in path.")
-map("n", "<leader>E", function() files.open() end, "Toggle Mini files")
-map("n", "<leader>cc", ":lua require('quicker').toggle()<CR>", "Toggle quickfix")
-map("n", "<leader>ff", pick.builtin.files, "Find files")
-map("n", "<leader>fh", pick.builtin.help, "Find help tags")
-map("n", "<leader>fg", pick.builtin.grep_live, "Live grep across project")
-map("n", "<leader>fr", pick.builtin.resume, "Resume last picker")
-
-local miniclue = require('mini.clue')
 miniclue.setup({
   triggers = {
     { mode = { 'n', 'x' }, keys = '<Leader>' },
@@ -50,3 +41,13 @@ miniclue.setup({
     miniclue.gen_clues.z(),
   },
 })
+
+local map = require("ale.keys").map
+
+map("n", "<leader>e", function() files.open(vim.fn.expand('%:p:.')) end, "Toggle Mini files in path.")
+map("n", "<leader>E", files.open, "Toggle Mini files")
+map("n", "<leader>cc", quicker.toggle, "Toggle quickfix")
+map("n", "<leader>ff", pick.builtin.files, "Find files")
+map("n", "<leader>fh", pick.builtin.help, "Find help tags")
+map("n", "<leader>fg", pick.builtin.grep_live, "Live grep across project")
+map("n", "<leader>fr", pick.builtin.resume, "Resume last picker")
