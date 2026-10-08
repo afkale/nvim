@@ -1,9 +1,5 @@
 vim.pack.add({
   { src = "https://github.com/rose-pine/neovim",                        name = "rose-pine" },
-  { src = "https://github.com/nvim-lualine/lualine.nvim",               name = "lualine" },
-
-  { src = "https://github.com/lewis6991/gitsigns.nvim",                 name = "gitsigns" },
-  { src = "https://github.com/afkale/wswitcher.nvim",                   name = "wswitcher" },
 
   { src = "https://github.com/nvim-mini/mini.nvim",                     name = "mini-nvim" },
   { src = "https://github.com/rafamadriz/friendly-snippets",            name = "friendly-snippets" },
@@ -12,7 +8,6 @@ vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig",                   name = "nvim-lspconfig" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter",         name = "nvim-treesitter",        branch = "main" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context", name = "nvim-treesitter-context" },
-
 
   { src = "https://github.com/mfussenegger/nvim-dap",                   name = "nvim-dap" },
   { src = "https://github.com/mfussenegger/nvim-dap-python",            name = "nvim-dap-python" },
