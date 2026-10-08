@@ -23,19 +23,20 @@ vim.lsp.enable({
 })
 
 
-local kmopts = { noremap = true, silent = true }
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, kmopts)
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, kmopts)
-vim.keymap.set("n", "gri", vim.lsp.buf.references, kmopts)
-vim.keymap.set("n", "grn", vim.lsp.buf.rename, kmopts)
-vim.keymap.set("n", "gra", vim.lsp.buf.code_action, kmopts)
-vim.keymap.set("n", "gft", function()
+local map = require("ale.keys").map
+
+map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+map("n", "gri", vim.lsp.buf.references, "Find references")
+map("n", "grn", vim.lsp.buf.rename, "Rename symbol")
+map("n", "gra", vim.lsp.buf.code_action, "Code actions")
+map("n", "gft", function()
   vim.g.autoformat = not vim.g.autoformat
   vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
-end)
-vim.keymap.set("n", "gff", vim.lsp.buf.format, kmopts)
-vim.keymap.set("n", "ge", vim.diagnostic.setqflist, kmopts)
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, kmopts)
-vim.keymap.set("n", "fs", vim.lsp.buf.workspace_symbol, kmopts)
-vim.keymap.set("n", "K", function() vim.lsp.buf.hover { border = "single" } end, kmopts)
-vim.keymap.set("n", "E", function() vim.diagnostic.open_float { border = "single" } end, kmopts)
+end, "Toggle auto-format on save")
+map("n", "gff", vim.lsp.buf.format, "Format buffer")
+map("n", "ge", vim.diagnostic.setqflist, "Send all diagnostics to quickfix")
+map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
+map("n", "fs", vim.lsp.buf.workspace_symbol, "Search workspace symbols")
+map("n", "K", function() vim.lsp.buf.hover { border = "single" } end, "Show hover information")
+map("n", "E", function() vim.diagnostic.open_float { border = "single" } end, "Show diagnostic details in float")

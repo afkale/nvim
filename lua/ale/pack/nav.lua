@@ -15,23 +15,14 @@ files.setup({
   }
 })
 
-vim.keymap.set("n", "<leader>e",
-  function() files.open(vim.fn.expand('%:p:.')) end,
-  { desc = "Toggle Mini files in path.", noremap = true, silent = true }
-)
-
-vim.keymap.set("n", "<leader>E",
-  function() files.open() end,
-  { desc = "Toggle Mini files", noremap = true, silent = true }
-)
-vim.keymap.set(
-  "n", "<leader>cc", ":lua require('quicker').toggle()<CR>",
-  { desc = "Toggle quickfix", noremap = true, silent = true }
-)
-vim.keymap.set("n", "<leader>ff", pick.builtin.files, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fh", pick.builtin.help, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fg", pick.builtin.grep_live, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fr", pick.builtin.resume, { noremap = true, silent = true })
+local map = require("ale.keys").map
+map("n", "<leader>e", function() files.open(vim.fn.expand('%:p:.')) end, "Toggle Mini files in path.")
+map("n", "<leader>E", function() files.open() end, "Toggle Mini files")
+map("n", "<leader>cc", ":lua require('quicker').toggle()<CR>", "Toggle quickfix")
+map("n", "<leader>ff", pick.builtin.files, "Find files")
+map("n", "<leader>fh", pick.builtin.help, "Find help tags")
+map("n", "<leader>fg", pick.builtin.grep_live, "Live grep across project")
+map("n", "<leader>fr", pick.builtin.resume, "Resume last picker")
 
 local miniclue = require('mini.clue')
 miniclue.setup({

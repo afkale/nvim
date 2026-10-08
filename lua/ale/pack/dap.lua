@@ -24,16 +24,16 @@ vim.fn.sign_define("DapBreakpointRejected", { text = "●", texthl = "Diagnostic
 vim.fn.sign_define("DapLogPoint", { text = "◉", texthl = "DiagnosticInfo", linehl = "", numhl = "DiagnosticInfo", })
 vim.fn.sign_define("DapStopped", { text = "▶", texthl = "DiagnosticOk", linehl = "CursorLine", numhl = "DiagnosticOk", })
 
-local kmopts = { noremap = true, silent = true }
+local map = require("ale.keys").map
 
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, kmopts)
-vim.keymap.set("n", "<leader>dc", dap.continue, kmopts)
-vim.keymap.set("n", "<leader>do", dap.step_over, kmopts)
-vim.keymap.set("n", "<leader>di", dap.step_into, kmopts)
-vim.keymap.set("n", "<leader>dO", dap.step_out, kmopts)
-vim.keymap.set("n", "<leader>dq", dap.terminate, kmopts)
-vim.keymap.set("n", "<leader>dr", dap.repl.open, kmopts)
-vim.keymap.set("n", "<leader>dd", view.toggle, kmopts)
-vim.keymap.set("n", "<leader>dl", dap.run_last, kmopts)
-vim.keymap.set({ "n", "v" }, "<Leader>dh", widgets.hover, kmopts)
-vim.keymap.set({ "n", "v" }, "<Leader>dp", widgets.preview, kmopts)
+map("n", "<leader>db", dap.toggle_breakpoint, "Toggle breakpoint")
+map("n", "<leader>dc", dap.continue, "Continue debugging")
+map("n", "<leader>do", dap.step_over, "Step over")
+map("n", "<leader>di", dap.step_into, "Step into")
+map("n", "<leader>dO", dap.step_out, "Step out")
+map("n", "<leader>dq", dap.terminate, "Terminate debugging session")
+map("n", "<leader>dr", dap.repl.open, "Open debugger REPL")
+map("n", "<leader>dd", view.toggle, "Toggle dap-view UI")
+map("n", "<leader>dl", dap.run_last, "Run last debug configuration")
+map({ "n", "v" }, "<leader>dh", widgets.hover, "Hover over variable")
+map({ "n", "v" }, "<leader>dp", widgets.preview, "Preview variable value")

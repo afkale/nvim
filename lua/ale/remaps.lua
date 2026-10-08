@@ -1,45 +1,47 @@
-local opts = { noremap = true, silent = true }
+-- Shared keymap helper (definitions live in lua/ale/keys.lua to avoid
+-- redefining map()/kmap() in every file)
+local map = require("ale.keys").map
 
 -- Copy mappings using system clipboard
-vim.keymap.set({ "v", "x" }, "<leader>y", '"+y', opts)   -- Copy selection to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], opts) -- Copy current line or selection
-vim.keymap.set("n", "<leader>Y", [["+Y]], opts)          -- Copy entire line
+map({ "n", "v", "x" }, "<leader>y", [["+y]], "Copy selection or line to system clipboard")
+map("n", "<leader>Y", [["+Y]], "Copy entire line to system clipboard")
 
 -- Better J behavior
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+map("n", "J", "mzJ`z", "Join lines and keep cursor position")
 
 -- Move lines up/down
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move selection down")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move selection up")
 
 -- Better indenting in visual mode
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+map("v", "<", "<gv", "Indent left and reselect")
+map("v", ">", ">gv", "Indent right and reselect")
 
 -- Window resizing shortcuts
-vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", opts) -- Decrease window width
-vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", opts) -- Increase window width
-vim.keymap.set("n", "<A-j>", ":resize +2<CR>", opts)          -- Increase window height
-vim.keymap.set("n", "<A-k>", ":resize -2<CR>", opts)          -- Decrease window height
+map("n", "<A-h>", ":vertical resize -2<CR>", "Decrease window width")
+map("n", "<A-l>", ":vertical resize +2<CR>", "Increase window width")
+map("n", "<A-j>", ":resize +2<CR>", "Increase window height")
+map("n", "<A-k>", ":resize -2<CR>", "Decrease window height")
 
 -- Window navigation mappings
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts) -- Move left
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts) -- Move right
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts) -- Move down
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts) -- Move up
+map("n", "<C-h>", "<C-w>h", "Jump to left window")
+map("n", "<C-l>", "<C-w>l", "Jump to right window")
+map("n", "<C-j>", "<C-w>j", "Jump to window below")
+map("n", "<C-k>", "<C-w>k", "Jump to window above")
 
-vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", opts)
+-- Exit terminal mode
+map("t", "<C-\\><C-\\>", "<C-\\><C-n>", "Exit terminal mode")
 
 -- Quickfix
-vim.keymap.set("n", "<C-n>", ":cnext<CR>")
-vim.keymap.set("n", "<C-p>", ":cprev<CR>")
+map("n", "<C-n>", ":cnext<CR>", "Go to next quickfix item")
+map("n", "<C-p>", ":cprev<CR>", "Go to previous quickfix item")
 
 -- Miscellaneous shortcuts
-vim.keymap.set("v", "<C-s>", ":sort<CR>", opts) -- Sort lines visual
-vim.keymap.set(
+map("v", "<C-s>", ":sort<CR>", "Sort selected lines")
+map(
   "n",
   "<leader>tt",
   ":vsplit | term tmux -u new-session -s 'nvim_" .. vim.fn.getpid() .. "' -n 'nvim_" .. vim.fn.getpid() .. "'<CR>i",
-  opts
+  "Open tmux session in a vertical split terminal"
 )
-vim.keymap.set("n", "<leader>zz", "<C-W>|", opts) -- Zoom current buffer
+map("n", "<leader>zz", "<C-W>|", "Zoom current window")
