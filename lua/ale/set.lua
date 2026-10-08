@@ -23,7 +23,6 @@ vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
 vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 
 -- Visual guidelines
-vim.opt.colorcolumn = "100"     -- Highlight column 100 for better readability
 vim.opt.virtualedit = "onemore" -- Allow cursor one character past end of line
 
 -- Indentation
