@@ -7,8 +7,14 @@ local M = {}
 ---@param lhs string Left-hand side (the keys pressed)
 ---@param rhs string|function Right-hand side (command, keys, or callback)
 ---@param desc string Human-readable description (shown in :map, Mini.clue, etc.)
-function M.map(mode, lhs, rhs, desc)
-  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+---@param opts table|nil Extra options merged on top (e.g. { expr = true })
+function M.map(mode, lhs, rhs, desc, opts)
+  vim.keymap.set(
+    mode,
+    lhs,
+    rhs,
+    vim.tbl_extend("force", { noremap = true, silent = true, desc = desc }, opts or {})
+  )
 end
 
 return M

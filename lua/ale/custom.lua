@@ -1,3 +1,5 @@
+local map = require("ale.keys").map
+
 function _G.grep_operator(type)
   local saved_reg = vim.fn.getreg('"')
   local saved_regtype = vim.fn.getregtype('"')
@@ -10,14 +12,14 @@ function _G.grep_operator(type)
 end
 
 -- Operator-pending mapping for Grep (e.g., <leader>fiw to grep word under cursor motion)
-vim.keymap.set('n', '<leader>f', function()
+map("n", "<leader>f", function()
   vim.o.operatorfunc = 'v:lua.grep_operator'
   return 'g@'
-end, { expr = true, silent = true, desc = "Grep operator" })
+end, "Grep operator", { expr = true })
 
 
 -- Undotree
-vim.keymap.set("n", "<leader>u", function()
+map("n", "<leader>u", function()
   vim.cmd.packadd("nvim.undotree")
   require("undotree").open()
-end, { desc = "Toggle Builtin undotree" })
+end, "Toggle Builtin undotree")
