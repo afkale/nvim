@@ -47,7 +47,15 @@ local map = require("ale.keys").map
 map("n", "<leader>e", function() files.open(vim.fn.expand('%:p:.')) end, "Toggle Mini files in path.")
 map("n", "<leader>E", files.open, "Toggle Mini files")
 map("n", "<leader>cc", quicker.toggle, "Toggle quickfix")
-map("n", "<leader>ff", pick.builtin.files, "Find files")
+map("n", "<leader>ff", function()
+  if vim.fn.executable("fd") == 1 then
+    pick.builtin.cli({
+      command = { "fd", "--type=f", "--hidden", "--color=never" },
+    }, { source = { name = "Files (fd --hidden)" } })
+  else
+    pick.builtin.files()
+  end
+end, "Find files, including hidden paths")
 map("n", "<leader>fh", pick.builtin.help, "Find help tags")
 map("n", "<leader>fg", pick.builtin.grep_live, "Live grep across project")
 map("n", "<leader>fr", pick.builtin.resume, "Resume last picker")
