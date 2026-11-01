@@ -1,13 +1,7 @@
-require("mason").setup()
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities = vim.tbl_deep_extend(
-  "force", capabilities, require("mini.completion").get_lsp_capabilities()
-)
-vim.lsp.config("*", { capabilities = capabilities })
-vim.diagnostic.config({ virtual_text = true })
-
-vim.lsp.enable({
+-- LSP servers we always want. mason-lspconfig installs any that are missing;
+-- vim.lsp.enable also picks up the same servers when they come from the system
+-- (rustup, go install, uv, ...) rather than Mason.
+local servers = {
   "ty",
   "ruff",
   "rust_analyzer",
@@ -19,8 +13,23 @@ vim.lsp.enable({
   "basedpyright",
   "eslint",
   "gopls",
-  "html"
+  "html",
+}
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = servers,
 })
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities = vim.tbl_deep_extend(
+  "force", capabilities, require("mini.completion").get_lsp_capabilities()
+)
+vim.lsp.config("*", { capabilities = capabilities })
+vim.diagnostic.config({ virtual_text = true })
+
+vim.lsp.enable(servers)
 
 
 local map = require("ale.keys").map

@@ -13,6 +13,7 @@ vim.pack.add({
   { src = "https://github.com/mfussenegger/nvim-dap-python",            name = "nvim-dap-python" },
   { src = "https://github.com/igorlfs/nvim-dap-view",                   name = "nvim-dap-view" },
   { src = "https://github.com/mason-org/mason.nvim",                    name = "nvim-mason" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim",          name = "mason-lspconfig" },
   { src = "https://github.com/f-person/git-blame.nvim",                 name = "git-blame" },
 })
 
