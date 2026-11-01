@@ -6,6 +6,9 @@ vim.g.maplocalleader = " "
 vim.g.python3_host_prog = "/usr/bin/python3"
 
 if vim.fn.executable("rg") == 1 then
+  if (vim.env.RIPGREP_CONFIG_PATH or "") == "" then
+    vim.env.RIPGREP_CONFIG_PATH = vim.fn.stdpath("config") .. "/ripgreprc"
+  end
   vim.opt.grepprg = "rg --vimgrep --smart-case"
 elseif vim.fn.executable("ag") == 1 then
   vim.opt.grepprg = "ag --vimgrep --smart-case"

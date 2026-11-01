@@ -1,0 +1,5 @@
+# Read by ripgrep through $RIPGREP_CONFIG_PATH (set in lua/ale/set.lua).
+# Include hidden files in searches (same as <leader>ff), while still honouring
+# .gitignore and keeping VCS metadata out of the results.
+--hidden
+--glob=!.git/*
