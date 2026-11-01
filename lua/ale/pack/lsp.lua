@@ -10,7 +10,6 @@ local servers = {
   "bashls",
   "dockerls",
   "lua_ls",
-  "basedpyright",
   "eslint",
   "gopls",
   "html",
