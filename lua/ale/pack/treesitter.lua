@@ -7,21 +7,31 @@ local ensure_installed = {
   "dockerfile",
   "fish",
   "gitignore",
+  "go",
+  "gomod",
+  "gosum",
+  "gotmpl",
+  "graphql",
   "html",
   "javascript",
+  "jsdoc",
   "json",
   "lua",
   "make",
   "markdown",
+  "markdown_inline",
   "python",
   "query",
+  "regex",
+  "rust",
   "scss",
   "sql",
   "toml",
+  "tsx",
   "typescript",
   "vim",
   "vimdoc",
-  "go",
+  "yaml",
 }
 
 treesitter.install(ensure_installed)
@@ -44,5 +54,5 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 
     pcall(vim.treesitter.start, buf, lang)
-  end
+  end,
 })

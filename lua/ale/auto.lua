@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = 'en'
+    vim.opt_local.wrap = true
   end,
 })
 
@@ -32,6 +33,26 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+-- Auto-create parent directories when saving a new file
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = edit_group,
+  callback = function(args)
+    local filepath = vim.api.nvim_buf_get_name(args.buf)
+    if filepath ~= '' then
+      local dir = vim.fn.fnamemodify(filepath, ':h')
+      if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, 'p')
+      end
+    end
+  end,
+})
+
+-- Resize splits on window resize (helps with tmux)
+vim.api.nvim_create_autocmd('VimResized', {
+  group = edit_group,
+  command = 'tabdo wincmd =',
+})
+
 -- One group for all LSP hooks. Creating it once (clear = true) keeps reloading this
 -- file idempotent; creating it inside LspAttach would wipe the group every time
 -- another client attaches.
@@ -44,11 +65,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
     if client:supports_method('textDocument/completion') then
-      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-      -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-      -- client.server_capabilities.completionProvider.triggerCharacters = chars
-
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+
+    -- Use LSP's inlay hints if supported (e.g. rust-analyzer, lua_ls)
+    if client:supports_method('textDocument/inlayHint') then
+      vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
     end
   end,
 })

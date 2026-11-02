@@ -6,6 +6,6 @@ return {
           ignoreMultilineInstructions = true,
         },
       },
-    }
-  }
+    },
+  },
 }

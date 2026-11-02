@@ -13,6 +13,9 @@ local servers = {
   "eslint",
   "gopls",
   "html",
+  "cssls",
+  "ts_ls",
+  "yamlls",
 }
 
 require("mason").setup()
@@ -27,6 +30,15 @@ capabilities = vim.tbl_deep_extend(
 )
 vim.lsp.config("*", { capabilities = capabilities })
 vim.diagnostic.config({ virtual_text = true })
+
+-- Load per-server config overrides from the lsp/ directory.
+-- Each file returns a table that gets merged into the config.
+for _, name in ipairs(servers) do
+  local ok, config = pcall(require, "lsp." .. name)
+  if ok and type(config) == "table" and next(config) then
+    vim.lsp.config(name, config)
+  end
+end
 
 vim.lsp.enable(servers)
 
