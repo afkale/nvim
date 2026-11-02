@@ -56,10 +56,6 @@ vim.opt.concealcursor = "" -- Don't hide cursor line markup
 vim.opt.synmaxcol = 300    -- Syntax highlighting limit
 vim.opt.laststatus = 3
 
--- Better listchars (show trailing whitespace, tabs, etc.)
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", extends = "›", precedes = "‹" }
-
 -- Better split behavior
 vim.opt.splitkeep = "screen" -- Keep view when splitting
 
