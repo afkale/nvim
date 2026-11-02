@@ -2,7 +2,12 @@ return {
   settings = {
     yaml = {
       schemas = {
-        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
+          ".gitlab-ci.yml",
+          ".gitlab-ci.yaml",
+          "**/.gitlab-ci.yml",
+          "**/.gitlab-ci.yaml",
+        },
         ["https://raw.githubusercontent.com/compose-spec/compose-go/master/schema/compose-spec.json"] = {
           "docker-compose.yml",
           "docker-compose.yaml",
