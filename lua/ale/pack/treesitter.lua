@@ -1,4 +1,5 @@
-local treesitter = require("nvim-treesitter")
+-- nvim-treesitter handles parser auto-attach via its own FileType autocmd,
+-- so we only need to ensure parsers are installed.
 local ensure_installed = {
   "bash",
   "c",
@@ -34,25 +35,4 @@ local ensure_installed = {
   "yaml",
 }
 
-treesitter.install(ensure_installed)
-
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(args)
-    local buf = args.buf
-    local ft = vim.bo[buf].filetype
-
-    local lang = vim.treesitter.language.get_lang(ft)
-    if not lang then
-      return
-    end
-
-    local ok_add = pcall(vim.treesitter.language.add, lang)
-    if not ok_add then
-      return
-    end
-
-    pcall(vim.treesitter.start, buf, lang)
-  end,
-})
+require("nvim-treesitter").install(ensure_installed)

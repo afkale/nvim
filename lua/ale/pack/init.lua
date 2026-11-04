@@ -1,3 +1,5 @@
+-- Plugin naming: `name` becomes the directory under pack/*/opt/. Most entries keep
+-- the repo's canonical name but some strip the .nvim suffix for brevity.
 vim.pack.add({
   { src = "https://github.com/rose-pine/neovim",                        name = "rose-pine" },
 

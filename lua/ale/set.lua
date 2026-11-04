@@ -3,14 +3,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set the Python 3 host program for Neovim
-vim.g.python3_host_prog = "/usr/bin/python3"
+vim.g.python3_host_prog = vim.fn.exepath("python3") or "/usr/bin/python3"
 
-if vim.fn.executable("rg") == 1 then
+local has = require("ale.util")
+
+if has.has_rg then
   if (vim.env.RIPGREP_CONFIG_PATH or "") == "" then
     vim.env.RIPGREP_CONFIG_PATH = vim.fn.stdpath("config") .. "/ripgreprc"
   end
   vim.opt.grepprg = "rg --vimgrep --smart-case"
-elseif vim.fn.executable("ag") == 1 then
+elseif has.has_ag then
   vim.opt.grepprg = "ag --vimgrep --smart-case"
 end
 

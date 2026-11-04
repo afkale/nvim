@@ -1,27 +1,6 @@
 local map = require("ale.keys").map
 
--- Grep operator: use <leader>f as a prefix but with a specific motion.
--- e.g., <leader>giw  → grep word under cursor
---       <leader>f 2j → grep next two lines
--- The <leader>f mapping is an operator-pending mapping, so it doesn't conflict
--- with <leader>ff, <leader>fg, etc. as long as leader combinations are typed
--- within the timeoutlen window.
-function _G.grep_operator(type)
-  local saved_reg = vim.fn.getreg('"')
-  local saved_regtype = vim.fn.getregtype('"')
-  if type == 'char' or type == 'line' or type == 'block' then
-    vim.cmd('normal! `[v`]y')
-    local text = vim.fn.escape(vim.fn.getreg('"'), [[.,^$*[]\/~(){}|?+-":<>]])
-    vim.cmd('silent grep!  "' .. text .. '"')
-  end
-  vim.fn.setreg('"', saved_reg, saved_regtype)
-end
-
--- Operator-pending mapping for Grep (e.g., <leader>fiw to grep word under cursor motion)
-map("n", "<leader>f", function()
-  vim.o.operatorfunc = 'v:lua.grep_operator'
-  return 'g@'
-end, "Grep operator (motion)", { expr = true })
+-- Grep operator lives in ale/grep.lua (loaded via ale/init.lua).
 
 
 -- Undotree
@@ -33,7 +12,7 @@ map("n", "<leader>u", function()
     vim.cmd("packadd nvim.undotree")
     require("undotree").open()
   end
-end, "Toggle Builtin undotree")
+end, "Toggle undotree")
 
 -- Toggle line numbers
 map("n", "<leader>tn", function()
@@ -55,7 +34,5 @@ map("n", "<leader>tw", function()
 end, "Toggle line wrap")
 
 -- Terminal helper: open terminal in current directory
-map("n", "<leader>ft", ":term<CR>", "Open terminal in current window")
+map("n", "<leader>ft", ":term<CR>", "Open terminal")
 
--- Make Y behave like D (yank to end of line)
-map("n", "Y", "y$", "Yank to end of line")

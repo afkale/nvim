@@ -80,6 +80,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = lsp_group,
   callback = function(args)
+    -- Respect the manual format toggle (gft in lsp.lua).
+    if not vim.g.autoformat then
+      return
+    end
+
     local client = vim.lsp.get_clients({
       bufnr = args.buf,
       method = 'textDocument/formatting',
@@ -94,9 +99,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
+-- Augroup for tool integrations (quickfix, etc.)
+local tools_group = vim.api.nvim_create_augroup('my.tools', { clear = true })
+
 -- Open QuickfixList always after grep
 vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-  group = lsp_group,
+  group = tools_group,
   pattern = 'grep',
   command = ":lua require('quicker').open()",
 })

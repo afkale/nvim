@@ -1,5 +1,6 @@
 require("ale.set")
 require("ale.remaps")
 require("ale.custom")
+require("ale.grep")
 require("ale.pack")
 require("ale.auto")

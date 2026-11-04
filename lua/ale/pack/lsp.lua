@@ -2,7 +2,7 @@
 -- vim.lsp.enable also picks up the same servers when they come from the system
 -- (rustup, go install, uv, ...) rather than Mason.
 local servers = {
-  "ty",
+  "ty",        -- TypeScript type checker (ty) – no separate lsp/ty.lua config
   "ruff",
   "rust_analyzer",
   "jsonls",
@@ -53,10 +53,10 @@ map("n", "gra", vim.lsp.buf.code_action, "Code actions")
 map("n", "gft", function()
   vim.g.autoformat = not vim.g.autoformat
   vim.notify(vim.g.autoformat and 'Formatting Active' or 'Formatting Disabled', vim.log.levels.INFO)
-end, "Toggle auto-format on save")
+end, "Toggle auto-format")
 map("n", "gff", vim.lsp.buf.format, "Format buffer")
-map("n", "ge", vim.diagnostic.setqflist, "Send all diagnostics to quickfix")
+map("n", "ge", vim.diagnostic.setqflist, "Send diagnostics to quickfix")
 map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
 map("n", "fs", vim.lsp.buf.workspace_symbol, "Search workspace symbols")
-map("n", "K", function() vim.lsp.buf.hover { border = "single" } end, "Show hover information")
-map("n", "E", function() vim.diagnostic.open_float { border = "single" } end, "Show diagnostic details in float")
+map("n", "K", function() vim.lsp.buf.hover { border = "single" } end, "Show hover info")
+map("n", "E", function() vim.diagnostic.open_float { border = "single" } end, "Show diagnostic float")
